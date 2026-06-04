@@ -1,12 +1,12 @@
 {
-  "name": "@core/portfolio",
+  "name": "@apps/portfolio",
   "type": "module",
   "version": "0.0.1",
   "engines": {
     "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --port 4321",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
