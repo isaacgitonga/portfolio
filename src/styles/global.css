@@ -1,0 +1,173 @@
+@import "tailwindcss";
+
+@theme {
+  --font-nunito: "Nunito", sans-serif;
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-iceberg: "Iceberg", sans-serif;
+  --font-lato: "Lato", sans-serif;
+  --font-revalia: "Revalia", sans-serif;
+
+  --color-primary: #14b8a6; /* teal-500 */
+  --color-primary-hover: #0d9488; /* teal-600 */
+  --color-secondary: #f97316; /* orange-500 */
+  --color-secondary-hover: #ea580c; /* orange-600 */
+  --color-muted: #9ca3af; /* neutral-400 */
+  --color-muted-dark: #6b7280; /* neutral-500 */
+  --color-foreground: #e5e7eb; /* neutral-200 / text color */
+  --color-background: #0a0a0a; /* neutral dark background */
+}
+
+@layer base {
+  a {
+    @apply block;
+  }
+  
+  html,
+  body {
+    @apply bg-background text-foreground font-nunito overflow-x-hidden;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@layer components {
+  section {
+    @apply overflow-hidden;
+  }
+
+  #hero .stats li p {
+    @apply font-semibold font-montserrat text-muted text-nowrap;
+  }
+
+  #hero .stats li h2 {
+    @apply font-iceberg font-bold text-5xl text-primary;
+  }
+
+  #hero #about .identity {
+    @apply relative sm:p-8 rounded-full;
+  }
+
+  #skills .skill {
+    @apply max-w-6xl mx-auto min-h-screen sm:p-4 flex flex-col gap-8 justify-center items-start overflow-hidden;
+  }
+
+  #skills .skill .title {
+    @apply font-iceberg font-bold text-4xl lg:text-6xl text-center text-primary;
+  }
+
+  #skills .skill .desc {
+    @apply py-2 max-w-4xl space-y-4 text-lg text-muted;
+  }
+
+  #skills .skill .desc strong {
+    @apply font-semibold font-montserrat text-foreground;
+  }
+
+  #skills .skill .tools {
+    @apply flex flex-wrap gap-4 py-4 rounded-lg;
+  }
+
+  #skills .skill .tool,
+  #skills .global .tool {
+    @apply bg-neutral-900/50 text-foreground border border-neutral-800 rounded-md h-fit p-2 px-4 flex gap-2 items-center justify-center;
+  }
+
+  .tool p {
+    @apply font-semibold font-mono;
+  }
+
+  #projects .project {
+    @apply border-b border-zinc-700 py-4;
+  }
+
+  #projects .project a {
+    @apply w-full h-full space-y-2 my-2;
+  }
+
+  #projects .project h2 {
+    @apply relative text-4xl lg:text-6xl font-iceberg font-bold text-primary transition-colors duration-200 delay-100;
+  }
+
+  #projects .project h2 span {
+    @apply pr-4;
+  }
+
+  #projects .project h2 i {
+    @apply absolute top-0 text-slate-200 text-lg sm:text-xl;
+  }
+
+  #projects .project p {
+    @apply text-muted;
+  }
+
+  #projects .project .tech-stack {
+    @apply flex gap-2 sm:gap-4 flex-wrap items-center justify-start;
+  }
+
+  #projects .project .tech-stack li {
+    @apply flex items-center gap-2;
+  }
+
+  #projects .project .tech-stack div {
+    @apply size-2 bg-neutral-700 rounded-full;
+  }
+
+  #projects .project .tech-stack p {
+    @apply text-muted text-sm sm:text-base;
+  }
+
+  #contact input, #contact textarea {
+    @apply focus:border-primary/50;
+  }
+
+  .head {
+    @apply p-2 py-8 md:my-0;
+  }
+
+  .head h1 {
+    @apply text-6xl md:text-7xl lg:text-[85px] xl:text-[100px] py-2 font-bold font-iceberg text-center text-foreground;
+  }
+
+  .head p {
+    @apply py-4 text-center text-xl md:text-2xl lg:text-3xl text-muted font-semibold font-montserrat;
+  }
+
+  .nav-link {
+    @apply relative py-2 overflow-hidden;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-primary scale-x-0 origin-right transition-transform duration-500;
+  }
+
+  .nav-link:hover::after {
+    @apply scale-x-100 origin-left;
+  }
+}
+
+/* Firefox custom scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-neutral-700) var(--color-background);
+}
+
+/* WebKit browsers (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050707;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #262626;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #404040;
+}

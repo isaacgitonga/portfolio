@@ -1,0 +1,92 @@
+---
+// Contact.astro
+---
+<section id="contact" class="min-h-screen max-w-7xl mx-auto p-4 py-10">
+  <div class="max-w-6xl mx-auto p-4">
+    <div class="head pb-14 text-center">
+      <h1
+        class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
+      >
+        Get in Touch
+      </h1>
+      <p class="text-muted text-center text-xl mt-2">Have a question or want to work together?</p>
+    </div>
+
+    <div class="max-w-3xl mx-auto mt-6">
+      <form id="contact-form" class="space-y-6">
+        <input
+          type="checkbox"
+          name="botCheck"
+          class="hidden"
+          style="display: none"
+        />
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="space-y-2">
+            <label
+              for="name"
+              class="block text-sm font-semibold font-iceberg text-foreground uppercase tracking-wider"
+              >Name</label
+            >
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              class="w-full bg-neutral-900 border border-neutral-800 rounded-lg p-4 text-foreground focus:outline-hidden focus:ring-2 focus:ring-primary/50 transition-all"
+            />
+          </div>
+          <div class="space-y-2">
+            <label
+              for="email"
+              class="block text-sm font-semibold font-iceberg text-foreground uppercase tracking-wider"
+              >Email</label
+            >
+            <input
+              type="email"
+              id="email"
+              name="email"
+              pattern="[^@\\s]+@[^@\\s]+\\.[^@\\s]+"
+              required
+              class="w-full bg-neutral-900 border border-neutral-800 rounded-lg p-4 text-foreground focus:outline-hidden focus:ring-2 focus:ring-primary/50 transition-all"
+            />
+          </div>
+        </div>
+        <div class="space-y-2">
+          <label
+            for="subject"
+            class="block text-sm font-semibold font-iceberg text-foreground uppercase tracking-wider"
+            >Subject</label
+          >
+          <input
+            type="text"
+            id="subject"
+            name="subject"
+            required
+            class="w-full bg-neutral-900 border border-neutral-800 rounded-lg p-4 text-foreground focus:outline-hidden focus:ring-2 focus:ring-primary/50 transition-all"
+          />
+        </div>
+        <div class="space-y-2">
+          <label
+            for="message"
+            class="block text-sm font-semibold font-iceberg text-foreground uppercase tracking-wider"
+            >Message</label
+          >
+          <textarea
+            id="message"
+            name="message"
+            rows="6"
+            required
+            class="w-full bg-neutral-900 border border-neutral-800 rounded-lg p-4 text-foreground focus:outline-hidden focus:ring-2 focus:ring-primary/50 transition-all"
+          ></textarea>
+        </div>
+        <button
+          type="submit"
+          class="w-full py-4 bg-primary hover:bg-primary-hover text-background font-bold font-iceberg text-xl rounded-lg transition-colors cursor-pointer"
+        >
+          Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
