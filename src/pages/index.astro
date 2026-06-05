@@ -14,3 +14,30 @@ import Contact from '../components/Contact.astro';
   <Reviews />
   <Contact />
 </Layout>
+
+<script>
+  import gsap from "gsap";
+  import ScrambleTextPlugin from "gsap/ScrambleTextPlugin";
+  import { SplitText } from "gsap/SplitText";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { 
+    initNavbar, 
+    animateHero, 
+    animateSkills, 
+    animateProjects, 
+    animateReviews, 
+    animateContact 
+  } from '../animations';
+
+  gsap.registerPlugin(ScrambleTextPlugin);
+  gsap.registerPlugin(SplitText);
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Initialize page animations
+  initNavbar();
+  animateHero();
+  animateSkills();
+  animateProjects();
+  animateReviews();
+  animateContact();
+</script>

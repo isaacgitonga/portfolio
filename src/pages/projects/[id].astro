@@ -20,7 +20,7 @@ const { project } = Astro.props;
 <Layout title={`${project.title} | Projects`} description={project.description[0]}>
   <section class="max-w-6xl mx-auto px-6 py-12 md:py-24 space-y-12">
     <!-- Back Navigation -->
-    <div>
+    <div id="back-nav">
       <a href="/#projects" class="inline-flex items-center gap-2 text-muted hover:text-primary transition-colors font-iceberg text-sm">
         <i class="fa-solid fa-arrow-left"></i>
         <span>Back to Projects</span>
@@ -29,22 +29,22 @@ const { project } = Astro.props;
 
     <!-- Header & Meta -->
     <div class="space-y-4">
-      <h1 class="text-4xl md:text-6xl font-iceberg font-bold text-primary">{project.title}</h1>
-      <p class="text-lg text-muted font-montserrat font-medium">
+      <h1 id="project-title" class="text-4xl md:text-6xl font-iceberg font-bold text-primary">{project.title}</h1>
+      <p id="project-role" class="text-lg text-muted font-montserrat font-medium">
         {project.role} &nbsp;•&nbsp; {project.timeline}
       </p>
       
-      <div class="flex flex-wrap gap-2 mt-4">
+      <div id="project-status" class="flex flex-wrap gap-2 mt-4">
         {project.status.map((status) => (
-          <span class="px-3 py-1 bg-neutral-900 border border-neutral-800 text-xs rounded-full text-primary font-mono font-medium">
+          <p class="px-3 py-1 bg-neutral-900 border border-neutral-800 text-xs rounded-full text-primary font-mono font-medium">
             {status}
-          </span>
+          </p>
         ))}
       </div>
     </div>
 
     <!-- Banner -->
-    <div class="border border-neutral-900 rounded-xl overflow-hidden bg-neutral-950">
+    <div id="showcase" class="border border-neutral-900 rounded-xl overflow-hidden bg-neutral-950">
       <img 
         src={project.bannerUrl} 
         alt={`${project.title} Banner`}
@@ -53,13 +53,13 @@ const { project } = Astro.props;
     </div>
 
     <!-- Layout Grid: Left Content and Right Sidebar -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 mt-12">
+    <div id="overview" class="grid grid-cols-1 lg:grid-cols-3 gap-12 mt-12">
       <!-- Left Column: Content (takes 2 cols on desktop) -->
       <div class="lg:col-span-2 space-y-12">
         <!-- Overview -->
         <div class="space-y-4">
           <h2 class="text-2xl font-iceberg font-bold text-foreground border-b border-neutral-900 pb-2">Overview</h2>
-          <div class="space-y-4 text-muted leading-relaxed text-base">
+          <div id="project-desc" class="space-y-4 text-muted leading-relaxed text-base">
             {project.description.map((p) => (
               <p>{p}</p>
             ))}
@@ -69,7 +69,7 @@ const { project } = Astro.props;
         <!-- About -->
         <div class="space-y-4">
           <h2 class="text-2xl font-iceberg font-bold text-foreground border-b border-neutral-900 pb-2">About the Project</h2>
-          <div class="space-y-4 text-muted leading-relaxed text-base">
+          <div id="project-about" class="space-y-4 text-muted leading-relaxed text-base">
             {project.about.map((p) => (
               <p>{p}</p>
             ))}
@@ -79,7 +79,7 @@ const { project } = Astro.props;
         <!-- Architecture Highlights -->
         <div class="space-y-4">
           <h2 class="text-2xl font-iceberg font-bold text-foreground border-b border-neutral-900 pb-2">Architecture & Engineering</h2>
-          <ul class="space-y-3 pl-1">
+          <ul id="architecture-list" class="space-y-3 pl-1">
             {project.architecture.map((item) => (
               <li class="flex items-start gap-3 text-muted leading-relaxed text-base">
                 <i class="fa-solid fa-circle-check text-primary mt-1 shrink-0"></i>
@@ -92,7 +92,7 @@ const { project } = Astro.props;
         <!-- Key Challenges -->
         <div class="space-y-6">
           <h2 class="text-2xl font-iceberg font-bold text-foreground border-b border-neutral-900 pb-2">Key Challenges</h2>
-          <div class="space-y-6">
+          <div id="challenges-container" class="space-y-6">
             {project.challenges.map((challenge) => (
               <div class="bg-neutral-900/40 p-6 rounded-lg border border-neutral-800 space-y-4">
                 <h3 class="text-xl font-bold font-iceberg text-foreground">{challenge.title}</h3>
@@ -115,8 +115,8 @@ const { project } = Astro.props;
         <!-- Retrospective -->
         {project.retrospective && project.retrospective.length > 0 && (
           <div class="space-y-6">
-            <h2 class="text-2xl font-iceberg font-bold text-foreground border-b border-neutral-900 pb-2">Retrospective</h2>
-            <ul class="space-y-6">
+            <h2 id="retro-title" class="text-2xl font-iceberg font-bold text-foreground border-b border-neutral-900 pb-2">Retrospective</h2>
+            <ul id="retro-list" class="space-y-6">
               {project.retrospective.map((retro, index) => {
                 const stepNum = index + 1;
                 const paddedNum = stepNum > 9 ? `${stepNum}` : `0${stepNum}`;
@@ -145,7 +145,7 @@ const { project } = Astro.props;
               <a 
                 href={project.liveUrl} 
                 target="_blank"
-                class="flex items-center justify-center gap-2 w-full py-3 bg-primary hover:bg-primary-hover text-background font-bold font-iceberg rounded-lg transition-colors duration-250 cursor-pointer"
+                class="project-link-btn flex items-center justify-center gap-2 w-full py-3 bg-primary hover:bg-primary-hover text-background font-bold font-iceberg rounded-lg transition-colors duration-250 cursor-pointer"
               >
                 <span>Live Site</span>
                 <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
@@ -156,7 +156,7 @@ const { project } = Astro.props;
               <a 
                 href={project.repoUrl} 
                 target="_blank"
-                class="flex items-center justify-center gap-2 w-full py-3 bg-neutral-800 hover:bg-neutral-700 text-foreground font-bold font-iceberg rounded-lg border border-neutral-700 transition-colors duration-250 cursor-pointer"
+                class="project-link-btn flex items-center justify-center gap-2 w-full py-3 bg-neutral-800 hover:bg-neutral-700 text-foreground font-bold font-iceberg rounded-lg border border-neutral-700 transition-colors duration-250 cursor-pointer"
               >
                 <i class="fa-brands fa-github"></i>
                 <span>View Source</span>
@@ -189,3 +189,14 @@ const { project } = Astro.props;
     </div>
   </section>
 </Layout>
+
+<script>
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { initProjectAnimations } from "../../animations";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Run project detail animations
+  initProjectAnimations();
+</script>
