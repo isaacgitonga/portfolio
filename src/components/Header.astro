@@ -3,61 +3,106 @@
 ---
 
 <!-- Desktop Navigation Header -->
-<header class="fixed top-0 left-0 w-full z-40 bg-background/80 backdrop-blur-md border-b border-neutral-900 py-4 px-6 md:px-12 flex justify-between items-center">
+<header
+  class="max-w-7xl mx-auto sticky top-0 left-0 w-full z-40 bg-background/80 backdrop-blur-md border-b border-neutral-900 py-2 px-6 md:px-12 flex justify-between items-center"
+>
   <div class="flex items-center gap-3">
-    <a href="/#hero" class="flex items-center gap-3 hover:opacity-85 transition-opacity">
+    <a
+      href="/#hero"
+      class="flex items-center gap-3 hover:opacity-85 transition-opacity"
+    >
       <img
         src="/logos/logo-dark.png"
         alt="Profile Logo"
-        class="rounded-full w-8 h-8"
+        class="rounded-full w-6 h-6"
       />
-      <span class="font-iceberg font-bold text-xl tracking-wider text-primary">G.</span>
+      <span class="font-iceberg font-bold text-lg tracking-wider text-primary"
+        >G.
+      </span>
     </a>
   </div>
-  
+
   <nav class="hidden md:block">
     <ul class="flex items-center gap-8 font-iceberg text-base">
       <li>
-        <a href="/#hero" class="nav-link text-muted hover:text-primary transition-colors">Home</a>
+        <a
+          href="/#hero"
+          class="nav-link text-muted hover:text-primary transition-colors"
+          >Home</a
+        >
       </li>
       <li>
-        <a href="/#skills" class="nav-link text-muted hover:text-primary transition-colors">Skills</a>
+        <a
+          href="/#skills"
+          class="nav-link text-muted hover:text-primary transition-colors"
+          >Skills</a
+        >
       </li>
       <li>
-        <a href="/#projects" class="nav-link text-muted hover:text-primary transition-colors">Projects</a>
+        <a
+          href="/#projects"
+          class="nav-link text-muted hover:text-primary transition-colors"
+          >Projects</a
+        >
       </li>
       <li>
-        <a href="/#reviews" class="nav-link text-muted hover:text-primary transition-colors">Reviews</a>
+        <a
+          href="/#reviews"
+          class="nav-link text-muted hover:text-primary transition-colors"
+          >Reviews</a
+        >
       </li>
       <li>
-        <a href="/#contact" class="nav-link text-muted hover:text-primary transition-colors">Contact</a>
+        <a
+          href="/#contact"
+          class="nav-link text-muted hover:text-primary transition-colors"
+          >Contact</a
+        >
       </li>
       <li>
-        <a href="/blog" class="nav-link text-muted hover:text-primary transition-colors">Blog</a>
+        <a
+          href="/blog"
+          class="nav-link text-muted hover:text-primary transition-colors"
+          >Blog</a
+        >
       </li>
     </ul>
   </nav>
 
-  <!-- Mobile Toggle Button -->
-  <button
-    id="menu-toggle"
-    class="md:hidden p-3 bg-neutral-900/80 border border-neutral-800 rounded-full text-primary hover:text-primary-hover transition-colors cursor-pointer backdrop-blur-sm"
-    aria-label="Toggle Menu"
-  >
-    <i class="fa-solid fa-bars-staggered text-xl"></i>
-  </button>
+  <div class="flex items-center gap-4">
+    <div
+      class="bg-background/80 rounded-full px-3 flex items-center justify-center gap-4"
+    >
+      <button><i class="fa-solid fa-sun fa-sm"></i></button>
+      <button><i class="fa-solid fa-moon fa-sm"></i></button>
+    </div>
+
+    <a
+      target="_blank"
+      href="https://github.com/gitongaisaac"
+      class="hover:text-foreground transition-colors"
+    >
+      <i class="fa-brands fa-github fa-lg"></i>
+    </a>
+
+    <!-- Mobile Toggle Button -->
+    <button id="menu-toggle" class="md:hidden p-3" aria-label="Toggle Menu">
+      <i class="fa-solid fa-bars-staggered fa-lg"></i>
+    </button>
+  </div>
 </header>
 
 <!-- Mobile Navigation Drawer -->
-<nav id="side-nav" class="hidden fixed inset-0 z-50 h-screen w-screen">
+<nav id="side-nav" class="md:hidden fixed inset-0 z-50 h-screen w-screen">
   <div
     id="nav-backdrop"
     class="fixed inset-0 bg-background/60 backdrop-blur-xs"
-  ></div>
+  >
+  </div>
 
   <div
     id="nav-content"
-    class="fixed right-0 w-full sm:w-80 md:w-96 space-y-6 flex flex-col justify-between h-full p-8 bg-background border-l border-neutral-800 overflow-y-auto"
+    class="fixed right-0 w-full md:w-96 space-y-6 flex flex-col justify-between h-full p-8 bg-background border-l border-neutral-800 overflow-y-auto"
   >
     <div class="flex flex-col space-y-6">
       <div class="flex items-center justify-between">
@@ -79,13 +124,18 @@
         </button>
       </div>
 
-      <ul class="mt-8 space-y-6 text-3xl font-iceberg overflow-y-auto overflow-x-hidden">
+      <ul
+        class="mt-8 space-y-6 text-3xl font-iceberg overflow-y-auto overflow-x-hidden"
+      >
         <li>
           <a
             href="/#hero"
             class="mobile-nav-link group flex items-center gap-4 text-muted hover:text-primary transition-colors"
           >
-            <span class="text-xs text-muted-dark group-hover:text-primary transition-colors">01</span>
+            <span
+              class="text-xs text-muted-dark group-hover:text-primary transition-colors"
+              >01</span
+            >
             Home
           </a>
         </li>
@@ -94,7 +144,10 @@
             href="/#skills"
             class="mobile-nav-link group flex items-center gap-4 text-muted hover:text-primary transition-colors"
           >
-            <span class="text-xs text-muted-dark group-hover:text-primary transition-colors">02</span>
+            <span
+              class="text-xs text-muted-dark group-hover:text-primary transition-colors"
+              >02</span
+            >
             Skills
           </a>
         </li>
@@ -103,7 +156,10 @@
             href="/#projects"
             class="mobile-nav-link group flex items-center gap-4 text-muted hover:text-primary transition-colors"
           >
-            <span class="text-xs text-muted-dark group-hover:text-primary transition-colors">03</span>
+            <span
+              class="text-xs text-muted-dark group-hover:text-primary transition-colors"
+              >03</span
+            >
             Projects
           </a>
         </li>
@@ -112,7 +168,10 @@
             href="/#reviews"
             class="mobile-nav-link group flex items-center gap-4 text-muted hover:text-primary transition-colors"
           >
-            <span class="text-xs text-muted-dark group-hover:text-primary transition-colors">04</span>
+            <span
+              class="text-xs text-muted-dark group-hover:text-primary transition-colors"
+              >04</span
+            >
             Reviews
           </a>
         </li>
@@ -121,7 +180,10 @@
             href="/#contact"
             class="mobile-nav-link group flex items-center gap-4 text-muted hover:text-primary transition-colors"
           >
-            <span class="text-xs text-muted-dark group-hover:text-primary transition-colors">05</span>
+            <span
+              class="text-xs text-muted-dark group-hover:text-primary transition-colors"
+              >05</span
+            >
             Contact
           </a>
         </li>
@@ -130,7 +192,10 @@
             href="/blog"
             class="mobile-nav-link group flex items-center gap-4 text-muted hover:text-primary transition-colors"
           >
-            <span class="text-xs text-muted-dark group-hover:text-primary transition-colors">06</span>
+            <span
+              class="text-xs text-muted-dark group-hover:text-primary transition-colors"
+              >06</span
+            >
             Blog
           </a>
         </li>
@@ -143,8 +208,13 @@
         alt="Profile Logo"
         class="rounded-full w-8 h-8"
       />
-      <div class="text-sm text-muted font-montserrat tracking-widest uppercase truncate text-nowrap flex items-center gap-2">
-        <button class="copy-email active:scale-70 transition-all duration-200 cursor-pointer" aria-label="Copy Email">
+      <div
+        class="text-sm text-muted font-montserrat tracking-widest uppercase truncate text-nowrap flex items-center gap-2"
+      >
+        <button
+          class="copy-email active:scale-70 transition-all duration-200 cursor-pointer"
+          aria-label="Copy Email"
+        >
           <i class="fa-solid fa-copy text-lg"></i>
         </button>
         <span class="email-text text-xs">isaacggitonga@gmail.com</span>
@@ -154,38 +224,10 @@
 </nav>
 
 <script>
-  const toggleBtn = document.getElementById('menu-toggle');
-  const closeBtn = document.getElementById('menu-close');
-  const sideNav = document.getElementById('side-nav');
-  const backdrop = document.getElementById('nav-backdrop');
-  const mobileLinks = document.querySelectorAll('.mobile-nav-link');
-
-  function openMenu() {
-    if (sideNav) {
-      sideNav.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    }
-  }
-
-  function closeMenu() {
-    if (sideNav) {
-      sideNav.classList.add('hidden');
-      document.body.style.overflow = '';
-    }
-  }
-
-  toggleBtn?.addEventListener('click', openMenu);
-  closeBtn?.addEventListener('click', closeMenu);
-  backdrop?.addEventListener('click', closeMenu);
-
-  mobileLinks.forEach(link => {
-    link.addEventListener('click', closeMenu);
-  });
-
-  const copyBtns = document.querySelectorAll('.copy-email');
-  copyBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      navigator.clipboard.writeText('isaacggitonga@gmail.com');
+  const copyBtns = document.querySelectorAll(".copy-email");
+  copyBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      navigator.clipboard.writeText("isaacggitonga@gmail.com");
     });
   });
 </script>

@@ -1,11 +1,11 @@
 ---
 // Hero.astro
 ---
+
 <section id="hero" class="relative min-h-screen flex flex-col justify-center">
   <div id="hero-content" class="relative max-w-6xl p-4 mx-auto z-10 w-full">
-    
     <div
-      class="min-h-[80vh] flex flex-col md:flex-row-reverse items-end justify-end md:justify-between gap-2 md:gap-4 py-4"
+      class="min-h-screen pb-16 flex flex-col md:flex-row-reverse items-end justify-end md:justify-between gap-2 md:gap-4 py-4"
     >
       <ul class="stats space-y-5 ml-auto md:ml-0 self-center">
         <li>
@@ -36,20 +36,20 @@
       >
         <div class="space-y-3">
           <h1
-            class="hero-title text-6xl md:text-8xl font-bold font-iceberg text-primary flex gap-6 py-2"
+            class="hero-title text-3xl md:text-5xl font-bold font-iceberg text-primary flex gap-6 py-2"
           >
             G.
           </h1>
           <p
             class="hero-text max-w-lg text-muted font-montserrat font-semibold overflow-hidden leading-relaxed"
           >
-            <span class="block"
-              >Understand the machine before abstracting over it.</span
-            >
-            <span class="block text-foreground mt-2"
-              >Every abstraction must earn its cost; complexity is a
-              deliberate trade-off.</span
-            >
+            <span class="block">
+              Understand the machine before abstracting over it.
+            </span>
+            <span class="block text-foreground mt-2">
+              Every abstraction must earn its cost; complexity is a deliberate
+              trade-off.
+            </span>
           </p>
         </div>
       </div>
@@ -63,27 +63,28 @@
         id="me"
         class="identity row-start-1 md:col-start-2 md:ml-0 self-center py-2"
       >
-        <h2 class="py-2 font-iceberg font-bold text-primary text-3xl border-b border-neutral-900 mb-4">
+        <h2
+          class="py-2 font-iceberg font-bold text-primary text-3xl border-b border-neutral-900 mb-4"
+        >
           Who I Am
         </h2>
 
         <div class="leading-relaxed space-y-4 text-muted">
           <p>
             I’m a software engineer and system architect who builds reliable
-            infrastructure for organizations where correctness, security,
-            and long-term maintainability are non-negotiable.
+            infrastructure for organizations where correctness, security, and
+            long-term maintainability are non-negotiable.
           </p>
           <p>
             I specialize in evolving backend-heavy platforms that handle
-            sensitive data, complex workflows, and real operational
-            constraints. My work spans greenfield builds to legacy
-            modernization, always focusing on software that survives
-            production, not just the demo.
+            sensitive data, complex workflows, and real operational constraints.
+            My work spans greenfield builds to legacy modernization, always
+            focusing on software that survives production, not just the demo.
           </p>
           <p>
-            I don’t chase hype. I design architectures that are
-            understandable, auditable, and resilient—solutions that teams
-            can maintain and businesses can trust.
+            I don’t chase hype. I design architectures that are understandable,
+            auditable, and resilient—solutions that teams can maintain and
+            businesses can trust.
           </p>
         </div>
       </li>
@@ -92,14 +93,16 @@
         id="build"
         class="identity md:col-start-1 row-start-2 self-center py-2"
       >
-        <h2 class="py-2 font-iceberg font-bold text-primary text-3xl border-b border-neutral-900 mb-4">
+        <h2
+          class="py-2 font-iceberg font-bold text-primary text-3xl border-b border-neutral-900 mb-4"
+        >
           Technical Expertise
         </h2>
 
         <div class="max-w-xl leading-relaxed space-y-6">
           <p class="text-muted">
-            I architect, build, and modernize software systems with a
-            relentless focus on backend stability and data integrity.
+            I architect, build, and modernize software systems with a relentless
+            focus on backend stability and data integrity.
           </p>
 
           <div class="space-y-2">
@@ -110,50 +113,54 @@
               class="list-disc list-outside text-muted text-base space-y-4 pl-4"
             >
               <li>
-                <span class="font-montserrat font-semibold text-foreground text-sm"
+                <span
+                  class="font-montserrat font-semibold text-foreground text-sm"
                   >Resilient Backend Infrastructure:
                 </span>
                 <span
-                  >Designing APIs, transactional workflows, and
-                  data-intensive platforms that prioritize uptime.</span
+                  >Designing APIs, transactional workflows, and data-intensive
+                  platforms that prioritize uptime.</span
                 >
               </li>
               <li>
-                <span class="font-montserrat font-semibold text-foreground text-sm"
+                <span
+                  class="font-montserrat font-semibold text-foreground text-sm"
                   >Financial Engineering:
                 </span>
                 <span
-                  >Building payment integrations and ledgers where
-                  correctness and idempotency are non-negotiable.</span
+                  >Building payment integrations and ledgers where correctness
+                  and idempotency are non-negotiable.</span
                 >
               </li>
               <li>
-                <span class="font-montserrat font-semibold text-foreground text-sm"
+                <span
+                  class="font-montserrat font-semibold text-foreground text-sm"
                   >Legacy Modernization:
                 </span>
                 <span
-                  >Migrating critical platforms to modern stacks
-                  incrementally, ensuring zero downtime for production
-                  users.</span
+                  >Migrating critical platforms to modern stacks incrementally,
+                  ensuring zero downtime for production users.</span
                 >
               </li>
               <li>
-                <span class="font-montserrat font-semibold text-foreground text-sm"
+                <span
+                  class="font-montserrat font-semibold text-foreground text-sm"
                   >Architecture Consulting:
                 </span>
                 <span
-                  >Helping teams untangle technical debt and make
-                  sustainable, long-term engineering decisions.</span
+                  >Helping teams untangle technical debt and make sustainable,
+                  long-term engineering decisions.</span
                 >
               </li>
               <li>
-                <span class="font-montserrat font-semibold text-foreground text-sm"
+                <span
+                  class="font-montserrat font-semibold text-foreground text-sm"
                   >Hybrid Architectures:
                 </span>
                 <span
-                  >Balancing performance and delivery speed using BFFs
-                  (Backend for Frontend), serverless, and traditional
-                  monolithic patterns.</span
+                  >Balancing performance and delivery speed using BFFs (Backend
+                  for Frontend), serverless, and traditional monolithic
+                  patterns.</span
                 >
               </li>
             </ul>
@@ -166,32 +173,30 @@
         </div>
       </li>
 
-      <li
-        id="why"
-        class="identity md:col-start-2 row-start-3 self-center py-2"
-      >
-        <h2 class="py-2 font-iceberg font-bold text-primary text-3xl border-b border-neutral-900 mb-4">
+      <li id="why" class="identity md:col-start-2 row-start-3 self-center py-2">
+        <h2
+          class="py-2 font-iceberg font-bold text-primary text-3xl border-b border-neutral-900 mb-4"
+        >
           Why I Do It
         </h2>
 
         <div class="max-w-xl leading-relaxed space-y-4 text-muted">
           <p>
-            Most costly software failures don’t stem from bad ideas — they
-            stem from fragile systems, rushed architecture, and unmanaged
-            technical debt.
+            Most costly software failures don’t stem from bad ideas — they stem
+            from fragile systems, rushed architecture, and unmanaged technical
+            debt.
           </p>
           <p>
             I build software because I value
-            <span class="text-foreground font-semibold">resilience</span>. I design
-            systems that hold up under pressure: when traffic spikes, when
-            money is on the line, and long after the original authors have
+            <span class="text-foreground font-semibold">resilience</span>. I
+            design systems that hold up under pressure: when traffic spikes,
+            when money is on the line, and long after the original authors have
             moved on.
           </p>
           <p>
             I thrive on the hard parts of engineering —state management,
-            concurrency, and data integrity —because getting these right
-            early saves clients years of pain, expensive rewrites, and lost
-            trust.
+            concurrency, and data integrity —because getting these right early
+            saves clients years of pain, expensive rewrites, and lost trust.
           </p>
         </div>
       </li>

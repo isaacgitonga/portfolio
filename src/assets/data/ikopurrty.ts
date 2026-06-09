@@ -3,7 +3,7 @@ import type {Project} from "@/types.ts";
 export const ikopurrty: Project = {
   id: "ticketing-platform",
   title: "Ticketing Platform",
-  status: ["Ready MVP"],
+  status: ["Ready MVP", "Awaiting Launch"],
   description: [
     "A high-concurrency ticketing platform focused on transactional integrity, secure M-Pesa payments, and role-based access control."
   ],

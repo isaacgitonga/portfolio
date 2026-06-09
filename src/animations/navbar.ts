@@ -6,7 +6,7 @@ export function initNavbar() {
   const sideNav = document.getElementById('side-nav');
   const navDrawer = document.getElementById('nav-content');
   const navBackdrop = document.getElementById('nav-backdrop');
-  const navLinks = document.querySelectorAll('.nav-link');
+  const navLinks = document.querySelectorAll('.mobile-nav-link');
 
   if (!menuToggle || !sideNav || !menuClose || !navBackdrop || !navDrawer) return;
 
@@ -47,7 +47,7 @@ export function initNavbar() {
     duration: 0.4,
     ease: "power3.inOut"
   }, "-=0.2")
-  .from(".nav-link", {
+  .from(".mobile-nav-link", {
     x: 50,
     opacity: 0,
     stagger: 0.1,

@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@core/tsconfig": "workspace:*",
-    "@tailwindcss/vite": "catalog:",
-    "tailwindcss": "catalog:"
+    "@tailwindcss/vite": "^4.3.0",
+    "tailwindcss": "^4.3.0"
   }
 }
