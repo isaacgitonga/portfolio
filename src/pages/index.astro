@@ -7,7 +7,7 @@ import Reviews from "../components/Reviews.astro";
 import Contact from "../components/Contact.astro";
 ---
 
-<Layout data-page="home" title="Isaac Gitonga | Software Engineer">
+<Layout data-page="home" title="Isaac Gitonga | Software Architect">
   <Hero />
   <Skills />
   <Projects />
@@ -15,102 +15,102 @@ import Contact from "../components/Contact.astro";
   <Contact />
 </Layout>
 
-<script>
-  import gsap from "gsap";
-  import ScrambleTextPlugin from "gsap/ScrambleTextPlugin";
-  import { SplitText } from "gsap/SplitText";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
+<!--<script>-->
+<!--  import gsap from "gsap";-->
+<!--  import ScrambleTextPlugin from "gsap/ScrambleTextPlugin";-->
+<!--  import { SplitText } from "gsap/SplitText";-->
+<!--  import { ScrollTrigger } from "gsap/ScrollTrigger";-->
 
-  import {
-    initNavbar,
-    animateHero,
-    animateSkills,
-    animateProjects,
-    animateReviews,
-    animateContact,
-    animateHeadings,
-    initProjectAnimations
-  } from "../animations";
+<!--  import {-->
+<!--    initNavbar,-->
+<!--    animateHero,-->
+<!--    animateSkills,-->
+<!--    animateProjects,-->
+<!--    animateReviews,-->
+<!--    animateContact,-->
+<!--    animateHeadings,-->
+<!--    initProjectAnimations-->
+<!--  } from "../animations";-->
 
-  gsap.registerPlugin(ScrambleTextPlugin);
-  gsap.registerPlugin(SplitText);
-  gsap.registerPlugin(ScrollTrigger);
+<!--  gsap.registerPlugin(ScrambleTextPlugin);-->
+<!--  gsap.registerPlugin(SplitText);-->
+<!--  gsap.registerPlugin(ScrollTrigger);-->
 
-  /**
-   * This is the main TypeScript file. This file must be loaded before loading the specific page TS file.
-   */
-  document.documentElement.classList.remove("no-js");
+<!--  /**-->
+<!--   * This is the main TypeScript file. This file must be loaded before loading the specific page TS file.-->
+<!--   */-->
+<!--  document.documentElement.classList.remove("no-js");-->
 
-  /**
-   * Initializes animations for the current page based on the `data-page` attribute of the document's body.
-   * Executes specific animation initializers depending on whether the page is "home" or "project".
-   *
-   * @return {void} Does not return a value.
-   */
-  function initPageAnimations(): void {
-    if (document.body.dataset.page === "home") {
-      animateHeadings();
-    }
+<!--  /**-->
+<!--   * Initializes animations for the current page based on the `data-page` attribute of the document's body.-->
+<!--   * Executes specific animation initializers depending on whether the page is "home" or "project".-->
+<!--   *-->
+<!--   * @return {void} Does not return a value.-->
+<!--   */-->
+<!--  function initPageAnimations(): void {-->
+<!--    if (document.body.dataset.page === "home") {-->
+<!--      animateHeadings();-->
+<!--    }-->
 
-    if (document.body.dataset.page === "project") {
-      initProjectAnimations();
-    }
-  }
-
-
-/**
- * Manages the curtain transition effect for the web page, including fading the curtain in and out during page load and link navigation.
- *
- * @return {void} This function does not return a value. It sets up and handles DOM event listeners and animations for the curtain transition effect.
- */
-function runCurtain(): void {
-  // Wait for the DOM to be ready
-  document.addEventListener("DOMContentLoaded", () => {
-    // Start page animations after the curtain is gone
-    initPageAnimations();
-  });
-}
+<!--    if (document.body.dataset.page === "project") {-->
+<!--      initProjectAnimations();-->
+<!--    }-->
+<!--  }-->
 
 
-  /**
-   * Adds click event listeners to elements with the class `copy-email`.
-   * When clicked, the email address 'isaacggitonga@gmail.com' is copied to the clipboard.
-   *
-   * @return {void} This function does not return a value.
-   */
-  export function copyEmail(): void {
-    const copy  = document.querySelectorAll('.copy-email');
+<!--/**-->
+<!-- * Manages the curtain transition effect for the web page, including fading the curtain in and out during page load and link navigation.-->
+<!-- *-->
+<!-- * @return {void} This function does not return a value. It sets up and handles DOM event listeners and animations for the curtain transition effect.-->
+<!-- */-->
+<!--function runCurtain(): void {-->
+<!--  // Wait for the DOM to be ready-->
+<!--  document.addEventListener("DOMContentLoaded", () => {-->
+<!--    // Start page animations after the curtain is gone-->
+<!--    initPageAnimations();-->
+<!--  });-->
+<!--}-->
 
-    copy.forEach(email => email.addEventListener('click', () =>
-      navigator.clipboard.writeText('isaacggitonga@gmail.com')));
-  }
 
-  /**
-   * Updates the text content of an element with the current year.
-   * Searches for an element with the selector 'footer .year' and sets its text content
-   * to the current year. If the element is not found, the function exits without making changes.
-   *
-   * @return {void} Does not return a value.
-   */
-  export function addCopyrightYear(): void {
-    const year = new Date().getFullYear();
+<!--  /**-->
+<!--   * Adds click event listeners to elements with the class `copy-email`.-->
+<!--   * When clicked, the email address 'isaacggitonga@gmail.com' is copied to the clipboard.-->
+<!--   *-->
+<!--   * @return {void} This function does not return a value.-->
+<!--   */-->
+<!--  export function copyEmail(): void {-->
+<!--    const copy  = document.querySelectorAll('.copy-email');-->
 
-    const currency = document.querySelector('footer .year');
-    if (!currency) return;
+<!--    copy.forEach(email => email.addEventListener('click', () =>-->
+<!--      navigator.clipboard.writeText('isaacggitonga@gmail.com')));-->
+<!--  }-->
 
-    currency.textContent = year.toString();
-  }
+<!--  /**-->
+<!--   * Updates the text content of an element with the current year.-->
+<!--   * Searches for an element with the selector 'footer .year' and sets its text content-->
+<!--   * to the current year. If the element is not found, the function exits without making changes.-->
+<!--   *-->
+<!--   * @return {void} Does not return a value.-->
+<!--   */-->
+<!--  export function addCopyrightYear(): void {-->
+<!--    const year = new Date().getFullYear();-->
 
-  // initStars();
-  runCurtain();
-  copyEmail();
-  addCopyrightYear();
+<!--    const currency = document.querySelector('footer .year');-->
+<!--    if (!currency) return;-->
 
-  // Initialize page animations
-  initNavbar();
-  animateHero();
-  animateSkills();
-  animateProjects();
-  animateReviews();
-  animateContact();
-</script>
+<!--    currency.textContent = year.toString();-->
+<!--  }-->
+
+<!--  // initStars();-->
+<!--  runCurtain();-->
+<!--  copyEmail();-->
+<!--  addCopyrightYear();-->
+
+<!--  // Initialize page animations-->
+<!--  initNavbar();-->
+<!--  animateHero();-->
+<!--  animateSkills();-->
+<!--  animateProjects();-->
+<!--  animateReviews();-->
+<!--  animateContact();-->
+<!--</script>-->
