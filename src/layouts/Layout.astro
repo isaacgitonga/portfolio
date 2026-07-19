@@ -1,7 +1,7 @@
 ---
 import "../styles/global.css";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+import Navbar from "@/components/Navbar.astro";
+import Footer from "@/components/Footer.astro";
 
 interface Props {
   title?: string;
@@ -9,8 +9,8 @@ interface Props {
 }
 
 const {
-  title = "Isaac Gitonga | Software Engineer",
-  description = "I’m a software engineer and system architect who builds reliable infrastructure.",
+  title = "Isaac Gitonga | Software Architect",
+  description = "Software engineer and system architect building reliable infrastructure.",
 } = Astro.props;
 ---
 
@@ -37,7 +37,7 @@ const {
   <body
     class="bg-background text-foreground font-nunito overflow-x-hidden selection:bg-primary/20 selection:text-primary"
   >
-    <Header />
+    <Navbar />
     <slot />
     <Footer />
   </body>

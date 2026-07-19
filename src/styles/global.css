@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 @theme {
+  --nav-height: 72px;
+
   --font-nunito: "Nunito", sans-serif;
   --font-montserrat: "Montserrat", sans-serif;
   --font-iceberg: "Iceberg", sans-serif;
@@ -148,17 +150,18 @@
   }
 }
 
-.no-js #side-nav,
-.no-js #menu-toggle,
-.no-js #tagline,
-.no-js #hero-intro,
-.no-js #hero .stats,
-.no-js #back-nav,
-.no-js #project-title,
-.no-js #project-role,
-.no-js #showcase,
-.no-js #overview {
-  opacity: 0;
+/*.no-js #side-nav*/
+/*.no-js #menu-toggle,*/
+/*.no-js #tagline,*/
+/*.no-js #hero-intro,*/
+/*.no-js #hero .stats,*/
+/*.no-js #back-nav,*/
+/*.no-js #project-title,*/
+/*.no-js #project-role,*/
+/*.no-js #showcase,*/
+/*.no-js #overview */
+{
+  /*opacity: 0;*/
 }
 
 /* Firefox custom scrollbar */
@@ -184,4 +187,11 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: #404040;
+}
+
+.svg-icon {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
 }

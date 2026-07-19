@@ -1,5 +1,6 @@
 ---
-// Footer.astro
+import {getSocials} from "@/utils.ts";
+import Socials from "@/components/Socials.astro";
 ---
 
 <footer
@@ -10,14 +11,12 @@
   >
     <p class="text-muted font-montserrat max-w-lg text-center leading-relaxed">
       Built with
-      <span class="text-foreground font-semibold font-iceberg"
-        >TypeScript, HTML, Tailwind CSS</span
-      >, and
-      <span class="text-foreground font-semibold font-iceberg">Astro</span>.
+      <span class="text-foreground font-semibold font-iceberg">Astro, TypeScript,</span> and,
+      <span class="text-foreground font-semibold font-iceberg">Tailwind.</span>
       Designed and developed by
       <span class="text-primary font-semibold font-iceberg text-nowrap">
         <a
-          href="https://github.com/gitongaisaac"
+          href={getSocials().github}
           target="_blank"
           class="inline text-nowrap hover:underline"
         >
@@ -29,49 +28,18 @@
     </p>
 
     <div class="space-y-2 w-full flex flex-col items-center">
-      <div class="flex flex-col sm:flex-row gap-4 items-center justify-center">
-        <a
-          href="https://isaacgitonga.com"
-          class="hover:opacity-80 transition-opacity"
-        >
-          <img
-            src="/logos/logo-dark.png"
-            alt="Logo"
-            class="size-9 rounded-full"
-          />
-        </a>
-        <div
-          class="bg-background/50 border border-foreground/10 rounded-full px-4 flex items-center gap-2"
-        >
-          <span class="font-iceberg text-sm text-foreground"
-            >isaacggitonga@gmail.com</span
-          >
-          <button
-            class="copy-email text-muted hover:text-foreground active:scale-70 transition-all duration-200 cursor-pointer"
-            title="Copy Email"
-          >
-            <i class="fa-solid fa-copy"></i>
-          </button>
-        </div>
-        <a
-          href="https://github.com/gitongaisaac/portfolio"
-          target="_blank"
-          class="text-muted hover:text-foreground transition-colors text-3xl"
-        >
-          <i class="fa-brands fa-github"></i>
-        </a>
-      </div>
       <!-- <p
         class="text-neutral-700 font-montserrat text-center text-xs max-w-md mt-4"
       >
         Source code available for inspection. Inspiration encouraged;
         attribution appreciated.
       </p> -->
+
+      <Socials gap={6} />
     </div>
 
     <p class="font-montserrat font-light text-xs text-muted-dark mt-4">
-      &copy; <span class="year">{new Date().getFullYear()}</span> Isaac G. All rights
-      reserved.
+      &copy; <span class="year">{new Date().getFullYear()}</span> Isaac G. All rights reserved.
     </p>
   </div>
 </footer>

@@ -1,5 +1,5 @@
 import gsap from "gsap";
-import { SplitText } from "gsap/SplitText";
+import {SplitText} from "gsap/SplitText";
 import ScrambleTextPlugin from "gsap/ScrambleTextPlugin";
 
 const SCREEN_MD = window.innerWidth > 768;
@@ -7,7 +7,7 @@ const SCREEN_MD = window.innerWidth > 768;
 gsap.registerPlugin(ScrambleTextPlugin);
 gsap.registerPlugin(SplitText);
 
-function animateTagline(tl: GSAPTimeline) {
+export function animateTagline(tl: GSAPTimeline) {
   gsap.set(".compile", { yPercent: SCREEN_MD ? 40 : 20, opacity: 0 });
   gsap.set(".debug", { xPercent: SCREEN_MD ? -70 : -35, opacity: 0 });
   gsap.set(".repeat", { yPercent: SCREEN_MD ? -40 : -20, opacity: 0 });
