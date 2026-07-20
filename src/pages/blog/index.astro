@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import { MoveLeft } from '@lucide/astro';
 
 const posts = await getCollection('blog');
 const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
@@ -11,7 +12,7 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
     <!-- Back to Home -->
     <div>
       <a href="/" class="group inline-flex items-center gap-2 text-muted hover:text-primary transition-colors font-iceberg text-sm">
-        <i class="fa-solid fa-arrow-left transtion duration-200 group-hover:-translate-x-1"></i>
+        <MoveLeft class="transtion duration-200 group-hover:-translate-x-1" />
         <span>Back to Home</span>
       </a>
     </div>
