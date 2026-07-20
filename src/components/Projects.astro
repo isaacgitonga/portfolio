@@ -1,4 +1,5 @@
 ---
+import { SquareArrowOutUpRight } from "@lucide/astro";
 import projects from "../assets/data";
 ---
 
@@ -22,7 +23,7 @@ import projects from "../assets/data";
             <a href={`/projects/${project.id}`} class="group block py-6">
               <h2 class="flex relative w-fit items-center justify-between text-3xl md:text-4xl font-iceberg font-bold text-primary group-hover:text-primary-hover transition-colors duration-250">
                 <span>{project.title}</span>
-                <i class="fa-solid fa-arrow-up-right-from-square absolute -right-5 group-hover:-top-1 group-hover:-right-6 text-lg text-foreground opacity-50 group-hover:opacity-100 group-hover:text-primary transition-all duration-200" />
+                <SquareArrowOutUpRight size={20} class="absolute -right-5 top-0 opacity-50 text-foreground transition-all duration-200 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:opacity-100 group-hover:text-primary" />
               </h2>
 
               <p class="text-muted mt-3 text-base leading-relaxed max-w-4xl">

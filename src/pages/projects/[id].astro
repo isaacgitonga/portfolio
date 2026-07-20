@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import projects from "../../assets/data";
 import type { Project } from "@/types.ts";
+import {MoveLeft} from "@lucide/astro";
 
 export function getStaticPaths() {
   return projects.map((project) => ({
@@ -25,10 +26,10 @@ const { project } = Astro.props;
     <!-- Back Navigation -->
     <div id="back-nav">
       <a
-        href="/#projects"
+        href="/projects"
         class="group inline-flex items-center gap-2 text-muted hover:text-primary transition-colors font-iceberg text-sm"
       >
-        <i class="fa-solid fa-arrow-left transtion duration-200 group-hover:-translate-x-1"></i>
+        <MoveLeft class="transtion duration-200 group-hover:-translate-x-1" />
         <span>Back to Projects</span>
       </a>
     </div>
