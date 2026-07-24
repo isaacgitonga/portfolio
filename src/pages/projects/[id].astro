@@ -1,10 +1,10 @@
 ---
 import { Image } from "astro:assets";
-import { getCollection } from "astro:content";
-import Layout from "../../layouts/Layout.astro";
-import type { Project } from "@/schema/project.schema";
 import { MoveLeft } from "@lucide/astro";
 import type { ImageMetadata } from "astro";
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import type { Project } from "@/schema/project.schema";
 
 export async function getStaticPaths() {
   const allProjects = await getCollection("projects");
@@ -288,8 +288,7 @@ const hasImage = resolvedBannerPath in images;
 
       <!-- Right Column: Sidebar (takes 1 col on desktop) -->
       <div class="space-y-8">
-        <!-- Links -->
-        {project.liveUrl || project.repoUrl &&
+        {(project.liveUrl || project.repoUrl) &&
           <div
             class="bg-surface/80 p-6 rounded-xl border border-surface-border space-y-4 shadow-xs"
           >

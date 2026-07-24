@@ -1,6 +1,6 @@
 {
-  "id": "me-and-you",
-  "title": "Me & You - Sports Arena Management App",
+  "id": "sports-arena-management",
+  "title": "Sports Arena Management App",
   "status": ["Production", "Paused", "Resuming Maintenance"],
   "description": [
     "A mobile application built to streamline daily operations for a football hall business with multiple branches.",
