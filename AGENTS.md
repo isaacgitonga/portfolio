@@ -1,44 +1,40 @@
 # 🏛️ Local Domain Agent Directives: Portfolio (@core/portfolio)
 
-You are a Domain-Scoped Developer Agent assigned to the `apps/portfolio` directory. You must operate strictly within the boundaries of this folder and respect the rules of the surrounding monorepo.
+You are a Domain-Scoped Developer Agent assigned to `apps/portfolio` within the `@core` monorepo (`core -> @core/portfolio`). You must operate strictly within the boundaries of this folder and respect the monorepo architecture.
 
 ---
 
-## 🚫 Scope & Boundary Constraints
-*   **Your Sandbox**: You are strictly confined to `apps/portfolio/`.
-*   **ReadOnly Workspace**: You may read files outside this folder (e.g., shared configs at the root, or shared modules in `packages/`) for context, but you **MUST NOT** modify them under any circumstances.
-*   **No Cross-Talk**: Do not attempt to modify adjacent projects in `apps/` or shared code in `packages/`. If you need features from a shared package, coordinate with the user to request changes there first.
+## 📌 Project Context & State
+* **Monorepo Package**: `@core/portfolio` (located at `apps/portfolio`).
+* **Active Migration**: This portfolio is being actively migrated from legacy vanilla HTML to **Astro**.
+* **Content Layer Architecture**:
+  * Content collections are defined in `src/content.config.ts`.
+  * Schemas are decoupled into modular files inside `src/schema/*.schema.ts` (e.g., `src/schema/project.schema.ts`).
+  * Project entries are stored as JSON files in `src/content/projects/*.json`.
+  * Blog entries and architectural case studies are stored in `src/content/blog/` or `src/content/case-studies/`.
+  * **Raw Data Staging**: Any raw data copied or imported from other projects or external sources (e.g., briefs from `@core/atlas`) must be placed in `src/content/raw/` before being processed into schema-validated content collections.
+* **Schema Naming Conventions**:
+  * Schemas are written in PascalCase ending in `Schema` (e.g., `ProjectSchema`, `ProjectStackSchema`).
+  * Exported TypeScript types infer directly from the schema using the base name: `export type [Name] = z.infer<typeof [Name]Schema>` (e.g., `ProjectSchema` -> `export type Project`).
+* **Important Syntax Rules**:
+  * `import { z } from 'astro:content'` will be deprecated in Astro 7. Always import Zod via `import { z } from 'astro/zod'`.
 
 ---
 
-## 📦 Monorepo Package Management Rules (pnpm)
-This monorepo is managed by **pnpm workspaces**. You can run commands directly from your project folder:
-
-1.  **Adding/Removing Dependencies**: Run commands normally inside your folder. pnpm will automatically detect the workspace root and update the global lockfile for you:
-    ```bash
-    pnpm add [package-name]
-    pnpm add -D [dev-package-name]
-    ```
-2.  **Declare before using**: You cannot use "phantom dependencies" (packages installed at the root but not declared in your local `package.json`). If you need a package, install it explicitly in your directory.
-3.  **Local Package Linking**: To import a shared library from `packages/`, declare it in your local `package.json` using the workspace protocol:
-    ```json
-    "dependencies": {
-      "@[scope]/[shared-pkg]": "workspace:*"
-    }
-    ```
+## 🚫 Scope & Sandbox Constraints
+* **Target Boundary**: You are strictly confined to `apps/portfolio/`.
+* **Read-Only Monorepo Access**: You can directly read files outside this folder (such as root configs or `@core/atlas` docs for architectural references), but **MUST NOT** modify them autonomously.
+* **No Git Operations**: Do not perform any git commands (commit, branch, merge, rebase, push) autonomously. Wait for explicit user instructions.
 
 ---
 
-## 🛠️ Tooling & Orchestration (Turborepo)
-*   **Task Execution**: Monorepo tasks (builds, tests, dev servers) are orchestrated at the root using Turborepo (`turbo`).
-*   **Command Execution**: When running scripts, run them from your directory:
-    ```bash
-    pnpm run [script-name]
-    ```
-*   **Configuration Inheritance**: Respect and reference the root-level config files (e.g., extends `tsconfig.json` from the root, uses root-level ESLint/Prettier rules).
+## 📦 Monorepo Package Management (pnpm)
+* Manage dependencies locally within `apps/portfolio/`.
+* Run commands using `pnpm add [pkg]` or `pnpm run [script]`.
+* Local package linking with workspace protocol: `"@[scope]/[pkg]": "workspace:*"`.
 
 ---
 
-## 🏛️ Atlas Ecosystem Alignment
-This codebase is part of Isaac's professional ecosystem anchored by **Atlas** (his strategic repository at `/home/isaac/DevStudio/atlas`).
-When requested to document architectural decisions, log challenge resolutions, draft blog ideas, or "sync to Atlas," you must use the `atlas-sync` skill. Run `view_file` on the `atlas-sync` skill's `SKILL.md` to retrieve execution instructions.
+## 🏛️ Atlas Integration
+* Strategic records, project briefs, and architectural opinions live in `@core/atlas`.
+* Since read access outside `apps/portfolio` is available, cross-reference materials directly from `@core/atlas` when preparing blog drafts or case studies.
