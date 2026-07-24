@@ -1,7 +1,7 @@
 {
   "id": "ticketing-platform",
   "title": "Ticketing Platform",
-  "status": ["Ready MVP", "Awaiting Launch"],
+  "status": ["Ready MVP", "Active Development", "Awaiting Launch"],
   "description": [
     "A high-concurrency ticketing platform focused on transactional integrity, secure M-Pesa payments, and role-based access control."
   ],
@@ -16,6 +16,7 @@
   "featured": true,
   "published": true,
   "order": 1,
+  "liveUrl": "https://ikopurrty.com",
   "tags": ["Fintech", "Ticketing", "High Concurrency", "System Architecture"],
   "features": [
     "High-concurrency ticket reservation engine",
@@ -25,7 +26,7 @@
     "Real-time event analytics dashboard"
   ],
   "showcase": [
-    "/projects/ikopurrty/banner.png"
+    "/src/assets/images/projects/ikopurrty/banner.png"
   ],
   "related": [
     {

@@ -1,4 +1,4 @@
-import { z } from 'astro/zod';
+import {z} from 'astro/zod';
 
 export const ProjectChallengeSchema = z.object({
   title: z.string(),
@@ -65,8 +65,8 @@ export const ProjectSchema = z.object({
 
   // Related Articles & External Links
   related: z.array(z.union([z.string(), RelatedLinkSchema])).optional(),
-  repoUrl: z.string().url().optional(),
-  liveUrl: z.string().url().optional(),
+  repoUrl: z.url().optional(),
+  liveUrl: z.url().optional(),
 });
 
 export type Project = z.infer<typeof ProjectSchema>;
