@@ -1,0 +1,72 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PulseBackground from "@/components/PulseBackground.astro";
+import { RefreshCw, Home } from "@lucide/astro";
+---
+
+<Layout title="500: Internal Server Error | Isaac Gitonga">
+  <div class="relative min-h-[80vh] flex items-center justify-center px-6 overflow-hidden">
+    <!-- Thematic animated network background -->
+    <PulseBackground className="opacity-30 pb-20" />
+
+    <div class="relative z-10 max-w-2xl w-full text-center space-y-8 py-16">
+      <!-- Glow Exception Header -->
+      <div class="space-y-2">
+        <p class="font-mono text-xs uppercase tracking-widest text-secondary font-bold animate-pulse">
+          [ EXCEPTION: CORE_DUMP_TRIGGERED ]
+        </p>
+        <h1 class="text-8xl md:text-9xl font-iceberg font-bold text-primary tracking-tighter drop-shadow-[0_0_15px_rgba(20,184,166,0.3)]">
+          500
+        </h1>
+      </div>
+
+      <!-- Developer themed copy -->
+      <div class="space-y-4 max-w-lg mx-auto">
+        <h2 class="text-2xl font-iceberg font-bold text-foreground">
+          Unhandled runtime exception.
+        </h2>
+        <p class="text-muted text-base leading-relaxed font-montserrat font-medium">
+          The server encountered an unexpected state trying to compile this request. A stack trace has been logged, and the execution thread was halted to preserve system state.
+        </p>
+      </div>
+
+      <!-- Fake Mini Code Stack Trace / Core Dump details -->
+      <div class="bg-surface/60 border border-surface-border rounded-xl p-5 text-left font-mono text-xs text-muted max-w-md mx-auto space-y-3 backdrop-blur-xs">
+        <div class="flex justify-between border-b border-surface-border/50 pb-1">
+          <span class="text-muted-dark font-semibold">SIGNAL:</span>
+          <span class="text-red-400">SIGSEGV (Segment Fault)</span>
+        </div>
+        <div class="flex justify-between border-b border-surface-border/50 pb-1">
+          <span class="text-muted-dark font-semibold">REGISTERS:</span>
+          <span class="text-foreground">EIP: 0x0040182C | ESP: 0x7FFF0040</span>
+        </div>
+        <div class="space-y-1">
+          <span class="text-muted-dark font-semibold">STACK_TRACE:</span>
+          <div class="pl-3 space-y-0.5 text-muted-dark border-l-2 border-primary/20">
+            <div>at @core/portfolio/server.ts:42:12</div>
+            <div>at process.runNextTicks (node:internal/process/task_queues:60:5)</div>
+            <div>at processTimers (node:internal/timers:511:9)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Actions -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+        <button
+          onclick="window.location.reload()"
+          class="flex items-center justify-center gap-2 px-6 py-3 bg-surface border border-surface-border hover:bg-surface-hover text-foreground font-bold font-iceberg rounded-lg transition-colors w-full sm:w-auto cursor-pointer"
+        >
+          <RefreshCw size={16} />
+          <span>Retry Operation</span>
+        </button>
+        <a
+          href="/"
+          class="flex items-center justify-center gap-2 px-6 py-3 bg-primary hover:bg-primary-hover text-background font-bold font-iceberg rounded-lg transition-colors w-full sm:w-auto cursor-pointer"
+        >
+          <Home size={16} />
+          <span>Return Home</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</Layout>

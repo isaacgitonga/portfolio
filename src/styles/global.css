@@ -15,8 +15,11 @@
   --color-secondary-hover: #ea580c; /* orange-600 */
   --color-muted: #9ca3af; /* neutral-400 */
   --color-muted-dark: #6b7280; /* neutral-500 */
-  --color-foreground: #e5e7eb; /* neutral-200 / text color */
-  --color-background: #0a0a0a; /* neutral dark background */
+  --color-foreground: #f7fafc;
+  --color-background: #131420;
+  --color-surface: #181a2b; /* card surface matching #131420 theme tone */
+  --color-surface-hover: #22253d;
+  --color-surface-border: #282b45;
 }
 
 @layer base {

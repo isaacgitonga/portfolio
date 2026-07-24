@@ -1,0 +1,81 @@
+---
+import { SquareArrowOutUpRight } from "@lucide/astro";
+import type { Project } from "@/schema/project.schema";
+
+interface Props {
+  project: Project;
+  page: 'home' | 'projects';
+}
+
+const { project, page } = Astro.props;
+
+// Flatten tech stack items cleanly
+const allTech = Object.values(project.stack)
+  .flat()
+  .filter(Boolean);
+---
+
+<li class="project border-b border-surface-border/60 py-6 last:border-b-0">
+  <a href={`/projects/${project.id}`} class="group block space-y-3">
+    <!-- Meta Badges (Featured, Type, Client) -->
+    <div class="flex flex-wrap items-center gap-2">
+      {
+        project.featured && (
+          <span class="px-2.5 py-0.5 bg-secondary/15 border border-secondary/30 text-secondary text-[11px] font-mono font-semibold rounded-full uppercase tracking-wider">
+            Featured
+          </span>
+        )
+      }
+      {
+        project.projectType && (
+          <span class="px-2.5 py-0.5 bg-primary/10 border border-primary/20 text-primary text-[11px] font-mono font-medium rounded-full">
+            {project.projectType}
+          </span>
+        )
+      }
+      {
+        project.client && (
+          <span class="text-xs text-muted-dark font-montserrat">
+            for <strong class="text-foreground">{project.client}</strong>
+          </span>
+        )
+      }
+    </div>
+
+    <!-- Title & Arrow Icon -->
+    <h2 class={`flex relative w-fit items-center justify-between font-iceberg font-bold text-primary group-hover:text-primary-hover transition-colors duration-250 ${page === 'home' ? 'text-3xl md:text-4xl' : 'text-xl md:text-2xl tracking-wider'}`}>
+      <span>{project.title}</span>
+      <SquareArrowOutUpRight
+        size={20}
+        class="absolute -right-8 top-0 opacity-50 text-foreground transition-all duration-200 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:opacity-100 group-hover:text-primary"
+      />
+    </h2>
+
+    <!-- Description -->
+    <p class="text-muted text-base leading-relaxed max-w-4xl font-nunito">
+      {project.description[0]}
+    </p>
+
+    <!-- Key Metric Preview (if present) -->
+    {
+      project.metrics && project.metrics.length > 0 && (
+        <div class="flex items-center gap-2 text-xs text-primary font-mono font-medium pt-1">
+          <i class="fa-solid fa-chart-line text-[10px]" />
+          <span>{project.metrics[0]}</span>
+        </div>
+      )
+    }
+
+    <!-- Tech Stack Pills -->
+    <ul class="tech-stack flex flex-wrap gap-x-4 gap-y-2 pt-2 items-center">
+      {
+        allTech.map((tech) => (
+          <li class="flex items-center gap-2">
+            <div class="size-1.5 bg-neutral-600 rounded-full" />
+            <span class="text-muted text-xs font-mono">{tech}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </a>
+</li>
