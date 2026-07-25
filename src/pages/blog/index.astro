@@ -57,7 +57,7 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
                 {post.data.tags && post.data.tags.length > 0 && (
                   <div class="flex flex-wrap gap-2 pt-2">
                     {post.data.tags.map((tag) => (
-                      <span class="px-2 py-0.5 bg-neutral-900 border border-neutral-800 text-[10px] rounded-sm text-primary font-mono">
+                      <span class="px-2 py-0.5 bg-surface border border-surface-border text-[10px] rounded-sm text-primary font-mono">
                         {tag}
                       </span>
                     ))}
