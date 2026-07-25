@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { MoveLeft } from '@lucide/astro';
+
+const posts = await getCollection('blog');
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Layout data-page="project" title="Blog | Isaac Gitonga" description="Technical writing and opinions on software engineering, database design, and systems architecture.">
+  <section class="max-w-4xl mx-auto px-6 py-12 md:py-24 space-y-12">
+    <!-- Back to Home -->
+    <div>
+      <a href="/" class="group inline-flex items-center gap-2 text-muted hover:text-primary transition-colors font-iceberg text-sm">
+        <MoveLeft class="transtion duration-200 group-hover:-translate-x-1" />
+        <span>Back to Home</span>
+      </a>
+    </div>
+
+    <!-- Header -->
+    <div class="space-y-4">
+      <h1 class="text-4xl md:text-6xl font-iceberg font-bold text-primary">Blog</h1>
+      <p class="text-lg text-muted font-montserrat">
+        Thoughts and engineering briefs on backend architecture, databases, and modern web systems.
+      </p>
+    </div>
+
+    <!-- Blog Posts List -->
+    <div class="mt-12">
+      {sortedPosts.length === 0 ? (
+        <p class="text-muted italic">No posts published yet. Stay tuned!</p>
+      ) : (
+        <ul class="space-y-8 divide-y divide-neutral-900">
+          {sortedPosts.map((post) => (
+            <li class="pt-8 first:pt-0">
+              <article class="space-y-3">
+                <div class="flex items-center gap-4 text-xs font-mono text-muted-dark">
+                  <time datetime={post.data.pubDate.toISOString()}>
+                    {post.data.pubDate.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </time>
+                  <span>•</span>
+                  <span>By {post.data.author}</span>
+                </div>
+                
+                <h2 class="text-2xl md:text-3xl font-iceberg font-bold text-foreground hover:text-primary transition-colors">
+                  <a href={`/blog/${post.id}`}>{post.data.title}</a>
+                </h2>
+                
+                <p class="text-muted text-base leading-relaxed max-w-3xl">
+                  {post.data.description}
+                </p>
+
+                {post.data.tags && post.data.tags.length > 0 && (
+                  <div class="flex flex-wrap gap-2 pt-2">
+                    {post.data.tags.map((tag) => (
+                      <span class="px-2 py-0.5 bg-surface border border-surface-border text-[10px] rounded-sm text-primary font-mono">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </article>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </section>
+</Layout>

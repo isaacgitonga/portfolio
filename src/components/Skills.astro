@@ -1,102 +1,5 @@
 ---
 // Skills.astro
-
-interface Tool {
-  name: string;
-  logoUrl?: string;
-  iconClass?: string;
-  imgClass?: string;
-}
-
-interface Skill {
-  id: string;
-  title: string;
-  paragraphs: string[];
-  coreStrengths: string;
-  highlight?: {
-    icon: string;
-    text: string;
-  };
-  tools: Tool[];
-}
-
-const skills: Skill[] = [
-  {
-    id: "database",
-    title: "Database Design",
-    paragraphs: [
-      "I design databases as <strong>systems</strong>, not just storage layers.",
-      "My focus is on data models that reflect real business constraints, enforcing <strong>integrity at the database level</strong> so data remains valid even if application code fails. I prioritize transaction boundaries, indexing strategies, and predictable query behavior under load.",
-      "I work comfortably <strong>close to the metal</strong> —analyzing query plans, managing locking strategies, and writing raw SQL—while knowing exactly when to abstract complexity with an ORM. The goal is always the same: clear ownership, consistent performance, and schemas that can evolve without breaking production."
-    ],
-    coreStrengths: "Relational Modeling, Transactional Integrity, Indexing Strategy, Concurrency Control, Data Migrations.",
-    tools: [
-      { name: "SQL", logoUrl: "/logos/db.png", imgClass: "bg-cover bg-center size-6" },
-      { name: "PostgreSQL", logoUrl: "/logos/postgres.png", imgClass: "bg-cover bg-center h-6 w-8" },
-      { name: "MySQL", logoUrl: "/logos/mysql.png", imgClass: "object-cover size-6" },
-      { name: "Prisma", logoUrl: "/logos/prisma.png", imgClass: "object-cover rounded-sm size-6" },
-      { name: "Redis", logoUrl: "/logos/redis.png", imgClass: "object-cover size-6 rounded-sm" },
-      { name: "MongoDB", logoUrl: "/logos/mongodb.png", imgClass: "object-cover size-6" },
-      { name: "Neon", logoUrl: "/logos/neon.jpeg", imgClass: "object-cover size-6" }
-    ]
-  },
-  {
-    id: "backend",
-    title: "Backend Engineering",
-    paragraphs: [
-      "Backend engineering is my <strong>primary discipline</strong>.",
-      "I build APIs and systems where <strong>business logic lives in isolated layers</strong>, independent of frameworks. This decoupling makes systems easier to test, reason about, and scale without being locked into specific tools.",
-      "I pay strict attention to <strong>system boundaries</strong>: distinct separation between authentication and authorization, read vs. write models, and synchronous vs. asynchronous flows. Whether handling payments or modernizing legacy systems, I design backends to behave correctly under <strong>real-world conditions</strong> —handling failure states as gracefully as happy paths.",
-      "This is my chosen specialization: designing robust, production-grade systems that businesses can rely on."
-    ],
-    coreStrengths: "API Design, Authentication & Authorization, Transactional Workflows, System Architecture.",
-    highlight: {
-      icon: "fa-solid fa-gear",
-      text: "RESTful API Design"
-    },
-    tools: [
-      { name: "TypeScript", logoUrl: "/logos/typescript.png", imgClass: "size-6" },
-      { name: "Python", iconClass: "fa-brands fa-python text-2xl text-amber-500" },
-      { name: "Node.js", logoUrl: "/logos/node.webp", imgClass: "size-6" },
-      { name: "Express", logoUrl: "/logos/express.webp", imgClass: "size-6" },
-      { name: "Next.js", logoUrl: "/logos/next.png", imgClass: "size-6" },
-      { name: "Postman", logoUrl: "/logos/postman.png", imgClass: "size-6" },
-      { name: "Cloudflare", logoUrl: "/logos/cloudflare.png", imgClass: "size-6" },
-      { name: "Vercel", logoUrl: "/logos/vercel.png", imgClass: "size-6" },
-      { name: "Netlify", logoUrl: "/logos/netlify.png", imgClass: "size-6" }
-    ]
-  },
-  {
-    id: "frontend",
-    title: "Frontend Engineering",
-    paragraphs: [
-      "I approach frontend development with the same rigor as backend architecture.",
-      "I specialize in <strong>data-dense interfaces</strong> —admin panels, dashboards, and internal tools —where clarity and precision are paramount. Users in these environments need to understand complex data and perform precise actions without fighting the UI.",
-      "My focus is on <strong>state synchronization:</strong> data fetching patterns, correct error handling, and cache invalidation. I design interactions where the UI is an accurate reflection of the backend state, ensuring responsiveness without becoming fragile. I build interfaces that users can <strong>trust</strong>."
-    ],
-    coreStrengths: "Data-Heavy UI Design, Admin Dashboards, Structured Layouts, Predictable State Management, Clean and Maintainable Front-end Architecture.",
-    tools: [
-      { name: "TypeScript", logoUrl: "/logos/typescript.png", imgClass: "size-6" },
-      { name: "Next.js", logoUrl: "/logos/next.png", imgClass: "size-6" },
-      { name: "React.js", logoUrl: "/logos/react.png", imgClass: "h-5 w-6" },
-      { name: "Tailwind", logoUrl: "/logos/tailwind.png", imgClass: "h-4 w-6" },
-      { name: "Tanstack Query", logoUrl: "/logos/tanstack-query.png", imgClass: "size-6" },
-      { name: "Redux", logoUrl: "/logos/redux.png", imgClass: "size-6" },
-      { name: "Zod", logoUrl: "/logos/zod.png", imgClass: "size-6" },
-      { name: "GSAP", logoUrl: "/logos/gsap.png", imgClass: "size-6" },
-      { name: "Motion", logoUrl: "/logos/motion.png", imgClass: "size-6" }
-    ]
-  }
-];
-
-const devTools: Tool[] = [
-  { name: "Git", logoUrl: "/logos/git.png", imgClass: "size-6" },
-  { name: "GitHub", iconClass: "fa-brands fa-github text-2xl" },
-  { name: "Linux / Bash", logoUrl: "/logos/bash.png", imgClass: "size-6" },
-  { name: "NPM", logoUrl: "/logos/npm.png", imgClass: "h-4 w-6" },
-  { name: "PNPM", logoUrl: "/logos/pnpm.webp", imgClass: "size-6" },
-  { name: "Gemini", logoUrl: "/logos/gemini.png", imgClass: "size-6" }
-];
 ---
 <section id="skills" class="relative max-w-7xl mx-auto py-10 px-4">
   <div class="head">
@@ -123,81 +26,363 @@ const devTools: Tool[] = [
     </p>
   </div>
 
-  <div class="max-w-6xl mx-auto space-y-16 md:space-y-24 mt-16">
-    {skills.map((skill) => (
-      <div class={`${skill.id} skill relative grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start`}>
-        <!-- Left Content: Description (span 8) -->
-        <div class="md:col-span-8 space-y-6">
-          <h4 class="title">{skill.title}</h4>
+  <div class="max-w-6xl mx-auto space-y-10 mt-12">
+    <!-- Database Design -->
+    <div class="db skill relative">
+      <h4 class="title">Database Design</h4>
 
-          <div class="desc">
-            {skill.paragraphs.map((p) => (
-              <p set:html={p} />
-            ))}
-          </div>
+      <div class="desc">
+        <p>
+          I design databases as <strong>systems</strong>, not just storage
+          layers.
+        </p>
 
-          <div class="space-y-2 mt-4 text-base">
+        <p>
+          My focus is on data models that reflect real business constraints,
+          enforcing
+          <strong>integrity at the database level</strong>
+          so data remains valid even if application code fails. I prioritize
+          transaction boundaries, indexing strategies, and predictable query
+          behavior under load.
+        </p>
+
+        <p>
+          I work comfortably <strong>close to the metal</strong> —analyzing
+          query plans, managing locking strategies, and writing raw
+          SQL—while knowing exactly when to abstract complexity with an ORM.
+          The goal is always the same: clear ownership, consistent
+          performance, and schemas that can evolve without breaking
+          production.
+        </p>
+
+        <p class="mt-4">
+          <span class="text-foreground font-montserrat font-semibold"
+            >Core strengths:
+          </span>
+          <span class="block text-muted">
+            Relational Modeling, Transactional Integrity, Indexing Strategy,
+            Concurrency Control, Data Migrations.
+          </span>
+        </p>
+      </div>
+
+      <ul class="tools">
+        <li class="tool">
+          <img
+            src="/logos/db.png"
+            alt="SQL logo"
+            class="img bg-cover bg-center size-6"
+          />
+          <p>SQL</p>
+        </li>
+        <li class="tool">
+          <img
+            src="/logos/postgres.png"
+            alt="PostgreSQL logo"
+            class="img bg-cover bg-center h-6 w-8"
+          />
+          <p>PostgreSQL</p>
+        </li>
+        <li class="tool">
+          <img
+            src="/logos/mysql.png"
+            alt="MySQL logo"
+            class="img object-cover size-6"
+          />
+          <p>MySQL</p>
+        </li>
+        <li class="tool">
+          <img
+            src="/logos/prisma.png"
+            alt="Prisma ORM logo"
+            class="img object-cover rounded-sm size-6"
+          />
+          <p>Prisma</p>
+        </li>
+        <li class="tool">
+          <img
+            src="/logos/redis.png"
+            alt="Redis logo"
+            class="img object-cover size-6 rounded-sm"
+          />
+          <p>Redis</p>
+        </li>
+        <li class="tool">
+          <img
+            src="/logos/mongodb.png"
+            alt="mongoDb logo"
+            class="img object-cover size-6"
+          />
+          <p>MongoDB</p>
+        </li>
+        <li class="tool">
+          <img
+            src="/logos/neon.jpeg"
+            alt="Neon logo"
+            class="img object-cover size-6"
+          />
+          <p>Neon</p>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Backend Engineering -->
+    <div class="back-end skill relative">
+      <h4 class="title">Backend Engineering</h4>
+
+      <div>
+        <div class="desc">
+          <p>
+            Backend engineering is my <strong>primary discipline</strong>.
+          </p>
+
+          <p>
+            I build APIs and systems where
+            <strong>business logic lives in isolated layers</strong>,
+            independent of frameworks. This decoupling makes systems easier
+            to test, reason about, and scale without being locked into
+            specific tools.
+          </p>
+
+          <p>
+            I pay strict attention to <strong>system boundaries</strong>:
+            distinct separation between authentication and authorization,
+            read vs. write models, and synchronous vs. asynchronous flows.
+            Whether handling payments or modernizing legacy systems, I
+            design backends to behave correctly under
+            <strong>real-world conditions</strong> —handling failure states
+            as gracefully as happy paths.
+          </p>
+
+          <p>
+            This is my chosen specialization: designing robust,
+            production-grade systems that businesses can rely on.
+          </p>
+
+          <p class="space-y-2 mt-4">
             <span class="text-foreground font-montserrat font-semibold"
               >Core strengths:
             </span>
             <span class="block text-muted">
-              {skill.coreStrengths}
+              API Design, Authentication & Authorization, Transactional
+              Workflows, System Architecture.
             </span>
-          </div>
-
-          {skill.highlight && (
-            <div
-              class="flex gap-4 items-center mt-6 p-3 px-4 text-base text-secondary bg-surface/50 border border-surface-border w-fit rounded-lg"
-            >
-              <i class={skill.highlight.icon}></i>
-              <p class="font-mono font-semibold">{skill.highlight.text}</p>
-            </div>
-          )}
+          </p>
         </div>
 
-        <!-- Right Content: Tools Card (span 4) -->
-        <div class="md:col-span-4 bg-surface/30 border border-surface-border rounded-2xl p-6 shadow-xs">
-          <h5 class="font-iceberg font-bold text-lg text-primary mb-4">Technologies & Frameworks</h5>
-          <ul class="flex flex-wrap gap-3">
-            {skill.tools.map((tool) => (
-              <li class="tool">
-                {tool.logoUrl ? (
-                  <img
-                    src={tool.logoUrl}
-                    alt={`${tool.name} logo`}
-                    class={`img ${tool.imgClass || 'size-6'}`}
-                  />
-                ) : (
-                  <i class={tool.iconClass}></i>
-                )}
-                <p>{tool.name}</p>
-              </li>
-            ))}
-          </ul>
+        <div
+          class="flex gap-4 items-center my-6 p-3 px-4 text-base text-secondary bg-surface/50 border border-surface-border w-fit rounded-lg"
+        >
+          <i class="fa-solid fa-gear"></i>
+          <p class="font-mono font-semibold">RESTful API Design</p>
         </div>
       </div>
-    ))}
+
+      <ul class="tools">
+        <li class="tool">
+          <img
+            src="/logos/typescript.png"
+            alt="TypeScript logo"
+            class="img size-6"
+          />
+          <p>TypeScript</p>
+        </li>
+        <li class="tool">
+          <img
+            src="/logos/node.webp"
+            alt="Node JS logo"
+            class="img size-6"
+          />
+          <p>Node.js</p>
+        </li>
+        <li class="tool">
+          <img
+            src="/logos/express.webp"
+            alt="Express JS logo"
+            class="img size-6"
+          />
+          <p>Express</p>
+        </li>
+        <li class="tool">
+          <img
+            src="/logos/next.png"
+            alt="Next JS logo"
+            class="img size-6"
+          />
+          <p>Next.js</p>
+        </li>
+        <li class="tool">
+          <img
+            src="/logos/postman.png"
+            alt="Postman logo"
+            class="img size-6"
+          />
+          <p>Postman</p>
+        </li>
+        <li class="tool">
+          <img
+            src="/logos/cloudflare.png"
+            alt="Cloudflare logo"
+            class="img size-6"
+          />
+          <p>Cloudflare</p>
+        </li>
+        <li class="tool">
+          <img
+            src="/logos/vercel.png"
+            alt="Vercel logo"
+            class="img size-6"
+          />
+          <p>Vercel</p>
+        </li>
+        <li class="tool">
+          <img
+            src="/logos/netlify.png"
+            alt="Netlify logo"
+            class="img size-6"
+          />
+          <p>Netlify</p>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Frontend Engineering -->
+    <div class="front-end skill relative">
+      <h4 class="title">Frontend Engineering</h4>
+
+      <div class="desc">
+        <p>
+          I approach frontend development with the same rigor as backend
+          architecture.
+        </p>
+
+        <p>
+          I specialize in <strong>data-dense interfaces</strong> —admin
+          panels, dashboards, and internal tools —where clarity and
+          precision are paramount. Users in these environments need to
+          understand complex data and perform precise actions without
+          fighting the UI.
+        </p>
+
+        <p>
+          My focus is on <strong>state synchronization:</strong> robust data
+          fetching patterns, correct error handling, and efficient cache
+          invalidation. I design interactions where the UI is an accurate
+          reflection of the backend state, ensuring responsiveness without
+          becoming fragile. I build interfaces that users can
+          <strong>trust</strong>.
+        </p>
+
+        <p class="mt-4">
+          <span class="text-foreground font-montserrat font-semibold"
+            >Core strengths:
+          </span>
+          <span class="block text-muted">
+            Data-Heavy UI Design, Admin Dashboards, Structured Layouts,
+            Predictable State Management, Clean and Maintainable Front-end
+            Architecture.
+          </span>
+        </p>
+      </div>
+
+      <ul class="tools">
+        <li class="tool">
+          <img
+            src="/logos/typescript.png"
+            alt="TypeScript logo"
+            class="img size-6"
+          />
+          <p>TypeScript</p>
+        </li>
+        <li class="tool">
+          <img
+            src="/logos/next.png"
+            alt="Next JS logo"
+            class="img size-6"
+          />
+          <p>Next.js</p>
+        </li>
+        <li class="tool">
+          <img
+            src="/logos/react.png"
+            alt="React JS logo"
+            class="img h-5 w-6"
+          />
+          <p>React.js</p>
+        </li>
+        <li class="tool">
+          <img
+            src="/logos/tailwind.png"
+            alt="Tailwind logo"
+            class="img h-4 w-6"
+          />
+          <p>Tailwind</p>
+        </li>
+        <li class="tool">
+          <img
+            src="/logos/tanstack-query.png"
+            alt="TanStack Query logo"
+            class="img size-6"
+          />
+          <p>Tanstack Query</p>
+        </li>
+        <li class="tool">
+          <img src="/logos/redux.png" alt="Redux logo" class="img size-6" />
+          <p>Redux</p>
+        </li>
+        <li class="tool">
+          <img src="/logos/zod.png" alt="Zod logo" class="img size-6" />
+          <p>Zod</p>
+        </li>
+        <li class="tool">
+          <img src="/logos/gsap.png" alt="GSAP logo" class="img size-6" />
+          <p>GSAP</p>
+        </li>
+        <li class="tool">
+          <img
+            src="/logos/motion.png"
+            alt="Framer Motion logo"
+            class="img size-6"
+          />
+          <p>Motion</p>
+        </li>
+      </ul>
+    </div>
 
     <!-- Dev Tools -->
-    <div class="global pt-8 border-t border-surface-border">
+    <div class="global pt-8">
       <h3 class="text-2xl py-4 font-iceberg font-semibold text-primary">
         Dev Tools:
       </h3>
-      <ul class="flex flex-wrap gap-4 items-center justify-start">
-        {devTools.map((tool) => (
-          <li class="tool">
-            {tool.logoUrl ? (
-              <img
-                src={tool.logoUrl}
-                alt={`${tool.name} logo`}
-                class={`img ${tool.imgClass || 'size-6'}`}
-              />
-            ) : (
-              <i class={tool.iconClass}></i>
-            )}
-            <p>{tool.name}</p>
-          </li>
-        ))}
+      <ul class="tools flex flex-wrap gap-4 items-center justify-start">
+        <li class="tool">
+          <img src="/logos/git.png" alt="Git logo" class="img size-6" />
+          <p>Git</p>
+        </li>
+        <li class="tool">
+          <i class="fa-brands fa-github text-2xl"></i>
+          <p>GitHub</p>
+        </li>
+        <li class="tool">
+          <img src="/logos/bash.png" alt="Bash logo" class="img size-6" />
+          <p>Linux / Bash</p>
+        </li>
+        <li class="tool">
+          <img src="/logos/npm.png" alt="npm logo" class="img h-4 w-6" />
+          <p>NPM</p>
+        </li>
+        <li class="tool">
+          <img src="/logos/pnpm.webp" alt="pnpm logo" class="img size-6" />
+          <p>PNPM</p>
+        </li>
+        <li class="tool">
+          <img
+            src="/logos/gemini.png"
+            alt="Gemini AI logo"
+            class="img size-6"
+          />
+          <p>Gemini</p>
+        </li>
       </ul>
     </div>
   </div>
