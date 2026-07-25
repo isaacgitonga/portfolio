@@ -69,12 +69,12 @@ export function initProjectAnimations() {
     }
   });
 
-  gsap.from("section:nth-of-type(1) .bg-neutral-900\\/50", {
+  gsap.from("section:nth-of-type(1) .bg-surface\\/50", {
     x: 30,
     opacity: 0,
     duration: 1,
     scrollTrigger: {
-      trigger: "section:nth-of-type(1) .bg-neutral-900\\/50",
+      trigger: "section:nth-of-type(1) .bg-surface\\/50",
       start: "top 85%",
     },
   });
