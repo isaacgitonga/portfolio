@@ -8,13 +8,12 @@ const navs: NavItem[] = [
   { name: "Skills", href: "/#skills" },
   { name: "Projects", href: "/projects" },
   { name: "Reviews", href: "/#reviews" },
-  { name: "Contact", href: "/#contact" },
   { name: "Blog", href: "/blog" },
 ]
 ---
 
 <!-- Desktop Navigation Header -->
-<header class="max-w-7xl mx-auto sticky top-0 w-full z-40 bg-background backdrop-blur-md border-b border-foreground/5">
+<header class="max-w-7xl mx-auto sticky top-0 w-full z-40 bg-background/80 backdrop-blur-md border-b border-foreground/5">
   <div class="max-w-6xl mx-auto h-(--nav-height) flex justify-between items-center gap-6 py-2 px-6">
     <div class="flex items-center gap-3">
       <a href="/#hero" class="flex items-center gap-3 hover:opacity-85 transition-opacity">
@@ -35,12 +34,22 @@ const navs: NavItem[] = [
     </nav>
 
     <div class="flex items-center gap-4">
-      <Socials gap={5} />
+      <div class="hidden lg:block">
+        <Socials gap={5} />
+      </div>
 
       <div class="rounded-full p-1 flex items-center justify-center gap-2 border border-primary/15">
         <button class="rounded-full p-1 text-foreground/60"><Sun size={15} /></button>
         <button class="rounded-full bg-primary text-cyan-200 p-1"><Moon size={15} /></button>
       </div>
+
+      <!-- Desktop Contact Button -->
+      <a
+        href="/contact"
+        class="hidden md:inline-block px-5 py-2 bg-primary hover:bg-primary-hover text-background font-bold font-iceberg text-sm rounded-lg transition-colors cursor-pointer"
+      >
+        Contact Me
+      </a>
 
       <!-- Mobile Toggle Button -->
       <button id="menu-toggle" class="md:hidden" aria-label="Toggle Menu">
@@ -79,6 +88,14 @@ const navs: NavItem[] = [
           </li>
         ))}
       </ul>
+
+      <!-- Mobile Contact Button inside Drawer -->
+      <a
+        href="/contact"
+        class="flex items-center justify-center w-full py-4 mt-4 bg-primary hover:bg-primary-hover text-background font-bold font-iceberg text-lg rounded-lg transition-colors cursor-pointer"
+      >
+        Get in Touch
+      </a>
     </div>
 
     <div class="flex gap-6 items-center">

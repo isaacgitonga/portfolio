@@ -27,7 +27,7 @@ export type ProjectStack = z.infer<typeof ProjectStackSchema>;
 export const RelatedLinkSchema = z.object({
   title: z.string().optional(),
   url: z.string(),
-  type: z.enum(['blog', 'case-study', 'external', 'repo']).default('external'),
+  type: z.enum(['blog', 'case-study', 'external', 'repo', 'architecture']).default('external'),
 });
 
 export type RelatedLink = z.infer<typeof RelatedLinkSchema>;
