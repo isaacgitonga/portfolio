@@ -148,7 +148,8 @@
     @apply absolute bottom-0 left-0 w-full h-0.5 bg-primary scale-x-0 origin-right transition-transform duration-500;
   }
 
-  .nav-link:hover::after {
+  .nav-link:hover::after,
+  .nav-link.active-link::after {
     @apply scale-x-100 origin-left;
   }
 }
