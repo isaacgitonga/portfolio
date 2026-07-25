@@ -13,6 +13,7 @@ const isActive = (href: string) => {
   if (href === "/") {
     return pathname === "/" || pathname === "";
   }
+  
   return pathname.startsWith(href);
 };
 ---
@@ -46,9 +47,12 @@ const isActive = (href: string) => {
         <Socials gap={5} />
       </div>
 
-      <div class="rounded-full p-1 flex items-center justify-center gap-2 border border-primary/15">
-        <button class="rounded-full p-1 text-foreground/60"><Sun size={15} /></button>
-        <button class="rounded-full bg-primary text-cyan-200 p-1"><Moon size={15} /></button>
+      <div class="relative rounded-full p-1 flex items-center justify-center gap-1 border border-primary/15 bg-surface/50 h-9 overflow-hidden">
+        <!-- Sliding Indicator -->
+        <div id="theme-indicator" class="absolute left-1 w-7 h-7 bg-primary rounded-full transition-transform duration-300 ease-out z-0"></div>
+
+        <button id="theme-light-btn" class="relative w-7 h-7 flex items-center justify-center rounded-full cursor-pointer transition-colors duration-300 z-10" aria-label="Light Mode"><Sun size={15} /></button>
+        <button id="theme-dark-btn" class="relative w-7 h-7 flex items-center justify-center rounded-full cursor-pointer transition-colors duration-300 z-10" aria-label="Dark Mode"><Moon size={15} /></button>
       </div>
 
       <!-- Desktop Contact Button -->
@@ -116,3 +120,48 @@ const isActive = (href: string) => {
 </nav>
 
 <script src="../animations/navbar.ts"></script>
+
+<script>
+  const lightBtn = document.getElementById('theme-light-btn');
+  const darkBtn = document.getElementById('theme-dark-btn');
+  const indicator = document.getElementById('theme-indicator');
+
+  const updateToggleUI = (isLight: boolean) => {
+    if (isLight) {
+      // Move indicator to light button (left)
+      indicator?.classList.remove('translate-x-8');
+      indicator?.classList.add('translate-x-0');
+      // Update text colors
+      lightBtn?.classList.add('text-background');
+      lightBtn?.classList.remove('text-foreground/60');
+      darkBtn?.classList.add('text-foreground/60');
+      darkBtn?.classList.remove('text-background');
+    } else {
+      // Move indicator to dark button (right)
+      indicator?.classList.remove('translate-x-0');
+      indicator?.classList.add('translate-x-8');
+      // Update text colors
+      darkBtn?.classList.add('text-background');
+      darkBtn?.classList.remove('text-foreground/60');
+      lightBtn?.classList.add('text-foreground/60');
+      lightBtn?.classList.remove('text-background');
+    }
+  };
+
+  // Sync state on load
+  const isLight = document.documentElement.classList.contains('light');
+  updateToggleUI(isLight);
+
+  // Click listeners
+  lightBtn?.addEventListener('click', () => {
+    document.documentElement.classList.add('light');
+    localStorage.setItem('theme', 'light');
+    updateToggleUI(true);
+  });
+
+  darkBtn?.addEventListener('click', () => {
+    document.documentElement.classList.remove('light');
+    localStorage.setItem('theme', 'dark');
+    updateToggleUI(false);
+  });
+</script>
