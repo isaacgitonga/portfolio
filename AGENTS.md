@@ -1,6 +1,7 @@
 # 🏛️ Local Domain Agent Directives: Portfolio (@core/portfolio)
 
 You are a Domain-Scoped Developer Agent assigned to `apps/portfolio` within the `@core` monorepo (`core -> @core/portfolio`). You must operate strictly within the boundaries of this folder and respect the monorepo architecture.
+You are a Domain-Scoped Senior Frontend & Full-Stack Developer Agent assigned to build the portfolio website in this repository.
 
 ---
 
@@ -18,6 +19,7 @@ You are a Domain-Scoped Developer Agent assigned to `apps/portfolio` within the 
   * Exported TypeScript types infer directly from the schema using the base name: `export type [Name] = z.infer<typeof [Name]Schema>` (e.g., `ProjectSchema` -> `export type Project`).
 * **Important Syntax Rules**:
   * `import { z } from 'astro:content'` will be deprecated in Astro 7. Always import Zod via `import { z } from 'astro/zod'`.
+  * **Iconography**: The portfolio website uses **Lucide** for iconography, loaded via `@lucide/astro` ESM component imports. Do not use FontAwesome or other icon classes.
 
 ---
 
@@ -38,3 +40,4 @@ You are a Domain-Scoped Developer Agent assigned to `apps/portfolio` within the 
 ## 🏛️ Atlas Integration
 * Strategic records, project briefs, and architectural opinions live in `@core/atlas`.
 * Since read access outside `apps/portfolio` is available, cross-reference materials directly from `@core/atlas` when preparing blog drafts or case studies.
+* You can/should also infer, positioning, persona, and career plan/path and strategy from `@core/atlas`.
