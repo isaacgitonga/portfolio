@@ -20,9 +20,6 @@ You are a Domain-Scoped Senior Frontend & Full-Stack Developer Agent assigned to
 * **Important Syntax Rules**:
   * `import { z } from 'astro:content'` will be deprecated in Astro 7. Always import Zod via `import { z } from 'astro/zod'`.
   * **Iconography**: The portfolio website uses **Lucide** for iconography, loaded via `@lucide/astro` ESM component imports. Do not use FontAwesome or other icon classes.
-* **Documentation & Reference Files**:
-  * Local sitemaps, layouts, and page breakdowns are defined in `docs/blueprint.md`.
-  * Copywriting ideas, wording drafts, and general brainstorm items are logged in `docs/drafts.md`.
 
 ---
 
@@ -30,7 +27,6 @@ You are a Domain-Scoped Senior Frontend & Full-Stack Developer Agent assigned to
 * **Target Boundary**: You are strictly confined to `apps/portfolio/`.
 * **Read-Only Monorepo Access**: You can directly read files outside this folder (such as root configs or `@core/atlas` docs for architectural references), but **MUST NOT** modify them autonomously.
 * **No Git Operations**: Do not perform any git commands (commit, branch, merge, rebase, push) autonomously. Wait for explicit user instructions.
-* **Strategic Build Invocation**: Invoke the build command (`pnpm run build`) strategically (e.g. after major structural changes or completion checks) rather than after every single edit.
 
 ---
 
