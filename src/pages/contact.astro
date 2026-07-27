@@ -3,6 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import ContactForm from "@/components/react/ContactForm.tsx";
 import PriceTiers from "@/components/PriceTiers.astro";
 import Socials from "@/components/Socials.astro";
+import CopyIcon from "@/components/CopyIcon.astro";
 ---
 
 <Layout
@@ -13,7 +14,7 @@ import Socials from "@/components/Socials.astro";
     <div class="relative z-10 max-w-6xl w-full mx-auto py-24 md:py-32 space-y-12">
       <!-- Header & Intro consistent with home page style -->
       <div class="space-y-4 pb-20">
-        <h1 class="text-3xl md:text-5xl font-iceberg font-bold text-foreground">
+        <h1 class="text-3xl md:text-5xl font-montserrat font-bold text-foreground">
           Contact & Collaboration
         </h1>
         <p class="text-muted font-montserrat font-medium max-w-3xl leading-relaxed">
@@ -62,6 +63,15 @@ import Socials from "@/components/Socials.astro";
               Direct channels
             </h3>
             <div class="space-y-4">
+              <div class="flex flex-col gap-1 p-3 bg-background border border-surface-border rounded-lg">
+                <span class="text-xs text-muted-dark font-iceberg uppercase tracking-wider font-semibold">Email</span>
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-sm font-montserrat text-foreground font-medium break-all selection:bg-primary/20">
+                    advisory@isaacgitonga.com
+                  </span>
+                  <CopyIcon text="advisory@isaacgitonga.com" class="shrink-0" />
+                </div>
+              </div>
               <div class="flex items-center justify-between p-3 bg-background border border-surface-border rounded-lg">
                 <span class="text-xs text-muted-dark font-iceberg uppercase tracking-wider font-semibold">Socials</span>
                 <Socials gap={4} />

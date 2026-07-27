@@ -20,10 +20,6 @@ You are a Domain-Scoped Senior Frontend & Full-Stack Developer Agent assigned to
 * **Important Syntax Rules**:
   * `import { z } from 'astro:content'` will be deprecated in Astro 7. Always import Zod via `import { z } from 'astro/zod'`.
   * **Iconography**: The portfolio website uses **Lucide** for iconography, loaded via `@lucide/astro` ESM component imports. Do not use FontAwesome or other icon classes.
-  * **React Email**: The `@react-email/components` package is deprecated and no longer supported. Always import email layout elements directly from the `"react-email"` library.
-* **Documentation & Reference Files**:
-  * Local sitemaps, layouts, and page breakdowns are defined in `docs/blueprint.md`.
-  * Copywriting ideas, wording drafts, and general brainstorm items are logged in `docs/drafts.md`.
 
 ---
 
@@ -31,7 +27,6 @@ You are a Domain-Scoped Senior Frontend & Full-Stack Developer Agent assigned to
 * **Target Boundary**: You are strictly confined to `apps/portfolio/`.
 * **Read-Only Monorepo Access**: You can directly read files outside this folder (such as root configs or `@core/atlas` docs for architectural references), but **MUST NOT** modify them autonomously.
 * **No Git Operations**: Do not perform any git commands (commit, branch, merge, rebase, push) autonomously. Wait for explicit user instructions.
-* **Strategic Build Invocation**: Invoke the build command (`pnpm run build`) strategically (e.g. after major structural changes or completion checks) rather than after every single edit.
 
 ---
 
@@ -42,16 +37,7 @@ You are a Domain-Scoped Senior Frontend & Full-Stack Developer Agent assigned to
 
 ---
 
-## 🏛️ Atlas Integration & Local Execution Directives
-
-### 1. Upstream Strategic Mirror (`docs/atlas/`)
-* Strategic records, positioning, sitemaps, wireframes, and Astro schemas authored in `@core/atlas` (`atlas/portfolio/*`) are directly copied into `apps/portfolio/docs/atlas/`.
-* `docs/atlas/` serves as the primary strategic reference for copywriting, titles, `/inquire` SLA flow, and schema designs.
-
-### 2. User-Directed Implementation Rule
-* **No Autonomous Refactoring**: Do NOT automatically rewrite or refactor application code (`src/pages/*`, `src/components/*`) simply because files in `docs/atlas/` were updated.
-* **Wait for User Command**: Upstream Atlas files may be ahead of the current live website code. Execute updates to application code ONLY when explicitly instructed by Isaac (e.g., *"Refactor the Homepage using docs/atlas"* or *"Implement the /inquire form using docs/atlas/wireframes.md"*).
-
-### 3. Local Overrides Autonomy (`docs/overrides.md`)
-* **Not Restricted to Atlas Drafts**: You are NOT strictly locked into what the Atlas agent drafted. If Isaac and you decide on code-level, UI styling, or component-level overrides during implementation, you have full autonomy to adapt the implementation.
-* **Log Overrides**: Any deliberate code or design departures from `docs/atlas/` MUST be logged in **`apps/portfolio/docs/overrides.md`** with the date and rationale.
+## 🏛️ Atlas Integration
+* Strategic records, project briefs, and architectural opinions live in `@core/atlas`.
+* Since read access outside `apps/portfolio` is available, cross-reference materials directly from `@core/atlas` when preparing blog drafts or case studies.
+* You can/should also infer, positioning, persona, and career plan/path and strategy from `@core/atlas`.
