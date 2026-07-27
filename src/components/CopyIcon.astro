@@ -1,0 +1,83 @@
+---
+import { Copy, Check, X } from "@lucide/astro";
+
+interface Props {
+  text: string;
+  class?: string;
+}
+
+const { text, class: className = "" } = Astro.props;
+---
+
+<button
+  type="button"
+  class={`copy-btn p-1.5 rounded-md hover:bg-white/10 text-muted hover:text-primary transition-all duration-200 active:scale-95 flex items-center justify-center inline-flex ${className}`}
+  data-text={text}
+  aria-label={`Copy "${text}" to clipboard`}
+>
+  <span class="relative flex items-center justify-center h-4 w-4">
+    <Copy class="copy-icon h-4 w-4 absolute transition-all duration-200" />
+    <Check class="success-icon h-4 w-4 text-emerald-400 absolute opacity-0 scale-75 transition-all duration-200" />
+    <X class="error-icon h-4 w-4 text-rose-500 absolute opacity-0 scale-75 transition-all duration-200" />
+  </span>
+</button>
+
+<script>
+  function setupCopyButtons() {
+    const buttons = document.querySelectorAll('.copy-btn');
+    
+    buttons.forEach((btn) => {
+      if (btn.getAttribute('data-has-listener')) return;
+      btn.setAttribute('data-has-listener', 'true');
+      
+      btn.addEventListener('click', async () => {
+        const text = btn.getAttribute('data-text');
+        if (!text) return;
+        
+        const copyIcon = btn.querySelector('.copy-icon');
+        const successIcon = btn.querySelector('.success-icon');
+        const errorIcon = btn.querySelector('.error-icon');
+        
+        try {
+          await navigator.clipboard.writeText(text);
+          
+          if (copyIcon && successIcon) {
+            // Animate transition using CSS opacity and scale for success
+            copyIcon.classList.add('opacity-0', 'scale-75');
+            successIcon.classList.remove('opacity-0', 'scale-75');
+            successIcon.classList.add('opacity-100', 'scale-100');
+            btn.classList.add('bg-emerald-500/10');
+            
+            setTimeout(() => {
+              copyIcon.classList.remove('opacity-0', 'scale-75');
+              successIcon.classList.add('opacity-0', 'scale-75');
+              successIcon.classList.remove('opacity-100', 'scale-100');
+              btn.classList.remove('bg-emerald-500/10');
+            }, 2000);
+          }
+        } catch (err) {
+          if (copyIcon && errorIcon) {
+            // Animate transition using CSS opacity and scale for failure
+            copyIcon.classList.add('opacity-0', 'scale-75');
+            errorIcon.classList.remove('opacity-0', 'scale-75');
+            errorIcon.classList.add('opacity-100', 'scale-100');
+            btn.classList.add('bg-rose-500/10');
+            
+            setTimeout(() => {
+              copyIcon.classList.remove('opacity-0', 'scale-75');
+              errorIcon.classList.add('opacity-0', 'scale-75');
+              errorIcon.classList.remove('opacity-100', 'scale-100');
+              btn.classList.remove('bg-rose-500/10');
+            }, 2000);
+          }
+        }
+      });
+    });
+  }
+
+  // Run on initial load
+  setupCopyButtons();
+
+  // Run on view transition navigation
+  document.addEventListener('astro:page-load', setupCopyButtons);
+</script>
