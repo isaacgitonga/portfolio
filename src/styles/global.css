@@ -67,6 +67,10 @@
     @apply overflow-hidden;
   }
 
+  .btn {
+    @apply flex items-center justify-center w-fit p-4 bg-primary hover:bg-primary-hover text-background font-iceberg rounded-lg transition-colors cursor-pointer;
+  }
+
   #hero .stats li p {
     @apply font-semibold tracking-wide text-sm font-montserrat text-muted text-nowrap;
   }
