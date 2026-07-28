@@ -4,7 +4,7 @@ import type { Project } from "@/schema/project.schema";
 
 interface Props {
   project: Project;
-  page: 'home' | 'projects';
+  page: 'home' | 'work';
 }
 
 const { project, page } = Astro.props;
@@ -16,7 +16,7 @@ const allTech = Object.values(project.stack)
 ---
 
 <li class="project border-b border-surface-border/60 py-6 last:border-b-0">
-  <a href={`/projects/${project.id}`} class="group block space-y-3">
+  <a href={`/work/${project.id}`} class="group block space-y-3">
     <!-- Meta Badges (Featured, Type, Client) -->
     <div class="flex flex-wrap items-center gap-2">
       {
