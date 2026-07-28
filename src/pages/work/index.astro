@@ -1,7 +1,7 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import ProjectItem from "@/components/ProjectItem.astro";
-import { getCollection } from "astro:content";
 
 const rawProjects = await getCollection("projects");
 const projects = rawProjects
@@ -12,7 +12,7 @@ const projects = rawProjects
 
 <Layout
   title="Projects | Isaac Gitonga"
-  description="Selected engineering projects, systems architecture, and transactional platforms."
+  description="Selected engineering work, systems architecture, and transactional platforms."
 >
   <section class="max-w-6xl mx-auto px-6 py-12 md:py-24 space-y-12">
     <div class="space-y-4 py-8">
