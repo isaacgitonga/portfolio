@@ -15,18 +15,17 @@ const projects = rawProjects
   description="Selected engineering work, systems architecture, and transactional platforms."
 >
   <section class="max-w-6xl mx-auto px-6 py-12 md:py-24 space-y-12">
-    <div class="space-y-4 max-w-3xl pb-10 border-b border-surface-border/40">
-      <span class="text-xs uppercase font-mono tracking-widest text-primary font-semibold">Production Proof</span>
-      <h1 class="text-4xl md:text-5xl font-montserrat font-bold text-foreground leading-tight">
-        Projects & <br/><span class="text-primary font-iceberg font-normal">Systems Architecture</span>
+    <div class="space-y-4 py-8">
+      <h1 class="text-4xl font-montserrat font-bold text-foreground">
+        Projects & Systems Architecture
       </h1>
-      <p class="text-muted font-montserrat font-medium text-lg leading-relaxed mt-4">
-        A collection of backend infrastructure, fintech solutions, and transactional systems built for correctness, concurrency, and scale.
+      <p class="text-md text-muted font-montserrat font-medium max-w-3xl">
+        A collection of backend infrastructure, fintech solutions, and full-stack applications built for correctness, concurrency, and scale.
       </p>
     </div>
 
     <ul class="space-y-4">
-      {projects.map((project) => <ProjectItem project={project} page="work" />)}
+      {projects.map((project) => <ProjectItem project={project} page="projects" />)}
     </ul>
   </section>
 </Layout>
