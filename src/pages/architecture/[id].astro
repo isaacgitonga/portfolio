@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Layout from '@/layouts/Layout.astro';
-import { ArrowLeft, Calendar } from "@lucide/astro";
+import { ArrowLeft, Calendar, Tag, Clock } from "@lucide/astro";
 
 export async function getStaticPaths() {
   const specs = await getCollection('architecture');
