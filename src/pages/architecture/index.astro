@@ -1,0 +1,110 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import { ArrowRight, BookOpen, Clock, Tag } from "@lucide/astro";
+
+const specs = await getCollection("architecture");
+const publishedSpecs = specs
+  .filter((s) => s.data.published)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<Layout
+  title="Architecture Catalog | Isaac Gitonga"
+  description="Evergreen library of system architectures, transactional outbox designs, pessimistic locking ledger specifications, and database-level multi-tenant configurations."
+>
+  <div class="relative min-h-screen px-6 overflow-hidden">
+    <div class="relative z-10 max-w-6xl w-full mx-auto py-24 md:py-32 space-y-16">
+      
+      <!-- Page Header -->
+      <div class="space-y-4 max-w-3xl pb-10 border-b border-surface-border/40">
+        <span class="text-xs uppercase font-mono tracking-widest text-primary font-semibold">Evergreen Engineering Library</span>
+        <h1 class="text-4xl md:text-5xl font-montserrat font-bold text-foreground leading-tight">
+          Architectural Specs & <br/><span class="text-primary font-iceberg font-normal">System Blueprints</span>
+        </h1>
+        <p class="text-muted font-montserrat font-medium text-lg leading-relaxed mt-4">
+          This catalog serves as an auditable library of software systems and database patterns I have designed and deployed. These entries are structured as technical RFCs—detailing data flows, transaction boundaries, failure modes, and architectural trade-offs.
+        </p>
+      </div>
+
+      <!-- Specs List -->
+      <div class="space-y-8">
+        {publishedSpecs.map((spec) => (
+          <article 
+            class="group relative bg-surface/30 hover:bg-surface/60 border border-surface-border hover:border-primary/20 rounded-2xl p-6 md:p-8 transition-all duration-300 backdrop-blur-xs flex flex-col md:flex-row md:items-center justify-between gap-6"
+          >
+            <div class="space-y-4 max-w-3xl">
+              <!-- Category and Date -->
+              <div class="flex flex-wrap items-center gap-3 text-xs font-mono text-muted-dark">
+                <span class="px-2 py-0.5 bg-primary/10 border border-primary/20 text-primary rounded-sm font-semibold">
+                  {spec.data.category || "Architecture"}
+                </span>
+                <span class="flex items-center gap-1">
+                  <Clock size={12} />
+                  <time datetime={spec.data.pubDate.toISOString()}>
+                    {spec.data.pubDate.toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric"
+                    })}
+                  </time>
+                </span>
+              </div>
+
+              <!-- Title & Desc -->
+              <div class="space-y-2">
+                <a href={`/architecture/${spec.id}`}>
+                  <h2 class="text-2xl font-iceberg font-bold text-foreground group-hover:text-primary transition-colors duration-250">
+                    {spec.data.title}
+                  </h2>
+                </a>
+                <p class="text-muted text-sm font-montserrat leading-relaxed">
+                  {spec.data.description}
+                </p>
+              </div>
+
+              <!-- Tags -->
+              {spec.data.tags && spec.data.tags.length > 0 && (
+                <div class="flex flex-wrap gap-2 pt-2">
+                  {spec.data.tags.map((tag) => (
+                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 bg-[#0e0f18] text-muted-dark font-mono text-[10px] rounded border border-surface-border">
+                      <Tag size={8} />
+                      <span>{tag}</span>
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <!-- CTA Arrow -->
+            <div class="shrink-0 flex items-center">
+              <a
+                href={`/architecture/${spec.id}`}
+                class="inline-flex items-center justify-center h-12 w-12 rounded-full border border-surface-border text-muted group-hover:text-background group-hover:bg-primary group-hover:border-primary transition-all duration-300 active:scale-95 cursor-pointer"
+                aria-label={`Read specification: ${spec.data.title}`}
+              >
+                <ArrowRight size={18} class="transition duration-200 group-hover:translate-x-0.5" />
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <!-- Verification Note Banner -->
+      <div class="bg-surface/30 border border-surface-border rounded-2xl p-6 md:p-8 flex items-start gap-4">
+        <div class="p-2 bg-primary/10 border border-primary/20 text-primary rounded-xl mt-1 shrink-0">
+          <BookOpen size={20} />
+        </div>
+        <div class="space-y-2">
+          <h3 class="font-iceberg text-base font-bold text-foreground">
+            How these blueprints are verified
+          </h3>
+          <p class="text-xs text-muted font-montserrat leading-relaxed max-w-4xl">
+            Each pattern in this library represents production configurations run in active environments. Rather than using toy framework code, they are designed with respect to physical system constraints (e.g. statement timeouts, transaction scope boundaries, database indexing behavior, and socket retries).
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</Layout>

@@ -12,7 +12,7 @@
     </p>
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
     {/* Card 1: Audits & Consulting */}
     <div class="bg-surface/30 border border-surface-border hover:border-primary/50 hover:bg-surface/50 rounded-xl p-6 transition-all duration-300 flex flex-col justify-between group">
       <div class="space-y-4">
@@ -45,13 +45,6 @@
           </li>
         </ul>
       </div>
-      <!--<button-->
-      <!--  type="button"-->
-      <!--  onclick="window.dispatchEvent(new CustomEvent('select-tier', { detail: { budget: 'under_2500', inquiry: 'architecture_consulting' } }))"-->
-      <!--  class="mt-6 w-full py-2 bg-surface hover:bg-primary hover:text-background border border-surface-border hover:border-primary text-foreground text-xs font-bold font-iceberg rounded-lg transition-all cursor-pointer text-center"-->
-      <!--&gt;-->
-      <!--  Select Scope-->
-      <!--</button>-->
     </div>
 
     {/* Card 2: Feature Integrations */}
@@ -86,13 +79,6 @@
           </li>
         </ul>
       </div>
-      <!--<button-->
-      <!--  type="button"-->
-      <!--  onclick="window.dispatchEvent(new CustomEvent('select-tier', { detail: { budget: 'tier_2500_10000', inquiry: 'checkout_payments' } }))"-->
-      <!--  class="mt-6 w-full py-2 bg-primary text-background hover:bg-primary-hover border border-primary text-xs font-bold font-iceberg rounded-lg transition-all cursor-pointer text-center"-->
-      <!--&gt;-->
-      <!--  Select Scope-->
-      <!--</button>-->
     </div>
 
     {/* Card 3: Core Platforms */}
@@ -127,13 +113,41 @@
           </li>
         </ul>
       </div>
-      <!--<button-->
-      <!--  type="button"-->
-      <!--  onclick="window.dispatchEvent(new CustomEvent('select-tier', { detail: { budget: 'tier_10000_25000', inquiry: 'greenfield_platform' } }))"-->
-      <!--  class="mt-6 w-full py-2 bg-surface hover:bg-primary hover:text-background border border-surface-border hover:border-primary text-foreground text-xs font-bold font-iceberg rounded-lg transition-all cursor-pointer text-center"-->
-      <!--&gt;-->
-      <!--  Select Scope-->
-      <!--</button>-->
+    </div>
+
+    {/* Card 4: Flexible Advisory */}
+    <div class="bg-surface/30 border border-surface-border hover:border-primary/50 hover:bg-surface/50 rounded-xl p-6 transition-all duration-300 flex flex-col justify-between group">
+      <div class="space-y-4">
+        <div class="flex items-center justify-between">
+          <span class="p-2 bg-primary/10 rounded-lg text-primary text-sm shrink-0">
+            <svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width={2}>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </span>
+          <span class="text-xs font-mono font-bold text-muted-dark uppercase">[ Retainer ]</span>
+        </div>
+        <div class="space-y-1">
+          <h3 class="font-iceberg font-bold text-lg text-foreground group-hover:text-primary transition-colors">
+            Advisory & Retainers
+          </h3>
+          <p class="font-mono text-sm text-primary font-bold">Flexible</p>
+        </div>
+        <p class="text-xs text-muted font-montserrat leading-relaxed">
+          For services that cannot be well quantified or scoped cleanly upfront—dynamic consulting packages, ongoing operations, or code reviews.
+        </p>
+        <ul class="space-y-2 text-xs font-montserrat text-muted pt-2 border-t border-surface-border/50">
+          <li class="flex items-center gap-2">
+            <span class="text-primary">✓</span> Ongoing Systems Consultation
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-primary">✓</span> Dynamic Advisory Retainers
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-primary">✓</span> Operational Security Representation
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
+
 </div>

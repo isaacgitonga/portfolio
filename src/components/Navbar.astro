@@ -5,9 +5,14 @@ import Socials from "@/components/Socials.astro";
 type NavItem = { name: string; href: string };
 const navs: NavItem[] = [
   { name: "Home", href: "/" },
+  { name: "Services", href: "/services" },
+  { name: "Architecture", href: "/architecture" },
+  { name: "Automation", href: "/automation" },
   { name: "Work", href: "/work" },
+  { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
 ]
+
 
 const pathname = Astro.url.pathname;
 const isActive = (href: string) => {
@@ -28,7 +33,7 @@ const isActive = (href: string) => {
       </a>
 
       <nav class="hidden md:block">
-        <ul class="flex items-center gap-8 font-iceberg text-base">
+        <ul class="flex items-center gap-8 font-iceberg text-sm">
           {navs.map(nav => (
             <li>
               <a 
