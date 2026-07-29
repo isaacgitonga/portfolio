@@ -1,0 +1,180 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import { ArrowLeft, Calendar, Tag, Clock } from "@lucide/astro";
+
+export async function getStaticPaths() {
+  const specs = await getCollection('architecture');
+  return specs.map((spec) => ({
+    params: { id: spec.id },
+    props: { spec },
+  }));
+}
+
+const { spec } = Astro.props;
+const { Content } = await render(spec);
+---
+
+<Layout title={`${spec.data.title} | Architecture Catalog`} description={spec.data.description}>
+  <article class="max-w-4xl mx-auto px-6 py-12 md:py-24 space-y-8">
+    <!-- Back to Catalog -->
+    <div>
+      <a href="/architecture" class="group inline-flex items-center gap-2 text-muted hover:text-primary transition-colors font-iceberg text-sm">
+        <ArrowLeft size={16} class="transition duration-200 group-hover:-translate-x-1" />
+        <span>Back to Catalog</span>
+      </a>
+    </div>
+
+    <!-- Header Metadata -->
+    <div class="space-y-4 border-b border-surface-border/40 pb-8">
+      <div class="flex flex-wrap items-center gap-4 text-xs font-mono text-muted-dark">
+        <span class="px-2 py-0.5 bg-primary/10 border border-primary/20 text-primary rounded-sm font-semibold">
+          {spec.data.category || "Architecture"}
+        </span>
+        <span class="flex items-center gap-1">
+          <Calendar size={12} />
+          <time datetime={spec.data.pubDate.toISOString()}>
+            {spec.data.pubDate.toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })}
+          </time>
+        </span>
+      </div>
+
+      <h1 class="text-3xl md:text-5xl font-iceberg font-bold text-primary leading-tight">
+        {spec.data.title}
+      </h1>
+
+      {spec.data.tags && spec.data.tags.length > 0 && (
+        <div class="flex flex-wrap gap-2 pt-2">
+          {spec.data.tags.map((tag) => (
+            <span class="inline-flex items-center gap-1 px-2.5 py-0.5 bg-surface border border-surface-border text-[10px] rounded text-muted font-mono">
+              #{tag}
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <!-- Markdown Content Body -->
+    <div class="prose prose-invert max-w-none font-nunito leading-relaxed text-muted mt-8">
+      <Content />
+    </div>
+
+    <!-- Page Footer CTA -->
+    <div class="mt-16 pt-8 border-t border-surface-border/40 flex flex-col sm:flex-row justify-between items-center gap-6">
+      <div class="space-y-1 text-center sm:text-left">
+        <h4 class="font-iceberg font-bold text-lg text-foreground">Need to implement this pattern?</h4>
+        <p class="text-xs text-muted font-montserrat">Let's discuss how this fits your specific system parameters and scale limits.</p>
+      </div>
+      <a 
+        href="/book" 
+        class="px-5 py-3 bg-primary hover:bg-primary-hover text-background font-iceberg font-bold text-sm rounded-lg transition-colors cursor-pointer"
+      >
+        Book a System Audit
+      </a>
+    </div>
+  </article>
+</Layout>
+
+<script>
+  import mermaid from 'mermaid';
+
+  function initMermaid() {
+    const codeBlocks = document.querySelectorAll('pre.language-mermaid, pre:has(code.language-mermaid)');
+    if (codeBlocks.length === 0) return;
+
+    codeBlocks.forEach((block) => {
+      // Find code content
+      const codeEl = block.querySelector('code');
+      const code = (codeEl ? codeEl.innerText : (block as HTMLElement).innerText).trim();
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'mermaid my-8 bg-[#181a2b]/30 border border-[#282b45] p-6 rounded-xl flex justify-center overflow-x-auto';
+      wrapper.textContent = code;
+      
+      block.parentNode?.replaceChild(wrapper, block);
+    });
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'dark',
+      themeVariables: {
+        background: '#131420',
+        primaryColor: '#14b8a6',
+        primaryTextColor: '#f7fafc',
+        lineColor: '#282b45',
+        actorBkg: '#181a2b',
+        actorBorder: '#282b45',
+        actorTextColor: '#f7fafc',
+        signalColor: '#14b8a6',
+        signalTextColor: '#f7fafc',
+      }
+    });
+
+    mermaid.run();
+  }
+
+  // Run on load and after page transitions
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMermaid);
+  } else {
+    initMermaid();
+  }
+  
+  document.addEventListener('astro:page-load', initMermaid);
+</script>
+
+<style is:global>
+  @reference "../../styles/global.css";
+
+  .prose h2 {
+    @apply text-2xl font-bold font-iceberg text-foreground mt-12 mb-6 border-b border-surface-border/40 pb-2;
+  }
+  .prose h3 {
+    @apply text-xl font-bold font-iceberg text-foreground mt-8 mb-4;
+  }
+  .prose p {
+    @apply mb-6 text-muted text-base leading-relaxed;
+  }
+  .prose ul {
+    @apply list-disc pl-6 mb-6 space-y-2 text-muted;
+  }
+  .prose ol {
+    @apply list-decimal pl-6 mb-6 space-y-2 text-muted;
+  }
+  .prose li {
+    @apply text-muted;
+  }
+  .prose strong {
+    @apply text-foreground font-semibold;
+  }
+  .prose table {
+    @apply w-full border-collapse mb-8 text-left text-sm;
+  }
+  .prose th {
+    @apply border-b border-surface-border py-3 px-4 font-iceberg font-bold text-foreground;
+  }
+  .prose td {
+    @apply border-b border-surface-border/30 py-3 px-4 text-muted leading-relaxed;
+  }
+  .prose tr:hover td {
+    @apply text-foreground bg-surface/10;
+  }
+  .prose pre {
+    @apply p-4 rounded-xl border border-surface-border bg-[#0d0e15]! overflow-x-auto my-6 text-xs font-mono;
+  }
+  .prose code {
+    @apply font-mono text-sm px-1.5 py-0.5 bg-[#0d0e15] rounded border border-surface-border text-primary font-medium;
+  }
+  .prose pre code {
+    @apply p-0 border-0 bg-transparent text-foreground font-normal;
+  }
+  
+  /* Mermaid diagram text adjustment */
+  .mermaid text {
+    @apply font-mono text-xs!;
+  }
+</style>
