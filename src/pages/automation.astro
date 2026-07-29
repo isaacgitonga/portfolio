@@ -1,6 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { Terminal, Shield, CircleCheckBig, Cpu, TriangleAlert } from "@lucide/astro";
+import { Terminal, Shield, ArrowUpRight, CheckCircle, Play, Cpu, AlertTriangle } from "@lucide/astro";
 ---
 
 <Layout
@@ -42,7 +42,7 @@ import { Terminal, Shield, CircleCheckBig, Cpu, TriangleAlert } from "@lucide/as
           <div class="space-y-4 pt-4">
             <div class="flex gap-4">
               <div class="p-2 bg-primary/10 border border-primary/20 text-primary rounded-xl shrink-0 h-fit">
-                <CircleCheckBig size={18} />
+                <CheckCircle size={18} />
               </div>
               <div class="space-y-1">
                 <h4 class="font-iceberg font-bold text-foreground">Decoupled Domain Architecture</h4>
@@ -111,7 +111,7 @@ import { Terminal, Shield, CircleCheckBig, Cpu, TriangleAlert } from "@lucide/as
                 <span>Explicit row-level locks found: `FOR UPDATE` detected.</span>
               </p>
               <p class="text-amber-500 flex items-center gap-1">
-                <TriangleAlert size={12} class="shrink-0" />
+                <AlertTriangle size={12} class="shrink-0" />
                 <span>Warning: statement_timeout is not configured at transaction boundary.</span>
               </p>
             </div>
