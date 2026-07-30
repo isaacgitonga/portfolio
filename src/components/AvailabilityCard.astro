@@ -1,0 +1,23 @@
+---
+import config from "@/app.config.ts";
+---
+
+<div class="bg-surface/50 border border-surface-border rounded-xl p-6 space-y-4 backdrop-blur-xs">
+  <h3 class="font-iceberg text-lg font-bold text-foreground">
+    Availability
+  </h3>
+  <div class="space-y-2 text-sm text-muted font-montserrat">
+    <div class="flex justify-between border-b border-surface-border/50 pb-2">
+      <span>Consulting:</span>
+      <span class="text-primary font-semibold capitalize">{config.availability.consulting}</span>
+    </div>
+    <div class="flex justify-between border-b border-surface-border/50 pb-2">
+      <span>Contract Work:</span>
+      <span class="text-primary font-semibold capitalize">{config.availability.contract}</span>
+    </div>
+    <div class="flex justify-between">
+      <span>Location:</span>
+      <span class="text-foreground">Nairobi, Kenya / Remote</span>
+    </div>
+  </div>
+</div>

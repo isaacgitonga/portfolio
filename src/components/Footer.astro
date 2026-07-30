@@ -34,7 +34,7 @@ import { Mail } from "@lucide/astro";
         <span class="text-xs font-montserrat font-medium selection:bg-primary/20">
           {config.profile.email}
         </span>
-        <CopyIcon text="advisory@isaacgitonga.com" class="p-1" />
+        <CopyIcon text={config.profile.email} class="p-1" />
       </div>
 
       <div class="flex gap-6 items-center">
@@ -47,7 +47,7 @@ import { Mail } from "@lucide/astro";
     </div>
 
     <p class="font-nunito text-sm text-muted-dark mt-4">
-      &copy; <span class="year">{new Date().getFullYear()}</span> Isaac G. All rights reserved.
+      &copy; <span class="year">{new Date().getFullYear()}</span> Isaac. All rights reserved.
     </p>
   </div>
 </footer>
