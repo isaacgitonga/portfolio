@@ -1,6 +1,5 @@
 ---
-import {getSocials} from "@/utils.ts";
-
+import config from "@/app.config.ts";
 const { gap = 6 } = Astro.props;
 
 interface Props {
@@ -18,7 +17,7 @@ const selectedGapClass = gapClasses[gap] || "gap-6";
 
 <div class={`flex items-center text-2xl text-muted ${selectedGapClass}`}>
   <a
-    href={getSocials().github}
+    href={config.profile.github}
     target="_blank"
     class="hover:text-foreground transition-colors size-5"
   >
@@ -29,7 +28,7 @@ const selectedGapClass = gapClasses[gap] || "gap-6";
   </a>
 
   <a
-    href={getSocials().twitter}
+    href={config.profile.twitter}
     target="_blank"
     class="hover:text-foreground transition-colors size-4"
   >
@@ -40,7 +39,7 @@ const selectedGapClass = gapClasses[gap] || "gap-6";
   </a>
 
   <a
-    href={getSocials().linkedin}
+    href={config.profile.linkedin}
     target="_blank"
     class="hover:text-foreground transition-colors size-5"
   >
