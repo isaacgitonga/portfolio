@@ -8,7 +8,11 @@ const config = {
     linkedin: 'https://www.linkedin.com/in/isaacgitonga',
     twitter: 'https://twitter.com/_isaacgitonga',
     instagram: 'https://www.instagram.com/_isaacgitonga',
-  }
+  },
+  availability: {
+    contract: 'open',
+    consulting: 'open',
+  },
 };
 
 export default config;

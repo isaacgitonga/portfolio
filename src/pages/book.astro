@@ -4,6 +4,8 @@ import BookingWizard from "@/components/react/BookingWizard.tsx";
 import PriceTiers from "@/components/PriceTiers.astro";
 import Socials from "@/components/Socials.astro";
 import CopyIcon from "@/components/CopyIcon.astro";
+import config from "@/app.config.ts";
+import AvailabilityCard from "@/components/AvailabilityCard.astro";
 ---
 
 <Layout
@@ -46,26 +48,7 @@ import CopyIcon from "@/components/CopyIcon.astro";
 
         <!-- Sidebar / Contact Details -->
         <div class="space-y-8">
-          <!-- Qualification standards -->
-          <div class="bg-surface/50 border border-surface-border rounded-xl p-6 space-y-4 backdrop-blur-xs">
-            <h3 class="font-iceberg text-lg font-bold text-foreground">
-              Availability
-            </h3>
-            <div class="space-y-2 text-sm text-muted font-montserrat">
-              <div class="flex justify-between border-b border-surface-border/50 pb-2">
-                <span>Consulting:</span>
-                <span class="text-primary font-semibold">Active</span>
-              </div>
-              <div class="flex justify-between border-b border-surface-border/50 pb-2">
-                <span>Contract Work:</span>
-                <span class="text-primary font-semibold">Open</span>
-              </div>
-              <div class="flex justify-between">
-                <span>Location:</span>
-                <span class="text-foreground">Nairobi, Kenya / Remote</span>
-              </div>
-            </div>
-          </div>
+          <AvailabilityCard />
 
           <!-- Email Bypass Escape Hatch -->
           <div class="bg-surface/50 border border-surface-border rounded-xl p-6 space-y-4 backdrop-blur-xs">
@@ -79,17 +62,17 @@ import CopyIcon from "@/components/CopyIcon.astro";
               <div class="flex flex-col gap-0.5 w-[calc(100%-2.5rem)]">
                 <span class="text-[10px] text-muted-dark font-iceberg uppercase tracking-wider font-semibold">Direct Inbox</span>
                 <span class="text-xs font-montserrat text-foreground font-medium break-all selection:bg-primary/20">
-                  advisory@isaacgitonga.com
+                  {config.profile.email}
                 </span>
               </div>
-              <CopyIcon text="advisory@isaacgitonga.com" class="shrink-0" />
+              <CopyIcon text={config.profile.email} class="shrink-0" />
             </div>
           </div>
 
           <!-- Direct Connections -->
           <div class="bg-surface/50 border border-surface-border rounded-xl p-6 space-y-4 backdrop-blur-xs">
             <h3 class="font-iceberg text-lg font-bold text-foreground">
-              Direct channels
+              Other channels
             </h3>
             <div class="space-y-4">
               <div class="flex items-center justify-between p-3 bg-background border border-surface-border rounded-lg">
