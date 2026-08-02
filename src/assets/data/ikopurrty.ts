@@ -1,4 +1,4 @@
-import type {Project} from "@/types.ts";
+import type {Project} from "@/types/project.types.ts";
 
 export const ikopurrty: Project = {
   id: "ticketing-platform",

@@ -1,35 +1,66 @@
-import { useEffect, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { type Contact, ContactSchema } from "@/schema/contact.schema.ts";
+import {useEffect, useRef, useState} from "react";
+import {useForm} from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {type Inquiry, InquirySchema} from "@/schema/inquiry.schema.ts";
 import CustomSelect from "@/components/react/CustomSelect.tsx";
+import {actions} from "astro:actions";
 
-export default function ContactForm() {
+const serviceNames: Record<string, string> = {
+  'backend-infra': 'Resilient Backend & API Infrastructure',
+  'identity-access': 'Enterprise Identity & Access Control (RBAC/ABAC)',
+  'payment-billing': 'Idempotent Payment & Billing Architectures',
+  'admin-consoles': 'Data-Dense Admin Consoles & Real-Time Sync',
+  'risk-auditing': 'Architectural Risk Auditing & Consultation',
+  'deterministic-rag': 'Deterministic RAG & Secure Agent Integration',
+};
+
+const validServiceIds = Object.keys(serviceNames);
+
+export default function InquiryForm() {
   const [submissionStatus, setSubmissionStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [selectedService, setSelectedService] = useState<string | null>(null);
   const formSectionRef = useRef<HTMLDivElement>(null);
 
-  const { register, handleSubmit, reset, setValue, watch, formState: { errors } } = useForm<Contact>({
-    resolver: zodResolver(ContactSchema),
+  const { register, handleSubmit, reset, setValue, watch, formState: { errors } } = useForm<Inquiry>({
+    resolver: zodResolver(InquirySchema),
     defaultValues: {
       message: "",
-    },
+      service: null,
+      inquiryType: null,
+    }
   });
 
   const inquiryTypeValue = watch("inquiryType");
 
   useEffect(() => {
     register("inquiryType");
+    register("service");
   }, [register]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const serviceParam = params.get("service");
+
+    if (serviceParam && validServiceIds.includes(serviceParam)) {
+      setSelectedService(serviceParam);
+      setValue("service", serviceParam as any);
+      setValue("inquiryType", null);
+    }
+  }, [setValue]);
 
   useEffect(() => {
     const handleSelectTier = (e: Event) => {
       const customEvent = e as CustomEvent;
+
       if (customEvent.detail) {
         const { inquiry } = customEvent.detail;
         if (inquiry) {
+          setSelectedService(null);
+          setValue("service", null);
           setValue("inquiryType", inquiry, { shouldValidate: true });
         }
+        
         formSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     };
@@ -38,7 +69,15 @@ export default function ContactForm() {
     return () => window.removeEventListener("select-tier", handleSelectTier);
   }, [setValue]);
 
-  const onSubmitForm = async (data: Contact) => {
+  const clearSelectedService = () => {
+    setSelectedService(null);
+    setValue("service", null);
+    const url = new URL(window.location.href);
+    url.searchParams.delete("service");
+    window.history.replaceState({}, "", url.toString());
+  };
+
+  const onSubmitForm = async (data: Inquiry) => {
     if (data.botCheck) {
       setSubmissionStatus("success");
       return;
@@ -48,19 +87,12 @@ export default function ContactForm() {
     setErrorMessage("");
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const { data: resData, error } = await actions.inquire(data);
 
-      if (!response.ok && response.status !== 404) {
-        throw new Error(`TRANSMIT_FAILURE: Status code ${response.status}`);
+      if (error) {
+        throw new Error(error.message || "Failed to submit inquiry.");
       }
 
-      await new Promise((resolve) => setTimeout(resolve, 1200));
       setSubmissionStatus("success");
       formSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     } catch (err: unknown) {
@@ -74,6 +106,10 @@ export default function ContactForm() {
   const handleResetForm = () => {
     setSubmissionStatus("idle");
     reset();
+    setSelectedService(null);
+    const url = new URL(window.location.href);
+    url.searchParams.delete("service");
+    window.history.replaceState({}, "", url.toString());
     formSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
@@ -114,7 +150,7 @@ export default function ContactForm() {
                 Message transmitted.
               </h2>
               <p className="text-muted text-sm max-w-md mx-auto font-montserrat leading-relaxed font-medium">
-                Your payload has been successfully dispatched to the serverless queue. I will review the logs and reply shortly.
+                Your payload has been successfully dispatched. You can expect a response within 12 hours.
               </p>
             </div>
             <button
@@ -202,14 +238,34 @@ export default function ContactForm() {
                 )}
               </div>
 
-              <CustomSelect
-                label="Inquiry Type"
-                placeholder="-- Select inquiry type --"
-                options={inquiryOptions}
-                value={inquiryTypeValue || ""}
-                onChange={(val) => setValue("inquiryType", val as Contact["inquiryType"], { shouldValidate: true })}
-                error={errors.inquiryType?.message}
-              />
+              {selectedService ? (
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center">
+                    <label className="block text-sm font-semibold font-montserrat text-foreground tracking-wide">
+                      Selected Service
+                    </label>
+                    <button
+                      type="button"
+                      onClick={clearSelectedService}
+                      className="text-xs text-primary hover:text-primary-hover font-mono underline cursor-pointer"
+                    >
+                      Clear / General Inquiry
+                    </button>
+                  </div>
+                  <div className="w-full bg-surface border border-surface-border rounded-lg p-4 text-primary font-montserrat font-bold text-sm truncate">
+                    {serviceNames[selectedService]}
+                  </div>
+                </div>
+              ) : (
+                <CustomSelect
+                  label="Inquiry Type"
+                  placeholder="-- Select inquiry type --"
+                  options={inquiryOptions}
+                  value={inquiryTypeValue || ""}
+                  onChange={(val) => setValue("inquiryType", val as Inquiry["inquiryType"], { shouldValidate: true })}
+                  error={errors.inquiryType?.message}
+                />
+              )}
             </div>
 
             <div className="space-y-2 pt-3">

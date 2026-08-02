@@ -1,4 +1,4 @@
-import type {Project} from "@/types.ts";
+import type {Project} from "@/types/project.types.ts";
 import {ikopurrty} from "@/assets/data/ikopurrty.ts";
 import {govtPortal} from "@/assets/data/govt-portal.ts";
 import {portfolio} from "@/assets/data/portfolio.ts";
