@@ -10,7 +10,6 @@ const navs: NavItem[] = [
   { name: "Automation", href: "/automation" },
   { name: "Work", href: "/work" },
   { name: "About", href: "/about" },
-  { name: "Contact", href: "/contact" },
 ]
 
 
@@ -61,12 +60,12 @@ const isActive = (href: string) => {
         <button id="theme-dark-btn" class="relative w-7 h-7 flex items-center justify-center rounded-full cursor-pointer transition-colors duration-300 z-10" aria-label="Dark Mode"><Moon size={15} /></button>
       </div>
 
-      <!-- Desktop Contact Button -->
+      <!-- Desktop Inquire Button -->
       <a
-        href="/book"
+        href="/apps/portfolio/src/pages/inquiry"
         class="hidden md:inline-block px-5 py-2 bg-primary hover:bg-primary-hover text-background font-bold font-iceberg text-sm rounded-lg transition-colors cursor-pointer"
       >
-        Book an Audit
+        Inquire
       </a>
 
       <!-- Mobile Toggle Button -->
@@ -110,12 +109,12 @@ const isActive = (href: string) => {
         ))}
       </ul>
 
-      <!-- Mobile Contact Button inside Drawer -->
+      <!-- Mobile Inquire Button inside Drawer -->
       <a
-        href="/book"
+        href="/apps/portfolio/src/pages/inquiry"
         class="flex items-center justify-center w-full py-4 mt-4 bg-primary hover:bg-primary-hover text-background font-bold font-iceberg text-lg rounded-lg transition-colors cursor-pointer"
       >
-        Book an Audit
+        Inquire
       </a>
     </div>
 

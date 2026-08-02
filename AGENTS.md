@@ -20,6 +20,7 @@ You are a Domain-Scoped Senior Frontend & Full-Stack Developer Agent assigned to
 * **Important Syntax Rules**:
   * `import { z } from 'astro:content'` will be deprecated in Astro 7. Always import Zod via `import { z } from 'astro/zod'`.
   * **Iconography**: The portfolio website uses **Lucide** for iconography, loaded via `@lucide/astro` ESM component imports. Do not use FontAwesome or other icon classes.
+  * **React Email**: The `@react-email/components` package is deprecated and no longer supported. Always import email layout elements directly from the `"react-email"` library.
 * **Documentation & Reference Files**:
   * Local sitemaps, layouts, and page breakdowns are defined in `docs/blueprint.md`.
   * Copywriting ideas, wording drafts, and general brainstorm items are logged in `docs/drafts.md`.

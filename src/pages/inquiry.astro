@@ -1,6 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import ContactForm from "@/components/react/ContactForm.tsx";
+import InquiryForm from "@/components/react/InquiryForm.tsx";
 import PriceTiers from "@/components/PriceTiers.astro";
 import Socials from "@/components/Socials.astro";
 import CopyIcon from "@/components/CopyIcon.astro";
@@ -9,7 +9,7 @@ import AvailabilityCard from "@/components/AvailabilityCard.astro";
 ---
 
 <Layout
-  title="Contact & Collaboration | Isaac Gitonga"
+  title="Inquire & Collaboration | Isaac Gitonga"
   description="Let's build reliable backend systems, fintech products, or consult on system architecture."
 >
   <div class="relative flex flex-col justify-center px-6 overflow-hidden">
@@ -18,23 +18,14 @@ import AvailabilityCard from "@/components/AvailabilityCard.astro";
       <div class="space-y-4 max-w-3xl pb-10 border-b border-surface-border/40 mb-12">
         <span class="text-xs uppercase font-mono tracking-widest text-primary font-semibold">General Channels</span>
         <h1 class="text-4xl md:text-5xl font-montserrat font-bold text-foreground leading-tight">
-          Contact & <br/><span class="text-primary font-iceberg font-normal">Collaboration</span>
+          Inquire & <br/><span class="text-primary font-iceberg font-normal">Collaboration</span>
         </h1>
         <p class="text-muted font-montserrat font-medium text-lg leading-relaxed mt-4">
           Have an architectural challenge, a payments platform project, or need support on a backend-heavy build? Let's trace out a solution.
         </p>
-        <p class="text-sm font-montserrat text-muted font-semibold pt-2">
-          Need a Systems Audit?
-          <a
-            href="/book"
-            class="inline-flex items-center gap-1 font-iceberg font-bold text-primary hover:underline ml-1"
-          >
-            Secure a slot directly on my calendar →
-          </a>
-        </p>
       </div>
 
-      <!-- Pricing Scopes (Full-Width outside the squeezed layout grid) -->
+      <!-- Pricing Scopes -->
       <PriceTiers />
 
       <hr class="border-surface-border/30" />
@@ -43,10 +34,10 @@ import AvailabilityCard from "@/components/AvailabilityCard.astro";
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start mt-8">
         <!-- Contact Form Card -->
         <div class="lg:col-span-2 bg-surface/50 border border-surface-border rounded-2xl p-6 md:p-8 backdrop-blur-xs">
-          <ContactForm client:load />
+          <InquiryForm client:load />
         </div>
 
-        <!-- Sidebar / Contact Details consistent with other internal views -->
+        <!-- Sidebar -->
         <div class="space-y-8">
           <AvailabilityCard />
 
