@@ -1,9 +1,9 @@
 import {useEffect, useRef, useState} from "react";
-import {actions, isInputError} from "astro:actions";
-import {Controller, useForm} from "react-hook-form";
+import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {type Inquiry, InquirySchema, type ServiceType} from "@/schema/inquiry.schema.ts";
+import {type Inquiry, InquirySchema} from "@/schema/inquiry.schema.ts";
 import CustomSelect from "@/components/react/CustomSelect.tsx";
+import {actions} from "astro:actions";
 
 const serviceNames: Record<string, string> = {
   'backend-infra': 'Resilient Backend & API Infrastructure',
@@ -17,11 +17,12 @@ const serviceNames: Record<string, string> = {
 const validServiceIds = Object.keys(serviceNames);
 
 export default function InquiryForm() {
-  const [serverState, setServerState] = useState<{ success: boolean; message: string | null }>({ success: false, message: null });
-  const [inquiryService, setInquiryService] = useState<string | null>(null);
+  const [submissionStatus, setSubmissionStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [selectedService, setSelectedService] = useState<string | null>(null);
   const formSectionRef = useRef<HTMLDivElement>(null);
 
-  const { control, register, handleSubmit, reset, setValue, setError, formState: { errors, isSubmitting } } = useForm<Inquiry>({
+  const { register, handleSubmit, reset, setValue, watch, formState: { errors } } = useForm<Inquiry>({
     resolver: zodResolver(InquirySchema),
     defaultValues: {
       message: "",
@@ -30,8 +31,11 @@ export default function InquiryForm() {
     }
   });
 
+  const inquiryTypeValue = watch("inquiryType");
+
   useEffect(() => {
     register("inquiryType");
+    register("service");
   }, [register]);
 
   useEffect(() => {
@@ -39,60 +43,70 @@ export default function InquiryForm() {
     const serviceParam = params.get("service");
 
     if (serviceParam && validServiceIds.includes(serviceParam)) {
-      setValue('service', serviceParam as ServiceType);
-      setInquiryService(serviceParam);
+      setSelectedService(serviceParam);
+      setValue("service", serviceParam as any);
+      setValue("inquiryType", null);
     }
-  }, []);
+  }, [setValue]);
+
+  useEffect(() => {
+    const handleSelectTier = (e: Event) => {
+      const customEvent = e as CustomEvent;
+
+      if (customEvent.detail) {
+        const { inquiry } = customEvent.detail;
+        if (inquiry) {
+          setSelectedService(null);
+          setValue("service", null);
+          setValue("inquiryType", inquiry, { shouldValidate: true });
+        }
+        
+        formSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    };
+
+    window.addEventListener("select-tier", handleSelectTier);
+    return () => window.removeEventListener("select-tier", handleSelectTier);
+  }, [setValue]);
 
   const clearSelectedService = () => {
-    setInquiryService(null);
+    setSelectedService(null);
     setValue("service", null);
-
     const url = new URL(window.location.href);
     url.searchParams.delete("service");
-
     window.history.replaceState({}, "", url.toString());
   };
 
-  const onSubmit = async (data: Inquiry) => {
-    setServerState({ success: false, message: null });
-
+  const onSubmitForm = async (data: Inquiry) => {
     if (data.botCheck) {
-      setServerState({ success: true, message: "Message send successfully." });
+      setSubmissionStatus("success");
       return;
     }
 
-    const { data: resData, error } = await actions.inquire(data);
+    setSubmissionStatus("submitting");
+    setErrorMessage("");
 
-    if (isInputError(error)) {
-      Object.entries(error.fields).forEach(([fieldName, messages]) => {
-        if (messages && messages.length > 0) {
-          setError(fieldName as keyof Inquiry, {
-            type: 'server',
-            message: messages[0],
-          });
-        }
-      });
+    try {
+      const { data: resData, error } = await actions.inquire(data);
 
-      return;
-    }
+      if (error) {
+        throw new Error(error.message || "Failed to submit inquiry.");
+      }
 
-    if (error) {
-      setServerState({ success: false, message: "Failed to submit inquiry." });
-      return;
-    }
-
-    if (resData) {
-      setServerState({ success: true, message: resData.message });
-      reset();
+      setSubmissionStatus("success");
+      formSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    } catch (err: unknown) {
+      console.error(err);
+      setSubmissionStatus("error");
+      const msg = err instanceof Error ? err.message : "TRANSMISSION_ERROR: Connection timed out.";
+      setErrorMessage(msg);
     }
   };
 
   const handleResetForm = () => {
-    setServerState({ success: false, message: null });
+    setSubmissionStatus("idle");
     reset();
-    setInquiryService(null);
-
+    setSelectedService(null);
     const url = new URL(window.location.href);
     url.searchParams.delete("service");
     window.history.replaceState({}, "", url.toString());
@@ -100,30 +114,31 @@ export default function InquiryForm() {
   };
 
   const inquiryOptions = [
-    { value: "architecture_consulting", label: "Systems Architecture & Risk Auditing" },
-    { value: "fractional_cto", label: "Fractional CTO & Technical Leadership" },
-    { value: "dedicated_backend", label: "Dedicated Backend & Infrastructure Build" },
-    { value: "api_design", label: "API Design & Integration" },
-    { value: "database_design", label: "Database Design & Query Performance" },
-    { value: "greenfield_platform", label: "Greenfield Platform & MVP Builds" },
-    { value: "ai_automation", label: "AI, Agents & Workflow Automation" },
-    { value: "data_heavy_ui", label: "Data-Heavy UI & State Management" },
-    { value: "general_inquiry", label: "General Inquiry" },
+    { value: "architecture_consulting", label: "Systems Architecture Consulting" },
+    { value: "fractional_cto", label: "Fractional CTO / Lead Architect" },
+    { value: "legacy_modernization", label: "Legacy Platform Modernization" },
+    { value: "greenfield_platform", label: "Greenfield Platform / MVP Build" },
+    { value: "checkout_payments", label: "Checkout & Payments Integration" },
+    { value: "database_design", label: "Database Schema & Query Tuning" },
+    { value: "dedicated_backend", label: "Dedicated Backend API Build" },
+    { value: "other", label: "Other Technical Challenge" },
   ];
 
   return (
     <div ref={formSectionRef} className="space-y-6 scroll-mt-24 w-full">
       <div className="space-y-2 pb-2 border-b border-surface-border/50">
         <h2 className="text-2xl font-iceberg font-bold text-foreground">
-          {serverState.success ? "Message Transmitted" : "Scoping Intake Form"}
+          {submissionStatus === "success" ? "Message Transmitted" : "Scoping Intake Form"}
         </h2>
         <p className="text-sm text-muted font-montserrat">
-          {serverState.success ? "[ STATUS: INQUIRY_SENT ]" : "Provide parameters below to register your queue payload."}
+          {submissionStatus === "success" 
+            ? "[ STATUS: MESSAGE_TRANSMITTED ]" 
+            : "Provide parameters below to register your queue payload."}
         </p>
       </div>
 
       <div className="relative w-full overflow-hidden">
-        {serverState.success && serverState.message ? (
+        {submissionStatus === "success" ? (
           <div className="text-center py-10 space-y-6 animate-fadeIn">
             <div className="inline-flex items-center justify-center size-16 rounded-full bg-primary/10 border border-primary/20 text-primary">
               <svg className="size-8 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -132,10 +147,10 @@ export default function InquiryForm() {
             </div>
             <div className="space-y-2">
               <h2 className="text-2xl font-iceberg font-bold text-foreground">
-                Inquiry Sent.
+                Message transmitted.
               </h2>
               <p className="text-muted text-sm max-w-md mx-auto font-montserrat leading-relaxed font-medium">
-                Your inquiry has been successfully sent. You can expect a response within 12 hours.
+                Your payload has been successfully dispatched. You can expect a response within 12 hours.
               </p>
             </div>
             <button
@@ -146,7 +161,7 @@ export default function InquiryForm() {
             </button>
           </div>
         ) : (
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 animate-fadeIn">
+          <form onSubmit={handleSubmit(onSubmitForm)} className="space-y-8 animate-fadeIn">
             <input
               type="text"
               {...register("botCheck")}
@@ -156,12 +171,12 @@ export default function InquiryForm() {
               autoComplete="off"
             />
 
-            {!serverState.success && serverState.message && (
+            {submissionStatus === "error" && (
               <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-4 rounded-lg font-mono text-xs flex gap-2 items-center">
                 <svg className="size-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                 </svg>
-                <span>{serverState.message}</span>
+                <span>{errorMessage}</span>
               </div>
             )}
 
@@ -223,9 +238,7 @@ export default function InquiryForm() {
                 )}
               </div>
 
-
-
-              {inquiryService ? (
+              {selectedService ? (
                 <div className="space-y-2">
                   <div className="flex justify-between items-center">
                     <label className="block text-sm font-semibold font-montserrat text-foreground tracking-wide">
@@ -239,48 +252,19 @@ export default function InquiryForm() {
                       Clear / General Inquiry
                     </button>
                   </div>
-                  <Controller
-                    name='service'
-                    control={control}
-                    render={({ field }) => (
-                      <input
-                        {...field}
-                        disabled
-                        value={serviceNames[inquiryService]}
-                        className="w-full bg-surface border border-surface-border rounded-lg p-4 text-primary font-montserrat font-bold text-sm truncate"
-                      />
-                    )}
-                  />
+                  <div className="w-full bg-surface border border-surface-border rounded-lg p-4 text-primary font-montserrat font-bold text-sm truncate">
+                    {serviceNames[selectedService]}
+                  </div>
                 </div>
               ) : (
-                <div className="space-y-2">
-                  <label className="block text-sm font-semibold font-montserrat text-foreground tracking-wide">
-                    Inquiry Type
-                  </label>
-
-                  <Controller
-                    name="inquiryType"
-                    control={control}
-                    render={({ field }) => (
-                      <CustomSelect
-                        placeholder="-- Select inquiry type --"
-                        options={inquiryOptions}
-                        value={field.value || ""}
-                        onChange={(val) => field.onChange(val)}
-                        error={errors.inquiryType?.message}
-                      />
-                    )}
-                  />
-
-                  <p className='text-sm text-muted'>What category does your inquiry fall into?</p>
-
-                  {errors.inquiryType && (
-                    <p className="text-red-400 text-xs font-mono mt-1 flex gap-1 items-center">
-                      <span className="inline-block size-1 bg-red-400 rounded-full" />
-                      {errors.inquiryType.message}
-                    </p>
-                  )}
-                </div>
+                <CustomSelect
+                  label="Inquiry Type"
+                  placeholder="-- Select inquiry type --"
+                  options={inquiryOptions}
+                  value={inquiryTypeValue || ""}
+                  onChange={(val) => setValue("inquiryType", val as Inquiry["inquiryType"], { shouldValidate: true })}
+                  error={errors.inquiryType?.message}
+                />
               )}
             </div>
 
@@ -307,19 +291,19 @@ export default function InquiryForm() {
 
             <button
               type="submit"
-              disabled={isSubmitting}
+              disabled={submissionStatus === "submitting"}
               className="w-full py-4 bg-primary hover:bg-primary-hover disabled:bg-primary/45 disabled:cursor-not-allowed text-background font-bold font-iceberg text-xl rounded-lg transition-colors flex items-center justify-center gap-2 cursor-pointer"
             >
-              {isSubmitting ? (
+              {submissionStatus === "submitting" ? (
                 <>
                   <svg className="animate-spin h-5 w-5 text-background" fill="none" viewBox="0 0 24 24">
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                   </svg>
-                  <span>Sending...</span>
+                  <span>SENDING...</span>
                 </>
               ) : (
-                <span>Inquire</span>
+                <span>SEND MESSAGE</span>
               )}
             </button>
           </form>

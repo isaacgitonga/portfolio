@@ -4,12 +4,10 @@ import InquiryForm from "@/components/react/InquiryForm.tsx";
 import PriceTiers from "@/components/PriceTiers.astro";
 import Socials from "@/components/Socials.astro";
 import CopyIcon from "@/components/CopyIcon.astro";
-import config from "@/app.config.ts";
-import AvailabilityCard from "@/components/AvailabilityCard.astro";
 ---
 
 <Layout
-  title="Inquiry & Collaboration | Isaac Gitonga"
+  title="Inquire & Collaboration | Isaac Gitonga"
   description="Let's build reliable backend systems, fintech products, or consult on system architecture."
 >
   <div class="relative flex flex-col justify-center px-6 overflow-hidden">
@@ -39,7 +37,26 @@ import AvailabilityCard from "@/components/AvailabilityCard.astro";
 
         <!-- Sidebar -->
         <div class="space-y-8">
-          <AvailabilityCard />
+          <!-- Availability Card -->
+          <div class="bg-surface/50 border border-surface-border rounded-xl p-6 space-y-4 backdrop-blur-xs">
+            <h3 class="font-iceberg text-lg font-bold text-foreground">
+              Availability
+            </h3>
+            <div class="space-y-2 text-sm text-muted font-montserrat">
+              <div class="flex justify-between border-b border-surface-border/50 pb-2">
+                <span>Consulting:</span>
+                <span class="text-primary font-semibold">Active</span>
+              </div>
+              <div class="flex justify-between border-b border-surface-border/50 pb-2">
+                <span>Contract Work:</span>
+                <span class="text-primary font-semibold">Open</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Location:</span>
+                <span class="text-foreground">Nairobi, Kenya / Remote</span>
+              </div>
+            </div>
+          </div>
 
           <!-- Direct Connections -->
           <div class="bg-surface/50 border border-surface-border rounded-xl p-6 space-y-4 backdrop-blur-xs">
@@ -51,9 +68,9 @@ import AvailabilityCard from "@/components/AvailabilityCard.astro";
                 <span class="text-xs text-muted-dark font-iceberg uppercase tracking-wider font-semibold">Email</span>
                 <div class="flex items-center justify-between gap-2">
                   <span class="text-sm font-montserrat text-foreground font-medium break-all selection:bg-primary/20">
-                    {config.profile.email}
+                    advisory@isaacgitonga.com
                   </span>
-                  <CopyIcon text={config.profile.email} class="shrink-0" />
+                  <CopyIcon text="advisory@isaacgitonga.com" class="shrink-0" />
                 </div>
               </div>
               <div class="flex items-center justify-between p-3 bg-background border border-surface-border rounded-lg">

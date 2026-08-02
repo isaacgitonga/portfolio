@@ -19,7 +19,7 @@ export const server = {
       })
 
       if (error) {
-        throw new ActionError({ code: 'BAD_REQUEST', message: 'Failed to send email. Please try again.' })
+        throw new ActionError({code: 'BAD_REQUEST', message: 'Failed to send email. Please try again.'})
       }
 
       await resend.emails.send({
@@ -29,7 +29,7 @@ export const server = {
         react: React.createElement(InquiryConfirmationEmail, input)
       })
 
-      return { success: true, data, message: 'Email sent successfully.' };
+      return data;
     }
   })
 }

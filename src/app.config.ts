@@ -1,3 +1,5 @@
+import {env} from "@/utils/env.ts";
+
 const config = {
   profile: {
     name: 'Isaac Gitonga',
@@ -13,6 +15,9 @@ const config = {
     contract: 'open',
     consulting: 'open',
   },
+  resend: {
+    apiKey: env.RESEND_API_KEY,
+  }
 };
 
 export default config;
