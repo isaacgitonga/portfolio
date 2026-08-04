@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import {useEffect, useRef, useState} from "react";
 
 interface SelectOption {
   value: string;
@@ -6,7 +6,6 @@ interface SelectOption {
 }
 
 interface CustomSelectProps {
-  label: string;
   placeholder: string;
   options: SelectOption[];
   value: string;
@@ -14,7 +13,7 @@ interface CustomSelectProps {
   error?: string;
 }
 
-export default function CustomSelect({ label, placeholder, options, value, onChange, error }: CustomSelectProps) {
+export default function CustomSelect({ placeholder, options, value, onChange, error }: CustomSelectProps) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -36,11 +35,7 @@ export default function CustomSelect({ label, placeholder, options, value, onCha
   };
 
   return (
-    <div className="space-y-2 relative" ref={containerRef}>
-      <label className="block text-sm font-semibold font-montserrat text-foreground tracking-wide">
-        {label}
-      </label>
-      
+    <div className="relative" ref={containerRef}>
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
@@ -67,14 +62,16 @@ export default function CustomSelect({ label, placeholder, options, value, onCha
       <ul
         role="listbox"
         aria-hidden={!isOpen}
-        className={`absolute z-50 w-full mt-2 bg-surface/95 border border-surface-border rounded-lg shadow-2xl backdrop-blur-md overflow-hidden overflow-y-auto font-nunito transition-all duration-200 ease-out origin-top ${
-          isOpen
+        className={`
+        absolute z-50 w-full mt-2 bg-surface/95 border border-surface-border rounded-lg shadow-2xl backdrop-blur-md overflow-hidden overflow-y-auto font-nunito transition-all duration-200 ease-out origin-top 
+        ${ isOpen
             ? "opacity-100 translate-y-0 scale-100 pointer-events-auto"
             : "opacity-0 -translate-y-2 scale-95 pointer-events-none"
         }`}
       >
         {options.map((opt) => {
           const isSelected = opt.value === value;
+
           return (
             <li
               key={opt.value}
@@ -97,13 +94,6 @@ export default function CustomSelect({ label, placeholder, options, value, onCha
           );
         })}
       </ul>
-
-      {error && (
-        <p className="text-red-400 text-xs font-mono mt-1 flex gap-1 items-center">
-          <span className="inline-block size-1 bg-red-400 rounded-full" />
-          {error}
-        </p>
-      )}
     </div>
   );
 }
