@@ -45,7 +45,7 @@ export default function CustomSelect({ placeholder, options, value, onChange, er
           error ? "focus:ring-red-500/20 focus:border-red-500" : "border-surface-border"
         }`}
       >
-        <span className={selectedOption ? "text-foreground font-medium" : "text-muted-dark"}>
+        <span className={`truncate ${selectedOption ? "text-foreground font-medium" : "text-muted-dark"}`}>
           {selectedOption ? selectedOption.label : placeholder}
         </span>
         <svg
@@ -63,7 +63,7 @@ export default function CustomSelect({ placeholder, options, value, onChange, er
         role="listbox"
         aria-hidden={!isOpen}
         className={`
-        absolute z-50 w-full mt-2 bg-surface/95 border border-surface-border rounded-lg shadow-2xl backdrop-blur-md overflow-hidden overflow-y-auto font-nunito transition-all duration-200 ease-out origin-top 
+        absolute z-50 w-full h-75 mt-2 bg-surface/95 border border-surface-border rounded-lg shadow-2xl backdrop-blur-md overflow-hidden overflow-y-auto font-nunito transition-all duration-200 ease-out origin-top 
         ${ isOpen
             ? "opacity-100 translate-y-0 scale-100 pointer-events-auto"
             : "opacity-0 -translate-y-2 scale-95 pointer-events-none"
