@@ -36,3 +36,5 @@ export const InquirySchema = z.object({
 });
 
 export type Inquiry = z.infer<typeof InquirySchema>;
+// export type InquiryType = z.infer<typeof InquiryTypeSchema>;
+export type ServiceType = z.infer<typeof ServiceTypeSchema>;
