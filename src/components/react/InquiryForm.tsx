@@ -100,14 +100,15 @@ export default function InquiryForm() {
   };
 
   const inquiryOptions = [
-    { value: "architecture_consulting", label: "Systems Architecture Consulting" },
-    { value: "fractional_cto", label: "Fractional CTO / Lead Architect" },
-    { value: "legacy_modernization", label: "Legacy Platform Modernization" },
-    { value: "greenfield_platform", label: "Greenfield Platform / MVP Build" },
-    { value: "checkout_payments", label: "Checkout & Payments Integration" },
-    { value: "database_design", label: "Database Schema & Query Tuning" },
-    { value: "dedicated_backend", label: "Dedicated Backend API Build" },
-    { value: "other", label: "Other Technical Challenge" },
+    { value: "architecture_consulting", label: "Systems Architecture & Risk Auditing" },
+    { value: "fractional_cto", label: "Fractional CTO & Technical Leadership" },
+    { value: "dedicated_backend", label: "Dedicated Backend & Infrastructure Build" },
+    { value: "api_design", label: "API Design & Integration" },
+    { value: "database_design", label: "Database Design & Query Performance" },
+    { value: "greenfield_platform", label: "Greenfield Platform & MVP Builds" },
+    { value: "ai_automation", label: "AI, Agents & Workflow Automation" },
+    { value: "data_heavy_ui", label: "Data-Heavy UI & State Management" },
+    { value: "general_inquiry", label: "General Inquiry" },
   ];
 
   return (
@@ -270,6 +271,8 @@ export default function InquiryForm() {
                       />
                     )}
                   />
+
+                  <p className='text-sm text-muted'>What category does your inquiry fall into?</p>
 
                   {errors.inquiryType && (
                     <p className="text-red-400 text-xs font-mono mt-1 flex gap-1 items-center">
