@@ -1,20 +1,20 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { getCollection } from "astro:content";
-import { 
-  Server, 
-  ShieldAlert, 
-  CreditCard, 
-  Layers, 
-  SearchCheck, 
-  Cpu, 
-  UserCheck, 
-  Compass, 
-  Zap, 
+import { INQUIRY_CATEGORY_MAP } from "@/constants/inquiryCategories";
+import {
+  Server,
+  ShieldAlert,
+  CreditCard,
+  Layers,
+  SearchCheck,
+  Cpu,
+  UserCheck,
+  Compass,
+  Zap,
   ArrowUpRight,
   CircleCheck
 } from "@lucide/astro";
-import { INQUIRY_CATEGORY_MAP } from "@/constants/inquiryCategories";
 
 const rawServices = await getCollection("services");
 
@@ -42,10 +42,9 @@ const iconMap: Record<string, any> = {
     <div class="relative z-10 max-w-6xl w-full mx-auto py-24 md:py-32 space-y-16">
       
       <!-- Page Header -->
-      <div class="space-y-4 max-w-3xl pb-10 border-b border-surface-border/40">
+      <div class="space-y-4 max-w-3xl pb-10">
         <div class="flex items-center gap-2">
           <span class="text-xs uppercase font-mono tracking-widest text-primary font-semibold">Services & Productized Advisory</span>
-          <span class="px-2 py-0.5 text-[10px] font-mono bg-primary/10 border border-primary/20 text-primary rounded-full font-bold">9 Offers Matrix</span>
         </div>
         <h1 class="text-4xl md:text-5xl font-montserrat font-bold text-foreground leading-tight">
           Productized Advisory & <br/><span class="text-primary font-iceberg font-normal">Systems Engineering</span>
@@ -72,7 +71,7 @@ const iconMap: Record<string, any> = {
                 <!-- Header with Icon & Meta -->
                 <div class="flex items-center justify-between">
                   <div class="flex items-center gap-3">
-                    <div class="p-3 bg-background border border-surface-border rounded-xl text-primary group-hover:text-foreground group-hover:bg-primary transition-all duration-300 shrink-0">
+                    <div class="p-2 bg-background border border-surface-border rounded-xl text-primary group-hover:text-foreground group-hover:bg-primary transition-all duration-300 shrink-0">
                       <Icon size={24} />
                     </div>
                     <div>
@@ -81,9 +80,6 @@ const iconMap: Record<string, any> = {
                       </span>
                     </div>
                   </div>
-                  <span class="text-[10px] font-mono text-muted-dark uppercase tracking-wider font-semibold bg-surface-border/20 px-2.5 py-1 rounded-md">
-                    Offer {String(index + 1).padStart(2, "0")}
-                  </span>
                 </div>
 
                 <!-- Title & Summary -->
@@ -98,36 +94,6 @@ const iconMap: Record<string, any> = {
 
                 <!-- Detailed Breakdown -->
                 <div class="space-y-4 pt-2 text-sm font-montserrat border-t border-surface-border/30">
-                  <!-- The Acute Friction -->
-                  <div>
-                    <span class="block text-[10px] uppercase font-mono tracking-wider text-rose-400 font-semibold mb-1">
-                      {service.problem.headline}
-                    </span>
-                    <ul class="space-y-1 text-xs text-muted">
-                      {service.problem.points.map((pt) => (
-                        <li class="flex items-start gap-1.5">
-                          <span class="text-rose-400 shrink-0 select-none">•</span>
-                          <span>{pt}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <!-- The Architectural Approach -->
-                  <div>
-                    <span class="block text-[10px] uppercase font-mono tracking-wider text-primary font-semibold mb-1">
-                      {service.approach.headline}
-                    </span>
-                    <ul class="space-y-1 text-xs text-muted">
-                      {service.approach.points.map((pt) => (
-                        <li class="flex items-start gap-1.5">
-                          <span class="text-primary shrink-0 select-none">›</span>
-                          <span>{pt}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
                   <!-- Concrete Deliverables -->
                   <div>
                     <span class="block text-[10px] uppercase font-mono tracking-wider text-foreground font-semibold mb-1.5">
@@ -142,25 +108,6 @@ const iconMap: Record<string, any> = {
                       ))}
                     </div>
                   </div>
-
-                  <!-- Tech Stack Chips -->
-                  <div>
-                    <span class="block text-[10px] uppercase font-mono tracking-wider text-muted-dark font-semibold mb-1.5">
-                      Core Toolchain & Internal Packages
-                    </span>
-                    <div class="flex flex-wrap gap-1.5">
-                      {service.techStack.communityTools.map((tool) => (
-                        <span class="text-[11px] font-mono px-2 py-0.5 bg-surface-border/20 border border-surface-border/40 text-muted rounded">
-                          {tool}
-                        </span>
-                      ))}
-                      {service.techStack.internalPackages?.map((pkg) => (
-                        <span class="text-[11px] font-mono px-2 py-0.5 bg-primary/10 border border-primary/20 text-primary rounded">
-                          {pkg}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
                 </div>
               </div>
 
@@ -172,15 +119,15 @@ const iconMap: Record<string, any> = {
                   <span class="block text-[10px] text-muted-dark font-normal">{service.pricing.timeline}</span>
                 </div>
                 <div class="flex items-center gap-3 shrink-0">
-                  {specSlug && (
-                    <a
-                      href={`/architecture/${specSlug}`}
-                      class="inline-flex items-center gap-1.5 text-xs font-iceberg font-bold text-muted hover:text-foreground hover:underline"
-                    >
-                      <span>Spec Proof</span>
-                      <ArrowUpRight size={14} />
-                    </a>
-                  )}
+                  <!--// {specSlug && (-->
+                  <!--//   <a-->
+                  <!--//     href={`/architecture/${specSlug}`}-->
+                  <!--//     class="inline-flex items-center gap-1.5 text-xs font-iceberg font-bold text-muted hover:text-foreground hover:underline"-->
+                  <!--//   >-->
+                  <!--//     <span>Spec Proof</span>-->
+                  <!--//     <ArrowUpRight size={14} />-->
+                  <!--//   </a>-->
+                  <!--// )}-->
                   <a
                     href={`/inquiry?service=${service.slug}`}
                     class="inline-flex items-center gap-1.5 px-4 py-2 bg-primary/10 border border-primary/20 hover:bg-primary hover:text-background text-xs font-iceberg font-bold text-primary rounded-xl transition-all duration-200"

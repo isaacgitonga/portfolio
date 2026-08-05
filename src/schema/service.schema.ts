@@ -1,4 +1,5 @@
 import {z} from 'astro/zod';
+import {InquiryTypeSchema} from "@/schema/inquiry.schema.ts";
 
 export const ServiceProblemSchema = z.object({
   headline: z.string(),
@@ -33,17 +34,7 @@ export const ServiceSchema = z.object({
   slug: z.string(),
   title: z.string(),
   summary: z.string(),
-  category: z.enum([
-    "system-architecture-audit",
-    "fractional-cto-leadership",
-    "dedicated-backend-build",
-    "api-design-integration",
-    "database-design-performance",
-    "greenfield-mvp-builds",
-    "ai-agents-automation",
-    "data-heavy-ui-state",
-    "general-inquiry"
-  ]),
+  category: InquiryTypeSchema,
   problem: ServiceProblemSchema,
   approach: ServiceApproachSchema,
   deliverables: z.array(z.string()),
