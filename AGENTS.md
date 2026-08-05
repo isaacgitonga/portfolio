@@ -42,7 +42,16 @@ You are a Domain-Scoped Senior Frontend & Full-Stack Developer Agent assigned to
 
 ---
 
-## 🏛️ Atlas Integration
-* Strategic records, project briefs, and architectural opinions live in `@core/atlas`.
-* Since read access outside `apps/portfolio` is available, cross-reference materials directly from `@core/atlas` when preparing blog drafts or case studies.
-* You can/should also infer, positioning, persona, and career plan/path and strategy from `@core/atlas`.
+## 🏛️ Atlas Integration & Local Execution Directives
+
+### 1. Upstream Strategic Mirror (`docs/atlas/`)
+* Strategic records, positioning, sitemaps, wireframes, and Astro schemas authored in `@core/atlas` (`atlas/portfolio/*`) are directly copied into `apps/portfolio/docs/atlas/`.
+* `docs/atlas/` serves as the primary strategic reference for copywriting, titles, `/inquire` SLA flow, and schema designs.
+
+### 2. User-Directed Implementation Rule
+* **No Autonomous Refactoring**: Do NOT automatically rewrite or refactor application code (`src/pages/*`, `src/components/*`) simply because files in `docs/atlas/` were updated.
+* **Wait for User Command**: Upstream Atlas files may be ahead of the current live website code. Execute updates to application code ONLY when explicitly instructed by Isaac (e.g., *"Refactor the Homepage using docs/atlas"* or *"Implement the /inquire form using docs/atlas/wireframes.md"*).
+
+### 3. Local Overrides Autonomy (`docs/overrides.md`)
+* **Not Restricted to Atlas Drafts**: You are NOT strictly locked into what the Atlas agent drafted. If Isaac and you decide on code-level, UI styling, or component-level overrides during implementation, you have full autonomy to adapt the implementation.
+* **Log Overrides**: Any deliberate code or design departures from `docs/atlas/` MUST be logged in **`apps/portfolio/docs/overrides.md`** with the date and rationale.
