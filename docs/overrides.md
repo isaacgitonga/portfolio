@@ -7,6 +7,6 @@
 
 ## 📋 Active Overrides Log
 
-| Date | Target Component / Route | Override Description | Rationale / Decision Context |
-| :--- | :--- | :--- | :--- |
-| *2026-08-05* | *Initial Setup* | *Created overrides tracking log.* | *Established local developer agent autonomy framework.* |
+| Date         | Target Component / Route                   | Override Description                | Rationale / Decision Context                                                                                                                                                                                                                                                                                                |
+|:-------------|:-------------------------------------------|:------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 2026-08-05   | Services Page (`src/pages/services.astro`) | Simplified Service Cards (Option B) | Removed acute friction and architectural approach bullet lists from index service cards to reduce visual density and improve scannability. Retained deliverables, toolchain chips, pricing anchor, and spec proof links. Full objects preserved in content collections for potential dedicated `/services/[...slug]` pages. |
