@@ -1,0 +1,43 @@
+{
+  "id": "04-data-dense-admin-consoles",
+  "slug": "data-dense-admin-consoles",
+  "title": "Data-Dense Admin Consoles & Real-Time Sync",
+  "summary": "Build high-density operations dashboards, server-driven TanStack data tables, and real-time SSE sync engines.",
+  "category": "data-heavy-ui-state",
+  "problem": {
+    "headline": "Clunky Ops Tools & Admin Logic Leaks",
+    "points": [
+      "Slow, unoptimized admin tables freezing under high row counts.",
+      "Inline UI toggles leaking admin routes and middleware into public client bundles.",
+      "Lack of real-time status updates forcing constant manual page refreshes."
+    ]
+  },
+  "approach": {
+    "headline": "Sandboxed Route Groups & Server-Driven Tables",
+    "points": [
+      "Isolate admin consoles into dedicated route groups ((admin)) or standalone repositories.",
+      "Deploy server-driven TanStack Table pagination, sorting, and JSONB filtering.",
+      "Stream live status updates via Server-Sent Events (SSE) and log audit events."
+    ]
+  },
+  "deliverables": [
+    "Sandboxed Operations Console with TanStack Table architecture",
+    "Real-time Server-Sent Events (SSE) broadcasting module",
+    "Append-only Operational Audit Log database schema & UI timeline",
+    "Query Optimization & Indexing Guide for high-row reporting"
+  ],
+  "techStack": {
+    "communityTools": ["Next.js", "TanStack Table", "PostgreSQL", "Lucide", "SSE"],
+    "internalPackages": ["@core/admin-table-query", "@core/audit-logger", "@core/realtime-sse"]
+  },
+  "pricing": {
+    "model": "turnkey-implementation",
+    "anchorText": "Fixed-Rate Package or Custom Scope",
+    "timeline": "2–4 Weeks Delivery",
+    "startingFrom": 4000
+  },
+  "articles": {
+    "architecture": ["concurrency-safe-inventory-ledger"]
+  },
+  "status": "live"
+}

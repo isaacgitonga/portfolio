@@ -1,0 +1,41 @@
+{
+  "id": "07-technical-candidate-vetting",
+  "slug": "technical-candidate-vetting",
+  "title": "Technical Candidate Vetting & Team Screening",
+  "summary": "Protect your company from $50k+ hiring mistakes with 90-minute architecture scenario interviews and blunt Pass/Fail scorecards.",
+  "category": "fractional-cto-leadership",
+  "problem": {
+    "headline": "Costly Hiring Mistakes & Unvetted Resumes",
+    "points": [
+      "Non-technical founders making expensive $50k–$150k+ bad engineering hires.",
+      "Inability to evaluate candidate database knowledge, concurrency control, or code quality.",
+      "Recruiter screenings failing to detect smooth talkers with zero production depth."
+    ]
+  },
+  "approach": {
+    "headline": "90-Minute Architecture Scenarios & Blunt Scorecards",
+    "points": [
+      "Design real-world architecture scenarios matching the client's actual tech stack.",
+      "Conduct a live 90-minute technical interview probing database locks, API boundaries, and trade-offs.",
+      "Deliver a blunt Pass/Fail scorecard with explicit Hire/No-Hire recommendations."
+    ]
+  },
+  "deliverables": [
+    "Custom 90-Minute Technical Architecture Challenge Scenario",
+    "3-Page Candidate Technical Scorecard with domain risk analysis",
+    "Blunt Hire / No-Hire Recommendation Verdict",
+    "90-Day First-Quarter Technical Onboarding Focus Plan"
+  ],
+  "techStack": {
+    "communityTools": ["System Architecture Rubrics", "PostgreSQL", "Node.js", "Zod"],
+    "internalPackages": ["@core/candidate-eval-rubric", "@core/architecture-interview-bank"]
+  },
+  "pricing": {
+    "model": "fixed-scope-audit",
+    "anchorText": "Per-Candidate Screening Fee or Monthly Retainer",
+    "timeline": "48-Hour Turnaround Per Candidate",
+    "startingFrom": 1500
+  },
+  "articles": {},
+  "status": "live"
+}

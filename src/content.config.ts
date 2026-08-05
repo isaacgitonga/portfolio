@@ -17,8 +17,7 @@ const architecture = defineCollection({
 const services = defineCollection({
   loader: glob({ pattern: '**/*.json', base: './src/content/services' }),
   schema: ServiceSchema,
-  type: 'data',
-})
+});
 
 export const collections = { services, projects, architecture };
 

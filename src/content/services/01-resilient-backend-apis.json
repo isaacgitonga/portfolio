@@ -1,0 +1,43 @@
+{
+  "id": "01-resilient-backend-apis",
+  "slug": "resilient-backend-apis",
+  "title": "Resilient Backend & Developer API Infrastructure",
+  "summary": "Design and build production-grade application backends and public Developer API Ecosystems built to survive scale.",
+  "category": "dedicated-backend-build",
+  "problem": {
+    "headline": "Fragile APIs & Unmanaged Webhook Failures",
+    "points": [
+      "Public API endpoints breaking under concurrent traffic spikes.",
+      "Dropped webhooks causing state desynchronization between systems.",
+      "Lack of distributed rate-limiting and public API key lifecycle management."
+    ]
+  },
+  "approach": {
+    "headline": "Decoupled Service Layers & Transactional Outboxes",
+    "points": [
+      "Implement transactional outbox engines to guarantee zero-drop webhook delivery.",
+      "Build framework-agnostic TypeScript service layers decoupled from API frameworks.",
+      "Enforce distributed rate limiting using Redis token-bucket algorithms."
+    ]
+  },
+  "deliverables": [
+    "Production-ready OpenAPI v3 specification & interactive portal",
+    "Transactional Outbox Webhook Engine module",
+    "Distributed Rate Limiter & API key rotation middleware",
+    "20-page Architectural Risk Audit & Remediation Report"
+  ],
+  "techStack": {
+    "communityTools": ["PostgreSQL", "Redis", "Zod", "Pino", "OpenAPI"],
+    "internalPackages": ["@core/outbox-engine", "@core/api-key-manager"]
+  },
+  "pricing": {
+    "model": "turnkey-implementation",
+    "anchorText": "Fixed-Rate Package or Custom Scope",
+    "timeline": "2–4 Weeks Delivery",
+    "startingFrom": 4500
+  },
+  "articles": {
+    "architecture": ["asynchronous-payment-checkout"]
+  },
+  "status": "live"
+}

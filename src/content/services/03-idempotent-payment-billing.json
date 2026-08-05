@@ -1,0 +1,43 @@
+{
+  "id": "03-idempotent-payment-billing",
+  "slug": "idempotent-payment-billing",
+  "title": "Idempotent Payment & Billing Architectures",
+  "summary": "Build zero-double-charge payment pipelines, audit-ready double-entry ledgers, and resilient webhook engines.",
+  "category": "dedicated-backend-build",
+  "problem": {
+    "headline": "Double-Charging Bugs & Unhandled Webhooks",
+    "points": [
+      "Network retries or duplicate clicks causing double charges for a single order.",
+      "Dropped payment webhooks resulting in silent revenue loss and user state drift.",
+      "Lack of immutable double-entry accounting ledgers for financial audits."
+    ]
+  },
+  "approach": {
+    "headline": "Cryptographic Idempotency & Double-Entry Accounting",
+    "points": [
+      "Enforce strict cryptographic idempotency keys to prevent duplicate transaction execution.",
+      "Implement immutable double-entry accounting ledgers for audit-ready balance tracking.",
+      "Commit business logic updates and outgoing payment events inside a transactional outbox."
+    ]
+  },
+  "deliverables": [
+    "Production-ready Idempotent Checkout Engine backend",
+    "Immutable Double-Entry Ledger database schema & execution library",
+    "Asynchronous Webhook Receiver with HMAC validation & deduplication",
+    "20-page Financial Reconciliation & Audit Protocol Report"
+  ],
+  "techStack": {
+    "communityTools": ["PostgreSQL", "Redis", "Stripe", "Zod", "Pino"],
+    "internalPackages": ["@core/idempotency-guard", "@core/double-entry-ledger", "@core/payment-outbox"]
+  },
+  "pricing": {
+    "model": "turnkey-implementation",
+    "anchorText": "Fixed-Rate Package or Custom Scope",
+    "timeline": "2–3 Weeks Delivery",
+    "startingFrom": 5000
+  },
+  "articles": {
+    "architecture": ["asynchronous-payment-checkout"]
+  },
+  "status": "live"
+}
