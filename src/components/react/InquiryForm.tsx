@@ -2,30 +2,28 @@ import {useEffect, useRef, useState} from "react";
 import {actions, isInputError} from "astro:actions";
 import {Controller, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {type Inquiry, InquirySchema, type ServiceType} from "@/schema/inquiry.schema.ts";
-import CustomSelect from "@/components/react/CustomSelect.tsx";
+import {type Inquiry, InquirySchema} from "@/schema/inquiry.schema";
+import CustomSelect from "@/components/react/CustomSelect";
+import {INQUIRY_CATEGORY_MAP} from "@/constants/inquiryCategories";
+import type {Service} from "@/schema";
 
-const serviceNames: Record<string, string> = {
-  'backend-infra': 'Resilient Backend & API Infrastructure',
-  'identity-access': 'Enterprise Identity & Access Control (RBAC/ABAC)',
-  'payment-billing': 'Idempotent Payment & Billing Architectures',
-  'admin-consoles': 'Data-Dense Admin Consoles & Real-Time Sync',
-  'risk-auditing': 'Architectural Risk Auditing & Consultation',
-  'deterministic-rag': 'Deterministic RAG & Secure Agent Integration',
-};
+interface Props {
+  services?: Pick<Service, 'slug' | 'title' | 'category'>[];
+}
 
-const validServiceIds = Object.keys(serviceNames);
-
-export default function InquiryForm() {
+export default function InquiryForm({ services = [] }: Props) {
   const [serverState, setServerState] = useState<{ success: boolean; message: string | null }>({ success: false, message: null });
   const [inquiryService, setInquiryService] = useState<string | null>(null);
   const formSectionRef = useRef<HTMLDivElement>(null);
 
-  const { control, register, handleSubmit, reset, setValue, setError, formState: { errors, isSubmitting } } = useForm<Inquiry>({
+  const serviceMap = Object.fromEntries(services.map((s) => [s.slug, s.title]));
+  const validServiceSlugs = services.map((s) => s.slug);
+
+  const { control, register, handleSubmit, reset, setError, formState: { errors, isSubmitting } } = useForm<Inquiry>({
     resolver: zodResolver(InquirySchema),
     defaultValues: {
       message: "",
-      service: null,
+      service: inquiryService,
       inquiryType: null,
     }
   });
@@ -38,15 +36,13 @@ export default function InquiryForm() {
     const params = new URLSearchParams(window.location.search);
     const serviceParam = params.get("service");
 
-    if (serviceParam && validServiceIds.includes(serviceParam)) {
-      setValue('service', serviceParam as ServiceType);
+    if (serviceParam && (validServiceSlugs.includes(serviceParam) || serviceMap[serviceParam])) {
       setInquiryService(serviceParam);
     }
-  }, []);
+  }, [services]);
 
   const clearSelectedService = () => {
     setInquiryService(null);
-    setValue("service", null);
 
     const url = new URL(window.location.href);
     url.searchParams.delete("service");
@@ -99,17 +95,10 @@ export default function InquiryForm() {
     formSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const inquiryOptions = [
-    { value: "architecture_consulting", label: "Systems Architecture & Risk Auditing" },
-    { value: "fractional_cto", label: "Fractional CTO & Technical Leadership" },
-    { value: "dedicated_backend", label: "Dedicated Backend & Infrastructure Build" },
-    { value: "api_design", label: "API Design & Integration" },
-    { value: "database_design", label: "Database Design & Query Performance" },
-    { value: "greenfield_platform", label: "Greenfield Platform & MVP Builds" },
-    { value: "ai_automation", label: "AI, Agents & Workflow Automation" },
-    { value: "data_heavy_ui", label: "Data-Heavy UI & State Management" },
-    { value: "general_inquiry", label: "General Inquiry" },
-  ];
+  const inquiryOptions = Object.entries(INQUIRY_CATEGORY_MAP).map(([value, label]) => ({
+    value,
+    label,
+  }));
 
   return (
     <div ref={formSectionRef} className="space-y-6 scroll-mt-24 w-full">
@@ -223,8 +212,6 @@ export default function InquiryForm() {
                 )}
               </div>
 
-
-
               {inquiryService ? (
                 <div className="space-y-2">
                   <div className="flex justify-between items-center">
@@ -246,7 +233,7 @@ export default function InquiryForm() {
                       <input
                         {...field}
                         disabled
-                        value={serviceNames[inquiryService]}
+                        value={serviceMap[inquiryService] || inquiryService}
                         className="w-full bg-surface border border-surface-border rounded-lg p-4 text-primary font-montserrat font-bold text-sm truncate"
                       />
                     )}

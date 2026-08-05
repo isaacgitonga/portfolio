@@ -1,99 +1,52 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { Server, ShieldAlert, CreditCard, Layers, SearchCheck, Cpu, ArrowUpRight } from "@lucide/astro";
+import { getCollection } from "astro:content";
+import { 
+  Server, 
+  ShieldAlert, 
+  CreditCard, 
+  Layers, 
+  SearchCheck, 
+  Cpu, 
+  UserCheck, 
+  Compass, 
+  Zap, 
+  ArrowUpRight,
+  CircleCheck
+} from "@lucide/astro";
+import { INQUIRY_CATEGORY_MAP } from "@/constants/inquiryCategories";
 
-interface ServiceOffer {
-  id: string;
-  icon: any;
-  title: string;
-  problem: string;
-  approach: string;
-  deliverable: string;
-  pricing: string;
-  specLink?: string;
-  specLabel?: string;
-}
+const rawServices = await getCollection("services");
 
-const services: ServiceOffer[] = [
-  {
-    id: "backend-infra",
-    icon: Server,
-    title: "Resilient Backend & API Infrastructure",
-    problem: "Naively coupled API controllers that lock during traffic spikes, bleed database connections, or crash under unexpected request payloads.",
-    approach: "Decoupled Clean Architecture isolating domain models from framework dependencies. Implementing robust CQRS patterns, message queues, and thread-safe boundaries.",
-    deliverable: "Production-grade backend system with documented OpenAPI contracts, comprehensive test suites, and decoupled execution layers.",
-    pricing: "Custom engagement / Architectural implementation package",
-    specLink: "/architecture/asynchronous-payment-checkout",
-    specLabel: "View Backend Spec Proof"
-  },
-  {
-    id: "identity-access",
-    icon: ShieldAlert,
-    title: "Enterprise Identity & Access Control (RBAC/ABAC)",
-    problem: "Broken Object-Level Authorization (BOLA) where multi-tenant data leaks because the app code relies on programmers always remembering 'tenant_id' checks.",
-    approach: "Database-enforced context isolation utilizing PostgreSQL Row-Level Security (RLS) and claims-based validation at the gateway layer.",
-    deliverable: "Secure, auditable tenant isolation boundary + automated security verification suite testing for privilege escalation.",
-    pricing: "Fixed-scope implementation",
-    specLink: "/architecture/database-level-row-level-security",
-    specLabel: "View RLS Tenant Isolation Spec"
-  },
-  {
-    id: "payment-billing",
-    icon: CreditCard,
-    title: "Idempotent Payment & Billing Architectures",
-    problem: "Orphaned webhook payments, duplicate Stripe charges, state desync on network drops, and billing ledgers that cannot be audited or reconciled.",
-    approach: "Asynchronous Transactional Outbox pattern decoupling client-side checkout intents from payment gateway lifecycles.",
-    deliverable: "A fully reconcilable, double-charge-proof ledger integration (Stripe / M-Pesa / Adyen) with active query reconciliation cron workers.",
-    pricing: "Fixed-rate package integration",
-    specLink: "/architecture/asynchronous-payment-checkout",
-    specLabel: "View Resilient Payments Spec"
-  },
-  {
-    id: "admin-consoles",
-    icon: Layers,
-    title: "Data-Dense Admin Consoles & Real-Time Sync",
-    problem: "Laggy administrative pages that lock rows during massive queries, stale dashboard state, and error-prone UI operations that cause database side-effects.",
-    approach: "Bespoke internal tools optimized for concurrency control. Aggressive cache-invalidation strategies, read-replicas for reporting queries, and jank-free operational UI.",
-    deliverable: "High-performance operational admin suite featuring precise state synchronization, audit logs, and transaction-safety guardrails.",
-    pricing: "Project-based advisory & build",
-    specLink: "/architecture/concurrency-safe-inventory-ledger",
-    specLabel: "View Ledger Concurrency Spec"
-  },
-  {
-    id: "risk-auditing",
-    icon: SearchCheck,
-    title: "Architectural Risk Auditing & Consultation",
-    problem: "System instability, mounting technical debt, slow query execution times, and fear of launching changes to production during peak hours.",
-    approach: "Systematic deep-dive auditing of database schema designs, query execution paths, transaction boundaries, lock durations, and network topologies.",
-    deliverable: "A blunt, highly detailed 20-page Architectural Audit Report highlighting critical failure points, security gaps, and a step-by-step remediation roadmap.",
-    pricing: "Flat-rate advisory engagement",
-    specLink: "/inquiry?service=risk-auditing",
-    specLabel: "Inquire about an Audit"
-  },
-  {
-    id: "deterministic-rag",
-    icon: Cpu,
-    title: "Deterministic RAG & Secure Agent Integration",
-    problem: "Unpredictable AI workflows that hallucinate, bleed proprietary customer data, bypass authorization checks, or run up massive API billings.",
-    approach: "Context-isolated AI orchestration pipelines with strict data retrieval boundaries, semantic cache controls, and auditable runtime trace logs.",
-    deliverable: "Production-ready, deterministic RAG system bounded by structural security rules, with cost-limiting rate guards and verification logs.",
-    pricing: "Automation engineering package",
-    specLink: "/automation",
-    specLabel: "Explore Agent Automation Engine"
-  }
-];
+// Sort services by ID (01 to 09)
+const services = rawServices.sort((a, b) => a.data.id.localeCompare(b.data.id));
+
+const iconMap: Record<string, any> = {
+  "01-resilient-backend-apis": Server,
+  "02-enterprise-identity-rbac": ShieldAlert,
+  "03-idempotent-payment-billing": CreditCard,
+  "04-data-dense-admin-consoles": Layers,
+  "05-architectural-risk-auditing": SearchCheck,
+  "06-deterministic-rag-agent-integration": Cpu,
+  "07-technical-candidate-vetting": UserCheck,
+  "08-technology-roadmap-fractional-cto": Compass,
+  "09-ai-business-automation": Zap,
+};
 ---
 
 <Layout
-  title="Services & Advisory | Isaac Gitonga"
-  description="Productized systems advisory, payment architecture design, database optimization, and high-integrity consulting services for tech companies."
+  title="Productized Advisory Services & Engineering | Isaac Gitonga"
+  description="High-integrity systems advisory, payment architecture design, database optimization, and productized consulting offers built to survive scale."
 >
   <div class="relative min-h-screen px-6 overflow-hidden">
     <div class="relative z-10 max-w-6xl w-full mx-auto py-24 md:py-32 space-y-16">
       
       <!-- Page Header -->
       <div class="space-y-4 max-w-3xl pb-10 border-b border-surface-border/40">
-        <span class="text-xs uppercase font-mono tracking-widest text-primary font-semibold">Services & Solutions</span>
+        <div class="flex items-center gap-2">
+          <span class="text-xs uppercase font-mono tracking-widest text-primary font-semibold">Services & Productized Advisory</span>
+          <span class="px-2 py-0.5 text-[10px] font-mono bg-primary/10 border border-primary/20 text-primary rounded-full font-bold">9 Offers Matrix</span>
+        </div>
         <h1 class="text-4xl md:text-5xl font-montserrat font-bold text-foreground leading-tight">
           Productized Advisory & <br/><span class="text-primary font-iceberg font-normal">Systems Engineering</span>
         </h1>
@@ -104,40 +57,108 @@ const services: ServiceOffer[] = [
 
       <!-- Services Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-        {services.map((service, index) => {
-          const Icon = service.icon;
+        {services.map((item, index) => {
+          const service = item.data;
+          const Icon = iconMap[service.id] || Server;
+          const categoryLabel = INQUIRY_CATEGORY_MAP[service.category] || service.category;
+          const specSlug = service.articles?.architecture?.[0];
+
           return (
             <div 
-              id={`service-card-${index}`}
+              id={`service-card-${index + 1}`}
               class="group relative flex flex-col justify-between bg-surface/40 hover:bg-surface/75 border border-surface-border hover:border-primary/30 rounded-2xl p-6 md:p-8 transition-all duration-300 backdrop-blur-xs shadow-xs hover:shadow-md hover:shadow-primary/5"
             >
               <div class="space-y-6">
-                <!-- Header with Icon -->
+                <!-- Header with Icon & Meta -->
                 <div class="flex items-center justify-between">
-                  <div class="p-3 bg-background border border-surface-border rounded-xl text-primary group-hover:text-foreground group-hover:bg-primary transition-all duration-300">
-                    <Icon size={24} />
+                  <div class="flex items-center gap-3">
+                    <div class="p-3 bg-background border border-surface-border rounded-xl text-primary group-hover:text-foreground group-hover:bg-primary transition-all duration-300 shrink-0">
+                      <Icon size={24} />
+                    </div>
+                    <div>
+                      <span class="block text-[10px] font-mono text-primary/80 uppercase tracking-wider font-semibold">
+                        {categoryLabel}
+                      </span>
+                    </div>
                   </div>
-                  <span class="text-[10px] font-mono text-muted-dark uppercase tracking-wider font-semibold">Offer 0{index + 1}</span>
+                  <span class="text-[10px] font-mono text-muted-dark uppercase tracking-wider font-semibold bg-surface-border/20 px-2.5 py-1 rounded-md">
+                    Offer {String(index + 1).padStart(2, "0")}
+                  </span>
                 </div>
 
-                <!-- Title & Description -->
+                <!-- Title & Summary -->
                 <div class="space-y-3">
                   <h3 class="text-xl font-iceberg font-bold text-foreground group-hover:text-primary transition-colors duration-200">
                     {service.title}
                   </h3>
-                  
-                  <div class="space-y-4 text-sm font-montserrat text-muted">
-                    <div>
-                      <span class="block text-[10px] uppercase font-mono tracking-wider text-rose-400 font-semibold mb-1">The Acute Friction</span>
-                      <p class="leading-relaxed">{service.problem}</p>
+                  <p class="text-sm font-montserrat text-muted/90 leading-relaxed">
+                    {service.summary}
+                  </p>
+                </div>
+
+                <!-- Detailed Breakdown -->
+                <div class="space-y-4 pt-2 text-sm font-montserrat border-t border-surface-border/30">
+                  <!-- The Acute Friction -->
+                  <div>
+                    <span class="block text-[10px] uppercase font-mono tracking-wider text-rose-400 font-semibold mb-1">
+                      {service.problem.headline}
+                    </span>
+                    <ul class="space-y-1 text-xs text-muted">
+                      {service.problem.points.map((pt) => (
+                        <li class="flex items-start gap-1.5">
+                          <span class="text-rose-400 shrink-0 select-none">•</span>
+                          <span>{pt}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <!-- The Architectural Approach -->
+                  <div>
+                    <span class="block text-[10px] uppercase font-mono tracking-wider text-primary font-semibold mb-1">
+                      {service.approach.headline}
+                    </span>
+                    <ul class="space-y-1 text-xs text-muted">
+                      {service.approach.points.map((pt) => (
+                        <li class="flex items-start gap-1.5">
+                          <span class="text-primary shrink-0 select-none">›</span>
+                          <span>{pt}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <!-- Concrete Deliverables -->
+                  <div>
+                    <span class="block text-[10px] uppercase font-mono tracking-wider text-foreground font-semibold mb-1.5">
+                      Concrete Client Deliverables
+                    </span>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                      {service.deliverables.map((deliv) => (
+                        <div class="flex items-center gap-1.5 text-xs text-foreground/80 bg-background/50 border border-surface-border/40 rounded-lg px-2.5 py-1.5">
+                          <CircleCheck size={12} class="text-emerald-400 shrink-0" />
+                          <span class="truncate">{deliv}</span>
+                        </div>
+                      ))}
                     </div>
-                    <div>
-                      <span class="block text-[10px] uppercase font-mono tracking-wider text-primary font-semibold mb-1">The Architectural Approach</span>
-                      <p class="leading-relaxed">{service.approach}</p>
-                    </div>
-                    <div>
-                      <span class="block text-[10px] uppercase font-mono tracking-wider text-foreground font-semibold mb-1">The Concrete Deliverable</span>
-                      <p class="leading-relaxed text-foreground/80">{service.deliverable}</p>
+                  </div>
+
+                  <!-- Tech Stack Chips -->
+                  <div>
+                    <span class="block text-[10px] uppercase font-mono tracking-wider text-muted-dark font-semibold mb-1.5">
+                      Core Toolchain & Internal Packages
+                    </span>
+                    <div class="flex flex-wrap gap-1.5">
+                      {service.techStack.communityTools.map((tool) => (
+                        <span class="text-[11px] font-mono px-2 py-0.5 bg-surface-border/20 border border-surface-border/40 text-muted rounded">
+                          {tool}
+                        </span>
+                      ))}
+                      {service.techStack.internalPackages?.map((pkg) => (
+                        <span class="text-[11px] font-mono px-2 py-0.5 bg-primary/10 border border-primary/20 text-primary rounded">
+                          {pkg}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -146,22 +167,23 @@ const services: ServiceOffer[] = [
               <!-- Footer (Pricing & Link) -->
               <div class="mt-8 pt-6 border-t border-surface-border/50 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div class="font-mono text-xs text-muted-dark">
-                  <span class="block text-[9px] uppercase tracking-wider">Pricing Anchor</span>
-                  <span class="text-secondary font-semibold">{service.pricing}</span>
+                  <span class="block text-[9px] uppercase tracking-wider">Pricing Anchor & Timeline</span>
+                  <span class="text-secondary font-semibold">{service.pricing.anchorText}</span>
+                  <span class="block text-[10px] text-muted-dark font-normal">{service.pricing.timeline}</span>
                 </div>
-                <div class="flex items-center gap-4">
-                  {service.specLink && (
+                <div class="flex items-center gap-3 shrink-0">
+                  {specSlug && (
                     <a
-                      href={service.specLink}
+                      href={`/architecture/${specSlug}`}
                       class="inline-flex items-center gap-1.5 text-xs font-iceberg font-bold text-muted hover:text-foreground hover:underline"
                     >
-                      <span>{service.specLabel}</span>
+                      <span>Spec Proof</span>
                       <ArrowUpRight size={14} />
                     </a>
                   )}
                   <a
-                    href={`/inquiry?service=${service.id}`}
-                    class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary/10 border border-primary/20 hover:bg-primary hover:text-background text-xs font-iceberg font-bold text-primary rounded-lg transition-all duration-200"
+                    href={`/inquiry?service=${service.slug}`}
+                    class="inline-flex items-center gap-1.5 px-4 py-2 bg-primary/10 border border-primary/20 hover:bg-primary hover:text-background text-xs font-iceberg font-bold text-primary rounded-xl transition-all duration-200"
                   >
                     <span>Inquire</span>
                     <ArrowUpRight size={14} />
@@ -186,7 +208,7 @@ const services: ServiceOffer[] = [
         </div>
         <div class="z-10 shrink-0">
           <a
-            href="/inquiry?service=risk-auditing"
+            href="/inquiry?service=architectural-risk-auditing"
             class="flex items-center justify-center gap-2 px-6 py-4 bg-primary hover:bg-primary-hover text-background font-bold font-iceberg text-base rounded-xl transition-all duration-200 shadow-lg shadow-primary/10 hover:shadow-primary/20 active:scale-98 cursor-pointer"
           >
             <span>Inquire about an Audit</span>

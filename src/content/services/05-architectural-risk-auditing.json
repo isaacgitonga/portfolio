@@ -1,0 +1,43 @@
+{
+  "id": "05-architectural-risk-auditing",
+  "slug": "architectural-risk-auditing",
+  "title": "Architectural Risk Auditing & System Stabilization",
+  "summary": "Rapid 1-to-2 week intensive diagnostic audit analyzing database locks, query performance, security risks, and system crashes.",
+  "category": "system-architecture-audit",
+  "problem": {
+    "headline": "System Crashes & Unidentified Database Bottlenecks",
+    "points": [
+      "Unexpected database deadlocks, memory leaks, and CPU spikes during traffic surges.",
+      "Internal teams trapped fighting daily fires rather than solving root causes.",
+      "Investors requiring technical due diligence before funding or acquisition."
+    ]
+  },
+  "approach": {
+    "headline": "Static Inspection & PostgreSQL EXPLAIN ANALYZE Profiling",
+    "points": [
+      "Profile query execution plans (EXPLAIN ANALYZE) and connection pool lock contention.",
+      "Audit security boundaries, session rotation, and payment outbox reliability.",
+      "Deliver a prioritized 30-day remediation matrix with exact code references."
+    ]
+  },
+  "deliverables": [
+    "Blunt 20-Page Architectural Audit Report with code references",
+    "Prioritized 30-Day Technical Remediation Roadmap",
+    "Executive Summary & Risk Scorecard for investors/CEOs",
+    "90-Minute Technical Debrief Session with engineering leads"
+  ],
+  "techStack": {
+    "communityTools": ["PostgreSQL", "k6", "Clinic.js", "Pino", "pnpm"],
+    "internalPackages": ["@core/audit-cli", "@core/remediation-template"]
+  },
+  "pricing": {
+    "model": "fixed-scope-audit",
+    "anchorText": "Fixed-Rate Diagnostic Sprint",
+    "timeline": "1–2 Weeks Delivery",
+    "startingFrom": 3500
+  },
+  "articles": {
+    "architecture": ["concurrency-safe-inventory-ledger"]
+  },
+  "status": "live"
+}

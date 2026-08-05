@@ -1,25 +1,11 @@
-import z from "zod";
+import { z } from "astro/zod";
+import { INQUIRY_CATEGORY_MAP, type InquiryCategorySlug } from "@/constants/inquiryCategories";
 
-export const InquiryTypeSchema = z.enum([
-  'architecture_consulting',
-  'fractional_cto',
-  'dedicated_backend',
-  'api_design',
-  'database_design',
-  'greenfield_platform',
-  'ai-automation',
-  'data_heavy_ui',
-  'general_inquiry'
-]);
+const categoryKeys = Object.keys(INQUIRY_CATEGORY_MAP) as [InquiryCategorySlug, ...InquiryCategorySlug[]];
 
-export const ServiceTypeSchema = z.enum([
-  'backend-infra',
-  'identity-access',
-  'payment-billing',
-  'admin-consoles',
-  'risk-auditing',
-  'deterministic-rag',
-]);
+export const InquiryTypeSchema = z.enum(categoryKeys);
+
+export const ServiceTypeSchema = z.string();
 
 export const InquirySchema = z.object({
   botCheck: z.string().nullish(),

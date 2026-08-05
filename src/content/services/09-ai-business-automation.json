@@ -1,0 +1,43 @@
+{
+  "id": "09-ai-business-automation",
+  "slug": "ai-business-automation",
+  "title": "AI Business Automation & Process Optimization",
+  "summary": "Replace manual operational labor with zero-hallucination document extraction pipelines, CRM enrichment, and automated workflows.",
+  "category": "ai-agents-automation",
+  "problem": {
+    "headline": "Manual Ops Labor & Fragile Zapier Hacks",
+    "points": [
+      "Manual tasks (invoices, lead qualification, support routing) burning hundreds of operational hours.",
+      "Fragile low-code Zapier hacks failing silently and producing hallucinated data.",
+      "Unmanaged AI integrations lacking audit trails and human-in-the-loop fallback bounds."
+    ]
+  },
+  "approach": {
+    "headline": "Zod-Validated AI Pipelines & Direct CRM Integration",
+    "points": [
+      "Enforce strict Zod schemas for all AI outputs and tool calls to eliminate unformatted responses.",
+      "Connect AI pipelines directly to existing business software (HubSpot, Slack, Postgres, email).",
+      "Route low-confidence tasks to human review while recording complete execution logs."
+    ]
+  },
+  "deliverables": [
+    "Production-ready AI Business Process Automation Pipeline",
+    "Direct CRM, Slack, and Database API Integrations",
+    "Operations Dashboard & Append-Only Execution Audit Log",
+    "Operational Maintenance & Confidence Threshold Runbook"
+  ],
+  "techStack": {
+    "communityTools": ["OpenAI", "Vercel AI SDK", "Zod", "PostgreSQL", "Resend"],
+    "internalPackages": ["@core/ai-invoice-parser", "@core/ai-lead-qualifier", "@core/ai-audit-trail"]
+  },
+  "pricing": {
+    "model": "turnkey-implementation",
+    "anchorText": "Fixed-Rate Package or Custom Scope",
+    "timeline": "2–4 Weeks Delivery",
+    "startingFrom": 3500
+  },
+  "articles": {
+    "architecture": ["asynchronous-payment-checkout"]
+  },
+  "status": "live"
+}

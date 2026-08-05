@@ -1,0 +1,43 @@
+{
+  "id": "06-deterministic-rag-agent-integration",
+  "slug": "deterministic-rag-agent-integration",
+  "title": "Deterministic RAG & Secure Agent Integration",
+  "summary": "Build zero-hallucination hybrid RAG pipelines, pgvector tenant metadata filtering, and Zod-validated agent tool loops.",
+  "category": "ai-agents-automation",
+  "problem": {
+    "headline": "AI Hallucinations & Unmanaged LLM Token Costs",
+    "points": [
+      "Generic AI wrappers producing hallucinated answers without clear document attribution.",
+      "Unmanaged vector databases risking enterprise data leaks across tenant boundaries.",
+      "Unpredictable API token bill shocks and lack of structured agent execution logs."
+    ]
+  },
+  "approach": {
+    "headline": "Hybrid Vector Search & Strict Automated Evals",
+    "points": [
+      "Combine pgvector embeddings with PostgreSQL full-text search for high-precision retrieval.",
+      "Enforce tenant metadata filtering directly inside vector queries for hard isolation.",
+      "Structure multi-step agent loops with Zod tool schemas, token cost caps, and evals."
+    ]
+  },
+  "deliverables": [
+    "Production-ready Hybrid RAG Retrieval Engine with pgvector",
+    "Deterministic Agent Tool Runner with Zod validation & audit logging",
+    "Automated LLM Evaluation Harness measuring retrieval accuracy",
+    "Token Cost & Security Compliance Guide"
+  ],
+  "techStack": {
+    "communityTools": ["PostgreSQL", "pgvector", "OpenAI", "Zod", "Vercel AI SDK"],
+    "internalPackages": ["@core/rag-retriever", "@core/agent-runner", "@core/llm-cost-guard"]
+  },
+  "pricing": {
+    "model": "turnkey-implementation",
+    "anchorText": "Fixed-Rate Package or Custom Scope",
+    "timeline": "2–4 Weeks Delivery",
+    "startingFrom": 4500
+  },
+  "articles": {
+    "architecture": ["asynchronous-payment-checkout"]
+  },
+  "status": "live"
+}

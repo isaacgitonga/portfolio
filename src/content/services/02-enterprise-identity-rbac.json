@@ -1,0 +1,43 @@
+{
+  "id": "02-enterprise-identity-rbac",
+  "slug": "enterprise-identity-rbac",
+  "title": "Enterprise Identity & Access Control (RBAC/ABAC)",
+  "summary": "Implement zero-trust identity, fine-grained RBAC/ABAC permissions, and PostgreSQL Row-Level Security tenant isolation.",
+  "category": "dedicated-backend-build",
+  "problem": {
+    "headline": "Cross-Tenant Leaks & Weak Permission Guards",
+    "points": [
+      "Boolean role flags failing to support enterprise permissions and org hierarchies.",
+      "Catastrophic cross-tenant data leak risks in shared database clusters.",
+      "Session hijacking vulnerabilities and unmanaged JWT token expiration."
+    ]
+  },
+  "approach": {
+    "headline": "Database-Level RLS & Fine-Grained Permission Matrices",
+    "points": [
+      "Enforce PostgreSQL Row-Level Security policies to isolate multi-tenant data at the engine level.",
+      "Replace broad roles with explicit permission strings evaluated by type-safe middleware.",
+      "Deploy HTTP-only cookie session rotation with token breach detection."
+    ]
+  },
+  "deliverables": [
+    "Production-ready RBAC/ABAC permission evaluation middleware",
+    "PostgreSQL Row-Level Security schema migration & tenant functions",
+    "Secure cookie session rotation & revocation system",
+    "20-page Identity & Data Isolation Security Matrix"
+  ],
+  "techStack": {
+    "communityTools": ["PostgreSQL", "Jose", "Zod", "Argon2", "Next.js"],
+    "internalPackages": ["@core/rbac-middleware", "@core/rls-context", "@core/auth-session"]
+  },
+  "pricing": {
+    "model": "turnkey-implementation",
+    "anchorText": "Fixed-Rate Package or Custom Scope",
+    "timeline": "2–3 Weeks Delivery",
+    "startingFrom": 4000
+  },
+  "articles": {
+    "architecture": ["database-level-row-level-security"]
+  },
+  "status": "live"
+}

@@ -1,0 +1,41 @@
+{
+  "id": "08-technology-roadmap-fractional-cto",
+  "slug": "technology-roadmap-fractional-cto",
+  "title": "Technology Roadmap & Fractional CTO Advisory",
+  "summary": "Eliminate tech paralysis with 2-week strategic scoping, stack selection, and developer-ready 90-day technical execution roadmaps.",
+  "category": "fractional-cto-leadership",
+  "problem": {
+    "headline": "Tech Paralysis & Unclear Developer Specifications",
+    "points": [
+      "Non-technical founders overwhelmed by tech stack choices and cloud costs.",
+      "Hiring developers without clear specifications leading to wasted budgets and abandoned apps.",
+      "Getting overcharged by agencies due to lack of technical oversight."
+    ]
+  },
+  "approach": {
+    "headline": "C4 System Blueprints & Phased 90-Day Milestones",
+    "points": [
+      "Audit business workflows and select modern, stable, non-hype technologies.",
+      "Draft modular technical specs, database schemas (DBML), and OpenAPI contracts.",
+      "Break execution into 30-day milestones with explicit acceptance criteria."
+    ]
+  },
+  "deliverables": [
+    "Comprehensive System Architecture Blueprint (C4 Model & DB Schemas)",
+    "Technology Stack Justification & Cloud Cost Comparison Matrix",
+    "Phased 90-Day Technical Execution Roadmap with 30-day sprint milestones",
+    "Developer Hiring & Agency RFP Specification Brief"
+  ],
+  "techStack": {
+    "communityTools": ["C4 Model", "DBML", "OpenAPI", "PostgreSQL", "Next.js"],
+    "internalPackages": ["@core/tech-spec-generator", "@core/stack-eval-matrix"]
+  },
+  "pricing": {
+    "model": "fractional-retainer",
+    "anchorText": "Fixed-Fee Scoping Package or Monthly Advisory",
+    "timeline": "2-Week Scoping or Ongoing Advisory",
+    "startingFrom": 4000
+  },
+  "articles": {},
+  "status": "live"
+}
