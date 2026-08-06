@@ -5,12 +5,14 @@
 
 ---
 
-## 🎯 1. Core Positioning & Hero Taglines
+## 🎯 1. Core Positioning & Taglines Matrix
 
 *   **Primary Title**: **Principal Architect & Systems Consultant**
-*   **Hero Subheadline**: *"Helping startups and growing businesses build software designed to survive scale."*
-*   **Hero Headline**: *"I Architect Backend Infrastructure That Survives Production."*
-*   **Core Value Proposition**: *"Helping growing tech companies untangle technical debt, guarantee payment ledger integrity, isolate multi-tenant data, and build deterministic AI agent workflows."*
+*   **Hero Main Headline**: *"Engineering the software components your business cannot afford to get wrong."*
+*   **Hero Subheadline**: *"Helping startups and growing platforms build software designed to survive scale."*
+*   **Core Thesis / Bottleneck Banner**: *"I don’t over-engineer your application. I isolate fragile bottlenecks so your core platform can scale without unexpected 2 AM outages."*
+*   **Services Page Hero Intro**: *"I build, test, and verify the most critical components of your software."*
+*   **Inquiry SLA Header**: *"Inquire for the software components your business cannot afford to get wrong. Guaranteed personal response within 12 hours."*
 
 ---
 

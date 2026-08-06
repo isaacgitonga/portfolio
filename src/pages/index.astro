@@ -1,40 +1,183 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Hero from "../components/Hero.astro";
-import Skills from "../components/Skills.astro";
-import ProjectItem from "../components/ProjectItem.astro";
-import Reviews from "../components/Reviews.astro";
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+import FeaturedArchitectureSpec from "@/components/FeaturedArchitectureSpec.astro";
 import { getCollection } from "astro:content";
+import { INQUIRY_CATEGORY_MAP } from "@/constants/inquiryCategories";
+import {
+  Server,
+  ShieldAlert,
+  CreditCard,
+  Layers,
+  SearchCheck,
+  Cpu,
+  UserCheck,
+  Compass,
+  Zap,
+  ArrowUpRight,
+  CircleCheck,
+} from "@lucide/astro";
 
-const rawProjects = await getCollection("projects");
-const projects = rawProjects
-  .filter((p) => p.data.published)
-  .sort((a, b) => a.data.order - b.data.order)
-  .map((p) => p.data);
+// Fetch and sort services (top 6 featured offers)
+const rawServices = await getCollection("services");
+const services = rawServices
+  .sort((a, b) => a.data.id.localeCompare(b.data.id))
+  .slice(0, 6);
+
+// Fetch architecture specs
+const rawSpecs = await getCollection("architecture");
+const publishedSpecs = rawSpecs
+  .filter((s) => s.data.published)
+  .sort((a, b) => a.data.order - b.data.order);
+
+const iconMap: Record<string, any> = {
+  "01-resilient-backend-apis": Server,
+  "02-enterprise-identity-rbac": ShieldAlert,
+  "03-idempotent-payment-billing": CreditCard,
+  "04-data-dense-admin-consoles": Layers,
+  "05-architectural-risk-auditing": SearchCheck,
+  "06-deterministic-rag-agent-integration": Cpu,
+  "07-technical-candidate-vetting": UserCheck,
+  "08-technology-roadmap-fractional-cto": Compass,
+  "09-ai-business-automation": Zap,
+};
 ---
 
-<Layout data-page="home" title="Isaac Gitonga | Software Architect">
+<Layout
+  data-page="home"
+  title="Isaac Gitonga | Principal Architect & Systems Consultant"
+  description="Engineering the software components your business cannot afford to get wrong. High-integrity systems advisory, payment architecture design, and concurrency-safe backends."
+>
+  <!-- Hero Section & Authority Pillars -->
   <Hero />
-  <Skills />
 
-  <section id="projects" class="min-h-screen max-w-7xl mx-auto p-4 py-10">
-    <div class="max-w-6xl mx-auto">
-      <div class="head">
-        <h1
-          class="bg-linear-to-r from-secondary to-primary bg-clip-text text-transparent"
-        >
-          Projects
-        </h1>
-        <p class="text-muted text-center text-xl mt-2">
-          Explore my latest work and the technologies that power them.
+  <!-- Featured 6 Services Grid -->
+  <section id="services-matrix" class="max-w-6xl mx-auto px-4 md:px-6 py-16 space-y-12">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-surface-border/40">
+      <div class="space-y-3 max-w-2xl">
+        <div class="flex items-center gap-2">
+          <span class="text-xs uppercase font-mono tracking-widest text-primary font-semibold">Productized Advisory</span>
+          <span class="px-2 py-0.5 text-[10px] font-mono bg-primary/10 border border-primary/20 text-primary rounded-full font-bold">Featured 6 Offers</span>
+        </div>
+        <h2 class="text-3xl md:text-4xl font-montserrat font-bold text-foreground">
+          Productized Engineering Services
+        </h2>
+        <p class="text-muted font-montserrat text-base">
+          Fixed-scope outcomes designed to guarantee data correctness, system isolation, and operational resilience.
         </p>
       </div>
+      <a
+        href="/services"
+        class="inline-flex items-center gap-2 px-4 py-2.5 bg-surface/60 hover:bg-surface/90 border border-surface-border text-xs font-iceberg font-bold text-foreground rounded-xl transition-all duration-200 shrink-0 cursor-pointer"
+      >
+        <span>View All Offers</span>
+        <ArrowUpRight size={14} />
+      </a>
+    </div>
 
-      <ul class="project-list space-y-4 mt-12">
-        {projects.map((project) => <ProjectItem project={project} />)}
-      </ul>
+    <!-- Grid of 6 Services -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+      {services.map((item, index) => {
+        const service = item.data;
+        const Icon = iconMap[service.id] || Server;
+        const categoryLabel = INQUIRY_CATEGORY_MAP[service.category] || service.category;
+        // const specSlug = service.articles?.architecture?.[0];
+
+        return (
+          <div 
+            id={`featured-service-${index + 1}`}
+            class="group relative flex flex-col justify-between bg-surface/40 hover:bg-surface/75 border border-surface-border hover:border-primary/30 rounded-2xl p-6 transition-all duration-300 backdrop-blur-xs shadow-xs hover:shadow-md hover:shadow-primary/5"
+          >
+            <div class="space-y-5">
+              <!-- Header with Icon & Meta -->
+              <div class="flex items-center justify-between">
+                <div class="p-2.5 bg-background border border-surface-border rounded-xl text-primary group-hover:text-foreground group-hover:bg-primary transition-all duration-300 shrink-0">
+                  <Icon size={22} />
+                </div>
+                <span class="text-[10px] font-mono text-muted-dark uppercase tracking-wider font-semibold bg-surface-border/20 px-2 py-0.5 rounded">
+                  Offer {String(index + 1).padStart(2, "0")}
+                </span>
+              </div>
+
+              <!-- Title & Summary -->
+              <div class="space-y-2">
+                <span class="block text-[10px] font-mono text-primary/80 uppercase tracking-wider font-semibold">
+                  {categoryLabel}
+                </span>
+                <h3 class="text-lg font-iceberg font-bold text-foreground group-hover:text-primary transition-colors duration-200">
+                  {service.title}
+                </h3>
+                <p class="text-xs font-montserrat text-muted/90 leading-relaxed line-clamp-3">
+                  {service.summary}
+                </p>
+              </div>
+
+              <!-- Deliverables Preview -->
+              <div class="space-y-2 pt-2 border-t border-surface-border/30">
+                <span class="block text-[10px] uppercase font-mono tracking-wider text-muted-dark font-semibold">
+                  Deliverables Preview
+                </span>
+                <div class="space-y-1.5">
+                  {service.deliverables.slice(0, 2).map((deliv) => (
+                    <div class="flex items-center gap-1.5 text-xs text-foreground/80">
+                      <CircleCheck size={12} class="text-emerald-400 shrink-0" />
+                      <span class="truncate">{deliv}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Footer -->
+            <div class="mt-6 pt-4 border-t border-surface-border/40 flex items-center justify-between gap-3">
+              <div class="font-mono text-[10px] text-muted-dark">
+                <span class="block uppercase tracking-wider text-[9px]">Anchor</span>
+                <span class="text-secondary font-semibold">{service.pricing.anchorText}</span>
+              </div>
+              <a
+                href={`/inquiry?service=${service.slug}`}
+                class="inline-flex items-center gap-1 px-3 py-1.5 bg-primary/10 border border-primary/20 hover:bg-primary hover:text-background text-xs font-iceberg font-bold text-primary rounded-lg transition-all duration-200 shrink-0"
+              >
+                <span>Inquire</span>
+                <ArrowUpRight size={12} />
+              </a>
+            </div>
+          </div>
+        );
+      })}
     </div>
   </section>
 
-  <Reviews />
+  <!-- Section 5: Featured Architecture Spec Blueprint -->
+  <FeaturedArchitectureSpec specs={publishedSpecs} />
+
+  <!-- Unified 12-Hour SLA Intake CTA Banner -->
+  <section class="max-w-6xl mx-auto px-4 md:px-6 py-12">
+    <div class="relative bg-linear-to-r from-surface/90 via-[#121c27] to-surface/90 border border-primary/25 rounded-2xl p-8 md:p-12 overflow-hidden flex flex-col md:flex-row justify-between items-center gap-8 shadow-xl">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(56,189,248,0.08),transparent)] pointer-events-none"></div>
+      
+      <div class="space-y-4 z-10 max-w-2xl text-center md:text-left">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 border border-primary/20 rounded-full text-primary text-[11px] font-mono font-semibold">
+          <CircleCheck size={12} class="text-emerald-400 shrink-0" />
+          <span>Guaranteed Personal Response Within 12 Hours</span>
+        </div>
+        <h2 class="text-2xl md:text-3xl font-iceberg font-bold text-foreground leading-tight">
+          Facing fragile bottlenecks or preparing for high traffic?
+        </h2>
+        <p class="text-muted text-sm font-montserrat leading-relaxed">
+          Let's evaluate your database limits, secure your tenant isolation boundaries, and establish audit-ready system resilience.
+        </p>
+      </div>
+
+      <div class="z-10 shrink-0">
+        <a
+          href="/inquiry"
+          class="flex items-center justify-center gap-2 px-6 py-4 bg-primary hover:bg-primary-hover text-background font-bold font-iceberg text-base rounded-xl transition-all duration-200 shadow-lg shadow-primary/20 hover:shadow-primary/30 active:scale-98 cursor-pointer"
+        >
+          <span>Submit System Inquiry</span>
+          <ArrowUpRight size={18} />
+        </a>
+      </div>
+    </div>
+  </section>
 </Layout>

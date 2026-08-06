@@ -31,12 +31,16 @@ graph TD
 ## 📄 3. Detailed Page Breakdown & Interactions
 
 ### Page 1: Homepage (`/`) — High-Authority Portal
-*   **Hero Section**: Headline (*"I Architect Backend Infrastructure That Survives Production."*), Subheadline (*"Helping startups and growing businesses build software designed to survive scale."*), Primary CTA (`[ Submit System Inquiry ]` -> `/inquire`).
+*   **Hero Section**:
+    *   *Left Column (Copy & CTA)*: Headline (*"Engineering the software components your business cannot afford to get wrong."*), Subheadline (*"Helping startups and growing platforms build software designed to survive scale."*), Primary CTA (`[ Submit System Inquiry ]` -> `/inquire`), and 12-Hour SLA response badge.
+    *   *Right Column (Visual Hero Element)*: **Interactive Telemetry & Command Console** — Glassmorphic dark terminal with live status indicator (`SYSTEM_STATUS: NOMINAL`), interactive command tabs (`$ inspect --layer=payments`, `--layer=concurrency`, `--layer=security`), live code/telemetry viewer, and contextual CTA bridge to `/inquire`.
 *   **Authority Pillars**: Idempotent Payment Ledgers, Multi-Tenant Context Isolation, Concurrency-Safe Backends, Deterministic RAG Systems.
-*   **Thesis & 9 Offer Showcase Grid**: Links to `/services`.
+*   **Core Thesis & Bottleneck Banner**: *"I don’t over-engineer your application. I isolate fragile bottlenecks so your core platform can scale without unexpected 2 AM outages."*
+*   **Featured 6 Offers Grid**: Links to `/services`.
 *   **Featured Architecture Spec Blueprint**: Embeds live code/spec viewer.
 
 ### Page 2: Services Showcase (`/services`)
+*   **Header Intro**: *"I build, test, and verify the most critical components of your software."*
 *   Grid of productized advisory offerings. Each card includes problem statement, architectural approach, concrete deliverables, tech stack, pricing anchor, and a contextual CTA (`[ Inquire for This Offer ]` -> `/inquire?service=slug`).
 
 ### Page 3: Architecture Catalog (`/architecture`)
