@@ -15,8 +15,9 @@ export default defineConfig({
 
   redirects: {
     '/case-studies': '/work',
-    '/book': '/inquire?service=risk-auditing',
-    '/contact': '/inquire',
+    '/book': '/inquiry?service=risk-auditing',
+    '/contact': '/inquiry',
+    '/inquire': '/inquiry',
   },
 
   adapter: vercel()

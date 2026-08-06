@@ -1,0 +1,245 @@
+---
+import { Terminal, ArrowRight } from "@lucide/astro";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+
+const layers = [
+  {
+    id: "payments",
+    label: "$ inspect --layer=payments",
+    name: "Transactional Outbox Engine",
+    file: "transactional_outbox.ts",
+    badge: "Financial Integrity",
+    code: `// Asynchronous Payment Intent Decoupling
+export async function executePaymentIntent(intent: PaymentIntent) {
+  return await db.transaction(async (tx) => {
+    // 1. Persist Intent with Idempotency Key
+    const record = await tx.outbox.create({
+      data: {
+        intentId: intent.id,
+        idempotencyKey: intent.key,
+        status: 'PENDING_DISPATCH',
+        payload: intent.payload
+      }
+    });
+    // 2. Dispatch Async Webhook Task
+    await queue.publish('payment.process', { outboxId: record.id });
+    return { status: 'QUEUED', outboxId: record.id };
+  });
+}`,
+    metrics: [
+      { label: "Idempotency", value: "Strict 100%" },
+      { label: "Double-Charge Risk", value: "0%" },
+      { label: "Dispatch Latency", value: "< 4ms" }
+    ],
+    serviceSlug: "idempotent-payment-billing",
+    serviceTitle: "Idempotent Payment & Billing Architectures"
+  },
+  {
+    id: "concurrency",
+    label: "$ inspect --layer=concurrency",
+    name: "Pessimistic Concurrency Ledger",
+    file: "concurrency_ledger.sql",
+    badge: "Data Integrity",
+    code: `-- Explicit Row-Locking under Peak Load
+BEGIN TRANSACTION;
+
+SELECT id, available_units, version
+FROM ticket_inventories
+WHERE event_id = 'evt_9901' AND tier = 'vip'
+FOR UPDATE NOWAIT; -- Prevents queue starvation
+
+UPDATE ticket_inventories
+SET available_units = available_units - 1,
+    version = version + 1
+WHERE id = 'inv_440a' AND available_units >= 1;
+
+COMMIT;`,
+    metrics: [
+      { label: "Max Throughput", value: "4,500 TPS" },
+      { label: "Lock Contention", value: "0 Collisions" },
+      { label: "Execution Time", value: "1.2ms" }
+    ],
+    serviceSlug: "system-architecture-audit",
+    serviceTitle: "System Architecture & Risk Auditing"
+  },
+  {
+    id: "security",
+    label: "$ inspect --layer=security",
+    name: "Multi-Tenant RLS Isolation",
+    file: "tenant_rls.sql",
+    badge: "Security Boundary",
+    code: `-- Enforce Tenant Boundaries in Postgres Engine
+CREATE POLICY tenant_isolation_policy ON customer_data
+  FOR ALL
+  USING (
+    tenant_id = current_setting('app.current_tenant_id', true)::uuid
+  )
+  WITH CHECK (
+    tenant_id = current_setting('app.current_tenant_id', true)::uuid
+  );
+
+-- Zero Data Leakage Guarantee Across Contexts`,
+    metrics: [
+      { label: "Tenant Bleed Risk", value: "Zero (0%)" },
+      { label: "Policy Scope", value: "Row-Level" },
+      { label: "Auth Check", value: "Engine Level" }
+    ],
+    serviceSlug: "dedicated-backend-build",
+    serviceTitle: "Dedicated Backend Infrastructure"
+  }
+];
+---
+
+<div class={`relative group ${className}`}>
+  <!-- Terminal Frame Ambient Glow -->
+  <div class="absolute -inset-1 bg-linear-to-r from-primary/30 via-cyan-500/20 to-secondary/30 rounded-3xl blur-xl opacity-60 group-hover:opacity-100 transition duration-500 pointer-events-none"></div>
+
+  <!-- Terminal Window Container -->
+  <div class="relative bg-[#090d14]/90 border border-primary/25 rounded-2xl shadow-2xl backdrop-blur-xl overflow-hidden font-mono text-xs text-slate-300">
+
+    <!-- Top Window Controls & Live Telemetry Status -->
+    <div class="flex items-center justify-between px-4 py-3 bg-[#0d121c] border-b border-surface-border select-none">
+      <div class="flex items-center gap-2">
+        <span class="w-3 h-3 rounded-full bg-rose-500/80 inline-block"></span>
+        <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
+        <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
+        <span class="ml-2 text-[11px] font-mono text-muted tracking-wider hidden sm:inline">
+          TELEMETRY // CONSOLE_v2.4
+        </span>
+      </div>
+
+      <!-- Live Heartbeat Indicator -->
+      <div class="flex items-center gap-2 px-2.5 py-1 bg-emerald-950/60 border border-emerald-500/30 rounded-full">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+        </span>
+        <span class="text-[10px] font-bold tracking-widest text-emerald-400 uppercase">
+          SYSTEM_STATUS: NOMINAL
+        </span>
+      </div>
+    </div>
+
+    <!-- Interactive Layer Selector Tabs -->
+    <div class="flex flex-wrap items-center bg-[#070a10] border-b border-surface-border p-1.5 gap-1 select-none" id="telemetry-tabs">
+      {layers.map((layer, index) => (
+        <button
+          type="button"
+          data-layer-id={layer.id}
+          class={`telemetry-tab-btn flex-1 min-w-[120px] px-3 py-1.5 rounded-lg text-left transition-all duration-200 cursor-pointer flex items-center justify-between gap-1.5 ${
+            index === 0
+              ? "bg-primary/15 text-primary border border-primary/30 font-semibold"
+              : "text-muted hover:text-foreground hover:bg-surface/50 border border-transparent"
+          }`}
+        >
+          <span class="truncate">{layer.label}</span>
+        </button>
+      ))}
+    </div>
+
+    <!-- Active Code & Spec Display -->
+    <div class="p-4 sm:p-5 space-y-4">
+      <!-- File Metadata Header -->
+      <div class="flex items-center justify-between text-[11px] pb-2 border-b border-surface-border/60">
+        <div class="flex items-center gap-2">
+          <Terminal size={14} class="text-primary shrink-0" />
+          <span class="font-bold text-foreground" id="telemetry-file-name">
+            {layers[0].file}
+          </span>
+          <span class="px-2 py-0.5 rounded text-[9px] bg-primary/10 text-primary border border-primary/20" id="telemetry-badge">
+            {layers[0].badge}
+          </span>
+        </div>
+        <span class="text-muted-dark text-[10px]" id="telemetry-layer-name">
+          {layers[0].name}
+        </span>
+      </div>
+
+      <!-- Syntax Code Block -->
+      <div class="relative bg-[#04060a] border border-surface-border/80 rounded-xl p-4 overflow-x-auto max-h-[220px] scrollbar-thin">
+        <pre id="telemetry-code-block" class="text-cyan-300 font-mono text-[11px] sm:text-xs leading-relaxed"><code>{layers[0].code}</code></pre>
+      </div>
+
+      <!-- Real-Time Metrics Bar -->
+      <div class="grid grid-cols-3 gap-2 pt-1" id="telemetry-metrics-container">
+        {layers[0].metrics.map((metric) => (
+          <div class="bg-surface/40 border border-surface-border/60 rounded-lg p-2.5 text-center">
+            <div class="text-[10px] text-muted uppercase tracking-wider">{metric.label}</div>
+            <div class="text-xs sm:text-sm font-bold text-emerald-400 mt-0.5 font-mono">{metric.value}</div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Contextual Action Bridge -->
+      <div class="pt-2 flex items-center justify-between border-t border-surface-border/60">
+        <span class="text-[10px] text-muted tracking-wide hidden sm:inline">
+          Architected & Tested in Production
+        </span>
+        <a
+          id="telemetry-cta-link"
+          href={`/inquiry?service=${layers[0].serviceSlug}`}
+          class="inline-flex items-center gap-1.5 text-xs font-bold text-primary hover:text-primary-hover font-mono transition-colors group/link cursor-pointer ml-auto"
+        >
+          <span>Inquire for This Architecture</span>
+          <ArrowRight size={13} class="transition-transform group-hover/link:translate-x-1" />
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ layers }}>
+  document.addEventListener("DOMContentLoaded", () => {
+    const tabButtons = document.querySelectorAll(".telemetry-tab-btn");
+    const fileNameEl = document.getElementById("telemetry-file-name");
+    const badgeEl = document.getElementById("telemetry-badge");
+    const layerNameEl = document.getElementById("telemetry-layer-name");
+    const codeBlockEl = document.getElementById("telemetry-code-block");
+    const metricsContainerEl = document.getElementById("telemetry-metrics-container");
+    const ctaLinkEl = document.getElementById("telemetry-cta-link");
+
+    if (!tabButtons.length || !codeBlockEl) return;
+
+    tabButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const layerId = btn.getAttribute("data-layer-id");
+        const selected = layers.find((l) => l.id === layerId);
+        if (!selected) return;
+
+        // Active button styles
+        tabButtons.forEach((b) => {
+          b.classList.remove("bg-primary/15", "text-primary", "border-primary/30", "font-semibold");
+          b.classList.add("text-muted", "border-transparent");
+        });
+        btn.classList.remove("text-muted", "border-transparent");
+        btn.classList.add("bg-primary/15", "text-primary", "border-primary/30", "font-semibold");
+
+        // Update Content
+        if (fileNameEl) fileNameEl.textContent = selected.file;
+        if (badgeEl) badgeEl.textContent = selected.badge;
+        if (layerNameEl) layerNameEl.textContent = selected.name;
+        if (codeBlockEl) codeBlockEl.querySelector("code").textContent = selected.code;
+        if (ctaLinkEl) ctaLinkEl.setAttribute("href", `/inquiry?service=${selected.serviceSlug}`);
+
+        // Update Metrics Grid
+        if (metricsContainerEl) {
+          metricsContainerEl.innerHTML = selected.metrics
+            .map(
+              (m) => `
+            <div class="bg-surface/40 border border-surface-border/60 rounded-lg p-2.5 text-center">
+              <div class="text-[10px] text-muted uppercase tracking-wider">${m.label}</div>
+              <div class="text-xs sm:text-sm font-bold text-emerald-400 mt-0.5 font-mono">${m.value}</div>
+            </div>
+          `
+            )
+            .join("");
+        }
+      });
+    });
+  });
+</script>
