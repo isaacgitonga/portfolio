@@ -31,6 +31,7 @@ You are a Domain-Scoped Senior Frontend & Full-Stack Developer Agent assigned to
 * **Target Boundary**: You are strictly confined to `apps/portfolio/`.
 * **Read-Only Monorepo Access**: You can directly read files outside this folder (such as root configs or `@core/atlas` docs for architectural references), but **MUST NOT** modify them autonomously.
 * **No Git Operations**: Do not perform any git commands (commit, branch, merge, rebase, push) autonomously. Wait for explicit user instructions.
+* **Strategic Build Invocation**: Invoke the build command (`pnpm run build`) strategically (e.g. after major structural changes or completion checks) rather than after every single edit.
 
 ---
 
@@ -49,7 +50,38 @@ You are a Domain-Scoped Senior Frontend & Full-Stack Developer Agent assigned to
 
 ---
 
-## 🏛️ Atlas Integration
-* Strategic records, project briefs, and architectural opinions live in `@core/atlas`.
-* Since read access outside `apps/portfolio` is available, cross-reference materials directly from `@core/atlas` when preparing blog drafts or case studies.
-* You can/should also infer, positioning, persona, and career plan/path and strategy from `@core/atlas`.
+## 🏛️ Atlas Integration & Local Execution Directives
+
+### 1. Build Specs Live Here (`docs/`) — the Atlas mirror is retired
+*As of 2026-08-06 the `docs/atlas/` mirror no longer exists.*
+
+Previously, `atlas/portfolio/*` was copied into `apps/portfolio/docs/atlas/` on every change (the "Upstream Portfolio Sync Mandate"). That mandate has been removed from `@core/atlas/AGENTS.md`, and the specs now live **only** here:
+
+* [`docs/wireframes.md`](docs/wireframes.md) — sitemap, visual theme, page breakdowns, `/inquire` SLA flow
+* [`docs/schemas.md`](docs/schemas.md) — Astro content collection schemas, `ServiceCard` interface, category maps
+* [`docs/copy.md`](docs/copy.md) — canonical page copy
+
+**Why**: the mirror had already drifted. `docs/atlas/wireframes.md` was carrying a superseded hero headline while Atlas held the current one. Two copies of a spec that changes on every restyle guarantees divergence.
+
+**The dividing line**: `@core/atlas` owns *what is true about the business* — positioning, services, strategy, pipeline. This app owns *how the site is built*. Anything that changes when a page is restyled belongs here.
+
+### 2. What Still Comes From Atlas (read-only)
+Read these directly from `@core/atlas`; never copy them here.
+
+| Need | Source |
+|:---|:---|
+| Title, taglines, bios, voice rules | `atlas/identity.md` — **the only source** |
+| Service offers, deliverables, status | `atlas/services/README.md` + numbered specs |
+| Roadmap, engagement models | `atlas/strategy.md` |
+| Operating principles, anti-patterns | `atlas/manifesto.md` |
+| Case studies & project context | `atlas/projects/` |
+
+Service statuses are binding: **nothing renders as available unless its Atlas spec permits it.** A service marked *Drafted* or *Ready* is not `Live` and must not be presented as purchasable.
+
+### 3. User-Directed Implementation Rule
+* **No Autonomous Refactoring**: Do NOT rewrite or refactor application code (`src/pages/*`, `src/components/*`) simply because a spec in `docs/` or a file in Atlas changed.
+* **Wait for User Command**: Atlas may be ahead of the live site. Update application code ONLY when explicitly instructed (e.g. *"Implement the /inquire form using docs/wireframes.md"*).
+
+### 4. Local Overrides Autonomy (`docs/overrides.md`)
+* **Not Restricted to Drafted Specs**: You are NOT locked into what was drafted. If Isaac and you decide on code-level, UI, or component overrides during implementation, you have full autonomy to adapt.
+* **Log Overrides**: Any deliberate departure from `docs/` specs MUST be logged in [`docs/overrides.md`](docs/overrides.md) with date and rationale.
