@@ -1,16 +1,7 @@
 ---
 import {Menu, Moon, Sun, X} from "@lucide/astro";
 import Socials from "@/components/Socials.astro";
-
-type NavItem = { name: string; href: string };
-const navs: NavItem[] = [
-  { name: "Home", href: "/" },
-  { name: "Services", href: "/services" },
-  { name: "Architecture", href: "/architecture" },
-  { name: "Automation", href: "/automation" },
-  { name: "Work", href: "/work" },
-  { name: "About", href: "/about" },
-]
+import { NAV_LINKS as navs } from "@/constants/navigation";
 
 
 const pathname = Astro.url.pathname;
