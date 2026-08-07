@@ -2,52 +2,99 @@
 import config from "@/app.config.ts";
 import Socials from "@/components/Socials.astro";
 import CopyIcon from "@/components/CopyIcon.astro";
-import { Mail } from "@lucide/astro";
+import { NAV_LINKS } from "@/constants/navigation";
+import { getCollection } from "astro:content";
+import { ArrowUpRight, Mail } from "@lucide/astro";
+
+const rawServices = await getCollection("services");
+const footerServices = rawServices
+  .filter((s) => s.data.featured && s.data.status === "live")
+  .sort((a, b) => a.data.displayOrder - b.data.displayOrder)
+  .slice(0, 5);
 ---
 
-<footer
-  class="bg-background border-t border-foreground/5 text-foreground py-8 mt-20"
->
-  <div
-    class="max-w-6xl mx-auto px-4 space-y-8 flex flex-col justify-between items-center"
-  >
-    <p class="text-muted font-montserrat max-w-lg text-center leading-relaxed">
-      Built with
-      <span class="text-foreground font-semibold font-iceberg">Astro, TypeScript,</span> and,
-      <span class="text-foreground font-semibold font-iceberg">Tailwind.</span>
-      Designed and developed by
-      <span class="text-primary font-semibold font-iceberg text-nowrap">
-        <a
-          href={config.profile.github}
-          target="_blank"
-          class="inline text-nowrap hover:underline"
-        >
-          <span class="px-0.5">Isaac G.</span>
-          <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-        </a>
-      </span>. Deployed on <span class="text-foreground font-semibold font-iceberg">Vercel</span>.
-    </p>
-
-    <div class="flex flex-col items-center gap-4">
-      <div class="flex items-center gap-2 bg-foreground/[0.03] border border-foreground/5 rounded-lg py-1 px-2.5 text-muted hover:text-foreground hover:border-foreground/10 transition-all duration-200">
-        <Mail class="h-3.5 w-3.5 text-muted" />
-        <span class="text-xs font-montserrat font-medium selection:bg-primary/20">
-          {config.profile.email}
-        </span>
-        <CopyIcon text={config.profile.email} class="p-1" />
-      </div>
-
-      <div class="flex gap-6 items-center">
-        <a href="/" class="flex items-center gap-3 hover:opacity-85 transition-opacity">
+<footer class="bg-background border-t border-surface-border/40 text-foreground mt-20">
+  <div class="max-w-6xl mx-auto px-4 md:px-6 py-16">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 pb-12 border-b border-surface-border/40">
+      <!-- Brand -->
+      <div class="col-span-2 lg:col-span-1 space-y-5">
+        <a href="/" class="flex items-center gap-3 hover:opacity-85 transition-opacity w-fit">
           <img src="/logos/logo-pulse.svg" alt="Profile Logo" class="h-9 w-auto" />
         </a>
+        <p class="text-muted font-montserrat text-sm leading-relaxed max-w-xs">
+          Built with <span class="text-foreground font-semibold font-iceberg">Astro, TypeScript,</span> and <span class="text-foreground font-semibold font-iceberg">Tailwind.</span> Deployed on <span class="text-foreground font-semibold font-iceberg">Vercel</span>.
+        </p>
+        <Socials gap={5} />
+      </div>
 
-        <Socials gap={6} />
+      <!-- Navigate -->
+      <div class="space-y-4">
+        <h6 class="text-xs uppercase font-mono tracking-widest text-primary font-semibold">Navigate</h6>
+        <ul class="space-y-3">
+          {NAV_LINKS.map((nav) => (
+            <li>
+              <a href={nav.href} class="text-sm text-muted hover:text-primary font-montserrat transition-colors">
+                {nav.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Services -->
+      <div class="space-y-4">
+        <h6 class="text-xs uppercase font-mono tracking-widest text-primary font-semibold">Services</h6>
+        <ul class="space-y-3">
+          {footerServices.map((entry) => (
+            <li>
+              <a
+                href={`/inquiry?service=${entry.data.slug}`}
+                class="text-sm text-muted hover:text-primary font-montserrat transition-colors"
+              >
+                {entry.data.title}
+              </a>
+            </li>
+          ))}
+          <li>
+            <a href="/services" class="inline-flex items-center gap-1 text-sm text-primary hover:text-primary-hover font-montserrat font-semibold transition-colors">
+              <span>View All Services</span>
+              <ArrowUpRight size={12} />
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="space-y-4">
+        <h6 class="text-xs uppercase font-mono tracking-widest text-primary font-semibold">Contact</h6>
+        <div class="flex items-center gap-2 bg-foreground/[0.03] border border-foreground/5 rounded-lg py-1 px-2.5 text-muted hover:text-foreground hover:border-foreground/10 transition-all duration-200 w-fit">
+          <Mail class="h-3.5 w-3.5 text-muted shrink-0" />
+          <span class="text-xs font-montserrat font-medium selection:bg-primary/20">
+            {config.profile.email}
+          </span>
+          <CopyIcon text={config.profile.email} class="p-1" />
+        </div>
+        <a
+          href="/inquiry"
+          class="inline-flex items-center gap-1.5 text-sm text-foreground hover:text-primary font-iceberg font-bold transition-colors"
+        >
+          <span>Submit System Inquiry</span>
+          <ArrowUpRight size={14} />
+        </a>
       </div>
     </div>
 
-    <p class="font-nunito text-sm text-muted-dark mt-4">
-      &copy; <span class="year">{new Date().getFullYear()}</span> Isaac. All rights reserved.
-    </p>
+    <div class="flex flex-col-reverse sm:flex-row items-center justify-between gap-4 pt-8">
+      <p class="font-nunito text-sm text-muted-dark">
+        &copy; <span class="year">{new Date().getFullYear()}</span> Isaac. All rights reserved.
+      </p>
+      <p class="font-nunito text-sm text-muted-dark">
+        Designed and developed by <a
+          href={config.profile.github}
+          target="_blank"
+          class="inline text-primary font-semibold font-iceberg hover:underline"
+        >Isaac G.</a>
+      </p>
+    </div>
   </div>
 </footer>
