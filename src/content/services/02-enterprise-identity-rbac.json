@@ -39,5 +39,7 @@
   "articles": {
     "architecture": ["database-level-row-level-security"]
   },
-  "status": "live"
+  "status": "live",
+  "featured": true,
+  "displayOrder": 3
 }

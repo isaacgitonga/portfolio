@@ -39,5 +39,7 @@
   "articles": {
     "architecture": ["asynchronous-payment-checkout"]
   },
-  "status": "live"
+  "status": "live",
+  "featured": true,
+  "displayOrder": 4
 }

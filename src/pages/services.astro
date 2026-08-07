@@ -1,37 +1,13 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { getCollection } from "astro:content";
-import { INQUIRY_CATEGORY_MAP } from "@/constants/inquiryCategories";
-import {
-  Server,
-  ShieldAlert,
-  CreditCard,
-  Layers,
-  SearchCheck,
-  Cpu,
-  UserCheck,
-  Compass,
-  Zap,
-  ArrowUpRight,
-  CircleCheck
-} from "@lucide/astro";
+import ServiceList from "@/components/ServiceList.astro";
+import {type CollectionEntry, getCollection} from "astro:content";
+import { ArrowUpRight } from "@lucide/astro";
 
-const rawServices = await getCollection("services");
-
-// Sort services by ID (01 to 09)
-const services = rawServices.sort((a, b) => a.data.id.localeCompare(b.data.id));
-
-const iconMap: Record<string, any> = {
-  "01-resilient-backend-apis": Server,
-  "02-enterprise-identity-rbac": ShieldAlert,
-  "03-idempotent-payment-billing": CreditCard,
-  "04-data-dense-admin-consoles": Layers,
-  "05-architectural-risk-auditing": SearchCheck,
-  "06-deterministic-rag-agent-integration": Cpu,
-  "07-technical-candidate-vetting": UserCheck,
-  "08-technology-roadmap-fractional-cto": Compass,
-  "09-ai-business-automation": Zap,
-};
+const rawServices: CollectionEntry<'services'>[] = await getCollection("services");
+const services = rawServices
+  .filter((service) => service.data.status === 'live')
+  .sort((a, b) => a.data.displayOrder - b.data.displayOrder);
 ---
 
 <Layout
@@ -55,92 +31,7 @@ const iconMap: Record<string, any> = {
       </div>
 
       <!-- Services Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-        {services.map((item, index) => {
-          const service = item.data;
-          const Icon = iconMap[service.id] || Server;
-          const categoryLabel = INQUIRY_CATEGORY_MAP[service.category] || service.category;
-          const specSlug = service.articles?.architecture?.[0];
-
-          return (
-            <div 
-              id={`service-card-${index + 1}`}
-              class="group relative flex flex-col justify-between bg-surface/40 hover:bg-surface/75 border border-surface-border hover:border-primary/30 rounded-2xl p-6 md:p-8 transition-all duration-300 backdrop-blur-xs shadow-xs hover:shadow-md hover:shadow-primary/5"
-            >
-              <div class="space-y-6">
-                <!-- Header with Icon & Meta -->
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center gap-3">
-                    <div class="p-2 bg-background border border-surface-border rounded-xl text-primary group-hover:text-foreground group-hover:bg-primary transition-all duration-300 shrink-0">
-                      <Icon size={24} />
-                    </div>
-                    <div>
-                      <span class="block text-[10px] font-mono text-primary/80 uppercase tracking-wider font-semibold">
-                        {categoryLabel}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Title & Summary -->
-                <div class="space-y-3">
-                  <h3 class="text-xl font-iceberg font-bold text-foreground group-hover:text-primary transition-colors duration-200">
-                    {service.title}
-                  </h3>
-                  <p class="text-sm font-montserrat text-muted/90 leading-relaxed">
-                    {service.summary}
-                  </p>
-                </div>
-
-                <!-- Detailed Breakdown -->
-                <div class="space-y-4 pt-2 text-sm font-montserrat border-t border-surface-border/30">
-                  <!-- Concrete Deliverables -->
-                  <div>
-                    <span class="block text-[10px] uppercase font-mono tracking-wider text-foreground font-semibold mb-1.5">
-                      Concrete Client Deliverables
-                    </span>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
-                      {service.deliverables.map((deliv) => (
-                        <div class="flex items-center gap-1.5 text-xs text-foreground/80 bg-background/50 border border-surface-border/40 rounded-lg px-2.5 py-1.5">
-                          <CircleCheck size={12} class="text-emerald-400 shrink-0" />
-                          <span class="truncate">{deliv}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Footer (Pricing & Link) -->
-              <div class="mt-8 pt-6 border-t border-surface-border/50 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <div class="font-mono text-xs text-muted-dark">
-                  <span class="block text-[9px] uppercase tracking-wider">Pricing Anchor & Timeline</span>
-                  <span class="text-secondary font-semibold">{service.pricing.anchorText}</span>
-                  <span class="block text-[10px] text-muted-dark font-normal">{service.pricing.timeline}</span>
-                </div>
-                <div class="flex items-center gap-3 shrink-0">
-                  <!--// {specSlug && (-->
-                  <!--//   <a-->
-                  <!--//     href={`/architecture/${specSlug}`}-->
-                  <!--//     class="inline-flex items-center gap-1.5 text-xs font-iceberg font-bold text-muted hover:text-foreground hover:underline"-->
-                  <!--//   >-->
-                  <!--//     <span>Spec Proof</span>-->
-                  <!--//     <ArrowUpRight size={14} />-->
-                  <!--//   </a>-->
-                  <!--// )}-->
-                  <a
-                    href={`/inquiry?service=${service.slug}`}
-                    class="inline-flex items-center gap-1.5 px-4 py-2 bg-primary/10 border border-primary/20 hover:bg-primary hover:text-background text-xs font-iceberg font-bold text-primary rounded-xl transition-all duration-200"
-                  >
-                    <span>Inquire</span>
-                    <ArrowUpRight size={14} />
-                  </a>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      <ServiceList services={services} variant="full" />
 
       <!-- CTA Banner -->
       <div class="relative bg-linear-to-r from-surface/80 to-[#14202d]/60 border border-surface-border rounded-2xl p-8 md:p-12 overflow-hidden flex flex-col md:flex-row justify-between items-center gap-8 mt-12">

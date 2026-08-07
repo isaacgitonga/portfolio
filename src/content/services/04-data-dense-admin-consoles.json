@@ -39,5 +39,7 @@
   "articles": {
     "architecture": ["concurrency-safe-inventory-ledger"]
   },
-  "status": "live"
+  "status": "live",
+  "featured": true,
+  "displayOrder": 5
 }

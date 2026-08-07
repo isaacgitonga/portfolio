@@ -44,7 +44,7 @@ const authorityPillars = [
     <!-- Left Column: Headlines & CTAs -->
     <div class="lg:col-span-7 space-y-6 sm:space-y-8">
       <!-- Status / Role Badge -->
-      <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 bg-surface/80 border border-primary/20 rounded-full backdrop-blur-md">
+      <div class="hero-badge inline-flex items-center gap-2.5 px-3.5 py-1.5 bg-surface/80 border border-primary/20 rounded-full backdrop-blur-md">
         <span class="relative flex h-2 w-2">
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
           <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -55,7 +55,7 @@ const authorityPillars = [
       </div>
 
       <!-- Main Headline -->
-      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-montserrat font-bold text-foreground leading-[1.15] tracking-tight">
+      <h1 class="hero-headline text-4xl sm:text-5xl lg:text-6xl font-montserrat font-bold text-foreground leading-[1.15] tracking-tight">
         Engineering the software components your business <br class="hidden sm:inline" />
         <span class="bg-linear-to-r from-primary via-cyan-400 to-secondary bg-clip-text text-transparent font-iceberg font-normal">
           cannot afford to get wrong.
@@ -63,13 +63,13 @@ const authorityPillars = [
       </h1>
 
       <!-- Subheadline -->
-      <p class="text-lg sm:text-xl font-montserrat font-medium text-muted leading-relaxed max-w-2xl">
+      <p class="hero-subhead text-lg sm:text-xl font-montserrat font-medium text-muted leading-relaxed max-w-2xl">
         Helping startups and growing platforms build software designed to survive scale. Fixed-scope architectural outcomes that protect data correctness and eliminate 2 AM outages.
       </p>
 
       <!-- CTAs & 12-Hour SLA Indicator -->
       <div class="space-y-4 pt-2">
-        <div class="flex flex-wrap items-center gap-4">
+        <div class="hero-ctas flex flex-wrap items-center gap-4">
           <a
             href="/inquiry"
             class="inline-flex items-center gap-2 px-6 py-3.5 bg-primary hover:bg-primary-hover text-background font-iceberg font-bold text-base rounded-xl transition-all duration-200 shadow-lg shadow-primary/15 hover:shadow-primary/30 active:scale-98 cursor-pointer"
@@ -85,7 +85,7 @@ const authorityPillars = [
           </a>
         </div>
 
-        <div class="flex items-center gap-2 text-xs font-mono text-muted-dark pt-1">
+        <div class="hero-sla flex items-center gap-2 text-xs font-mono text-muted-dark pt-1">
           <Clock size={14} class="text-emerald-400 shrink-0" />
           <span>Guaranteed personal response within 12 hours of submission.</span>
         </div>
@@ -93,7 +93,7 @@ const authorityPillars = [
     </div>
 
     <!-- Right Column: Visual Hero Element (Interactive Telemetry & Command Console) -->
-    <div class="lg:col-span-5 w-full">
+    <div class="hero-console lg:col-span-5 w-full">
       <TelemetryConsole />
     </div>
   </div>
@@ -113,7 +113,7 @@ const authorityPillars = [
       {authorityPillars.map((pillar) => {
         const IconComponent = pillar.icon;
         return (
-          <div class="group relative bg-surface/40 hover:bg-surface/75 border border-surface-border hover:border-primary/30 rounded-2xl p-5 transition-all duration-300 backdrop-blur-xs flex flex-col justify-between space-y-4">
+          <div class="hero-pillar group relative bg-surface/40 hover:bg-surface/75 border border-surface-border hover:border-primary/30 rounded-2xl p-5 transition-all duration-300 backdrop-blur-xs flex flex-col justify-between space-y-4">
             <div class="space-y-3">
               <div class="flex items-center justify-between">
                 <div class="p-2.5 bg-background border border-surface-border rounded-xl text-primary group-hover:bg-primary group-hover:text-background transition-all duration-300 shrink-0">
@@ -137,7 +137,7 @@ const authorityPillars = [
   </div>
 
   <!-- Core Thesis / Bottleneck Banner -->
-  <div class="relative bg-linear-to-r from-surface/80 via-surface/40 to-surface/80 border border-primary/20 rounded-2xl p-6 sm:p-8 backdrop-blur-md overflow-hidden">
+  <div class="hero-banner relative bg-linear-to-r from-surface/80 via-surface/40 to-surface/80 border border-primary/20 rounded-2xl p-6 sm:p-8 backdrop-blur-md overflow-hidden">
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(56,189,248,0.06),transparent)] pointer-events-none"></div>
     <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
       <div class="space-y-2 max-w-3xl">
@@ -163,3 +163,8 @@ const authorityPillars = [
     </div>
   </div>
 </section>
+
+<script>
+  import { animateHero } from "../animations/hero.ts";
+  animateHero();
+</script>

@@ -42,6 +42,8 @@ export const ServiceSchema = z.object({
   pricing: ServicePricingSchema,
   articles: ServiceArticlesSchema,
   status: z.enum(["live", "in-development", "incubating"]).default("live"),
+  featured: z.boolean().default(false),
+  displayOrder: z.number(),
 });
 
 export type Service = z.infer<typeof ServiceSchema>;

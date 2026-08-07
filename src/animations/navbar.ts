@@ -63,3 +63,14 @@ window.addEventListener('keydown', (e) => {
     closeMenu();
   }
 });
+
+// Toggle header border after scrolling past the top
+const siteHeader = document.getElementById('site-header');
+
+const updateHeaderBorder = () => {
+  siteHeader?.classList.toggle('border-foreground/5', window.scrollY > 0);
+  siteHeader?.classList.toggle('border-transparent', window.scrollY === 0);
+};
+
+updateHeaderBorder();
+window.addEventListener('scroll', updateHeaderBorder, { passive: true });

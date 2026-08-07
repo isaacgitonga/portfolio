@@ -1,20 +1,5 @@
 ---
-import {
-  BookOpen,
-  ArrowUpRight,
-  ArrowRight,
-  ShieldCheck,
-  Zap,
-  CheckCircle2,
-  Clock,
-  Tag,
-  Layers,
-  Server,
-  Lock,
-  Activity,
-  FileCode,
-  GitBranch
-} from "@lucide/astro";
+import { ArrowUpRight, ArrowRight, FileCode, GitBranch } from "@lucide/astro";
 import type { CollectionEntry } from "astro:content";
 
 interface Props {
@@ -132,15 +117,12 @@ CREATE POLICY tenant_isolation_policy ON customer_records
 ];
 ---
 
-<section id="featured-architecture-blueprint" class="max-w-6xl mx-auto px-4 md:px-6 py-16 space-y-12">
+<section id="featured-architecture-blueprint" class="max-w-7xl mx-auto px-4 md:px-6 py-16 space-y-12">
   <!-- Section Header -->
   <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-surface-border/40">
     <div class="space-y-3 max-w-2xl">
       <div class="flex items-center gap-2">
         <span class="text-xs uppercase font-mono tracking-widest text-primary font-semibold">Evergreen Engineering Library</span>
-        <span class="px-2.5 py-0.5 text-[10px] font-mono bg-primary/10 border border-primary/20 text-primary rounded-full font-bold">
-          Section 5 Blueprint Showcase
-        </span>
       </div>
       <h2 class="text-3xl md:text-4xl font-montserrat font-bold text-foreground">
         Featured Architecture Spec Blueprints
