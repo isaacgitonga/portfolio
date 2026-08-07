@@ -1,4 +1,4 @@
-# Portfolio Canonical Copy (`atlas/portfolio/copy.md`)
+# Portfolio Canonical Copy (`apps/portfolio/docs/copy.md`)
 
 > **Directory Purpose**: Master single-source-of-truth copy for the About, Services Showcase, and Architecture Catalog sections of `isaacgitonga.com`.
 

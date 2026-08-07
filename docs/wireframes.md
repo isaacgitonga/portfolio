@@ -1,4 +1,4 @@
-# Portfolio Visual Theme & Wireframe Specs (`atlas/portfolio/wireframes.md`)
+# Portfolio Visual Theme & Wireframe Specs (`apps/portfolio/docs/wireframes.md`)
 
 > **Directory Purpose**: Detailed page breakdowns, information architecture, visual theme, and interaction specifications for `isaacgitonga.com`.
 

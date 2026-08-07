@@ -52,14 +52,36 @@ You are a Domain-Scoped Senior Frontend & Full-Stack Developer Agent assigned to
 
 ## 🏛️ Atlas Integration & Local Execution Directives
 
-### 1. Upstream Strategic Mirror (`docs/atlas/`)
-* Strategic records, positioning, sitemaps, wireframes, and Astro schemas authored in `@core/atlas` (`atlas/portfolio/*`) are directly copied into `apps/portfolio/docs/atlas/`.
-* `docs/atlas/` serves as the primary strategic reference for copywriting, titles, `/inquire` SLA flow, and schema designs.
+### 1. Build Specs Live Here (`docs/`) — the Atlas mirror is retired
+*As of 2026-08-06 the `docs/atlas/` mirror no longer exists.*
 
-### 2. User-Directed Implementation Rule
-* **No Autonomous Refactoring**: Do NOT automatically rewrite or refactor application code (`src/pages/*`, `src/components/*`) simply because files in `docs/atlas/` were updated.
-* **Wait for User Command**: Upstream Atlas files may be ahead of the current live website code. Execute updates to application code ONLY when explicitly instructed by Isaac (e.g., *"Refactor the Homepage using docs/atlas"* or *"Implement the /inquire form using docs/atlas/wireframes.md"*).
+Previously, `atlas/portfolio/*` was copied into `apps/portfolio/docs/atlas/` on every change (the "Upstream Portfolio Sync Mandate"). That mandate has been removed from `@core/atlas/AGENTS.md`, and the specs now live **only** here:
 
-### 3. Local Overrides Autonomy (`docs/overrides.md`)
-* **Not Restricted to Atlas Drafts**: You are NOT strictly locked into what the Atlas agent drafted. If Isaac and you decide on code-level, UI styling, or component-level overrides during implementation, you have full autonomy to adapt the implementation.
-* **Log Overrides**: Any deliberate code or design departures from `docs/atlas/` MUST be logged in **`apps/portfolio/docs/overrides.md`** with the date and rationale.
+* [`docs/wireframes.md`](docs/wireframes.md) — sitemap, visual theme, page breakdowns, `/inquire` SLA flow
+* [`docs/schemas.md`](docs/schemas.md) — Astro content collection schemas, `ServiceCard` interface, category maps
+* [`docs/copy.md`](docs/copy.md) — canonical page copy
+
+**Why**: the mirror had already drifted. `docs/atlas/wireframes.md` was carrying a superseded hero headline while Atlas held the current one. Two copies of a spec that changes on every restyle guarantees divergence.
+
+**The dividing line**: `@core/atlas` owns *what is true about the business* — positioning, services, strategy, pipeline. This app owns *how the site is built*. Anything that changes when a page is restyled belongs here.
+
+### 2. What Still Comes From Atlas (read-only)
+Read these directly from `@core/atlas`; never copy them here.
+
+| Need | Source |
+|:---|:---|
+| Title, taglines, bios, voice rules | `atlas/identity.md` — **the only source** |
+| Service offers, deliverables, status | `atlas/services/README.md` + numbered specs |
+| Roadmap, engagement models | `atlas/strategy.md` |
+| Operating principles, anti-patterns | `atlas/manifesto.md` |
+| Case studies & project context | `atlas/projects/` |
+
+Service statuses are binding: **nothing renders as available unless its Atlas spec permits it.** A service marked *Drafted* or *Ready* is not `Live` and must not be presented as purchasable.
+
+### 3. User-Directed Implementation Rule
+* **No Autonomous Refactoring**: Do NOT rewrite or refactor application code (`src/pages/*`, `src/components/*`) simply because a spec in `docs/` or a file in Atlas changed.
+* **Wait for User Command**: Atlas may be ahead of the live site. Update application code ONLY when explicitly instructed (e.g. *"Implement the /inquire form using docs/wireframes.md"*).
+
+### 4. Local Overrides Autonomy (`docs/overrides.md`)
+* **Not Restricted to Drafted Specs**: You are NOT locked into what was drafted. If Isaac and you decide on code-level, UI, or component overrides during implementation, you have full autonomy to adapt.
+* **Log Overrides**: Any deliberate departure from `docs/` specs MUST be logged in [`docs/overrides.md`](docs/overrides.md) with date and rationale.
