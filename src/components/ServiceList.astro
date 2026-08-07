@@ -1,0 +1,50 @@
+---
+import type { CollectionEntry } from "astro:content";
+import ServiceListItem from "@/components/ServiceListItem.astro";
+import {
+  Server,
+  ShieldAlert,
+  CreditCard,
+  Layers,
+  SearchCheck,
+  Cpu,
+  UserCheck,
+  Compass,
+  Zap,
+} from "@lucide/astro";
+
+interface Props {
+  services: CollectionEntry<"services">[];
+  variant?: "featured" | "full";
+}
+
+const { services, variant = "full" } = Astro.props;
+
+const iconMap: Record<string, typeof Server> = {
+  "01-resilient-backend-apis": Server,
+  "02-enterprise-identity-rbac": ShieldAlert,
+  "03-idempotent-payment-billing": CreditCard,
+  "04-data-dense-admin-consoles": Layers,
+  "05-architectural-risk-auditing": SearchCheck,
+  "06-deterministic-rag-agent-integration": Cpu,
+  "07-technical-candidate-vetting": UserCheck,
+  "08-technology-roadmap-fractional-cto": Compass,
+  "09-ai-business-automation": Zap,
+};
+
+const gridClass =
+  variant === "featured"
+    ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch"
+    : "grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch";
+---
+
+<div class={gridClass}>
+  {services.map((entry, index) => (
+    <ServiceListItem
+      entry={entry}
+      icon={iconMap[entry.data.id] || Server}
+      index={index}
+      variant={variant}
+    />
+  ))}
+</div>

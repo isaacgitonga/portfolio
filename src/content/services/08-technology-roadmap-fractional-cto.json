@@ -37,5 +37,7 @@
     "startingFrom": 4000
   },
   "articles": {},
-  "status": "live"
+  "status": "live",
+  "featured": true,
+  "displayOrder": 1
 }
