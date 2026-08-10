@@ -68,7 +68,7 @@ window.addEventListener('keydown', (e) => {
 const siteHeader = document.getElementById('site-header');
 
 const updateHeaderBorder = () => {
-  siteHeader?.classList.toggle('border-foreground/5', window.scrollY > 0);
+  siteHeader?.classList.toggle('border-surface-border/50', window.scrollY > 0);
   siteHeader?.classList.toggle('border-transparent', window.scrollY === 0);
 };
 

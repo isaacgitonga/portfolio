@@ -141,18 +141,18 @@ CREATE POLICY tenant_isolation_policy ON customer_records
   </div>
 
   <!-- Interactive Blueprint Viewer Stage -->
-  <div class="bg-[#090d14]/90 border border-primary/20 rounded-2xl shadow-2xl backdrop-blur-xl overflow-hidden font-mono">
+  <div class="bg-[#090d14]/90 border border-teal-500/20 rounded-2xl shadow-2xl backdrop-blur-xl overflow-hidden font-mono">
     
     <!-- Top Selector Tabs -->
-    <div class="flex flex-wrap items-center bg-[#070a10] border-b border-surface-border p-2 gap-2 select-none" id="section5-rfc-tabs">
+    <div class="flex flex-wrap items-center bg-[#070a10] border-b border-zinc-800/80 p-2 gap-2 select-none" id="section5-rfc-tabs">
       {rfcBlueprints.map((rfc, index) => (
         <button
           type="button"
           data-rfc-id={rfc.id}
           class={`section5-tab-btn px-4 py-2 rounded-xl text-xs font-mono transition-all duration-200 cursor-pointer flex items-center gap-2 ${
             index === 0
-              ? "bg-primary/15 text-primary border border-primary/30 font-bold"
-              : "text-muted hover:text-foreground hover:bg-surface/50 border border-transparent"
+              ? "bg-teal-500/10 text-teal-400 border border-teal-500/20 font-bold"
+              : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/50 border border-transparent"
           }`}
         >
           <span class="text-[10px] opacity-75">{rfc.rfcNumber}</span>
@@ -165,17 +165,17 @@ CREATE POLICY tenant_isolation_policy ON customer_records
     <div class="p-6 md:p-8 space-y-6">
       
       <!-- Meta Header -->
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-surface-border/60">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-zinc-800/60">
         <div class="space-y-1">
           <div class="flex items-center gap-2 text-xs">
-            <span class="px-2 py-0.5 bg-primary/10 border border-primary/20 text-primary rounded text-[10px] font-bold" id="rfc-number-tag">
+            <span class="px-2 py-0.5 bg-teal-500/10 border border-teal-500/20 text-teal-400 rounded text-[10px] font-bold" id="rfc-number-tag">
               {rfcBlueprints[0].rfcNumber}
             </span>
-            <span class="text-muted-dark text-[11px]" id="rfc-category-tag">
+            <span class="text-zinc-500 text-[11px]" id="rfc-category-tag">
               {rfcBlueprints[0].category}
             </span>
           </div>
-          <h3 class="text-xl md:text-2xl font-iceberg font-bold text-foreground" id="rfc-title">
+          <h3 class="text-xl md:text-2xl font-iceberg font-bold text-zinc-100" id="rfc-title">
             {rfcBlueprints[0].title}
           </h3>
         </div>
@@ -183,7 +183,7 @@ CREATE POLICY tenant_isolation_policy ON customer_records
         <a
           id="rfc-inquire-btn"
           href={`/inquiry?service=${rfcBlueprints[0].serviceSlug}`}
-          class="inline-flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-hover text-background text-xs font-iceberg font-bold rounded-lg transition-all duration-200 shrink-0 cursor-pointer shadow-md shadow-primary/15"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-teal-500 hover:bg-teal-400 text-zinc-950 text-xs font-iceberg font-bold rounded-lg transition-all duration-200 shrink-0 cursor-pointer shadow-md shadow-teal-950/20"
         >
           <span>Inquire for This Architecture</span>
           <ArrowUpRight size={14} />
@@ -192,19 +192,19 @@ CREATE POLICY tenant_isolation_policy ON customer_records
 
       <!-- Flow Steps Topology Sequence -->
       <div class="space-y-3">
-        <div class="text-[11px] font-mono text-muted uppercase tracking-wider flex items-center gap-2">
-          <GitBranch size={13} class="text-primary" />
+        <div class="text-[11px] font-mono text-zinc-400 uppercase tracking-wider flex items-center gap-2">
+          <GitBranch size={13} class="text-teal-400" />
           <span>System Topology & Execution Data Flow</span>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3" id="rfc-flow-container">
           {rfcBlueprints[0].flowSteps.map((step) => (
-            <div class="bg-[#05080e] border border-surface-border/80 rounded-xl p-3.5 space-y-1.5">
+            <div class="bg-[#05080e] border border-zinc-800/80 rounded-xl p-3.5 space-y-1.5">
               <div class="flex items-center justify-between text-[10px]">
-                <span class="text-primary font-bold">{step.step}</span>
-                <span class="text-muted-dark font-mono">NODE</span>
+                <span class="text-teal-400 font-bold">{step.step}</span>
+                <span class="text-zinc-500 font-mono">NODE</span>
               </div>
-              <div class="text-xs font-bold text-foreground font-montserrat">{step.name}</div>
-              <div class="text-[10px] text-muted leading-tight font-montserrat">{step.desc}</div>
+              <div class="text-xs font-bold text-zinc-200 font-montserrat">{step.name}</div>
+              <div class="text-[10px] text-zinc-400 leading-tight font-montserrat">{step.desc}</div>
             </div>
           ))}
         </div>
@@ -212,14 +212,14 @@ CREATE POLICY tenant_isolation_policy ON customer_records
 
       <!-- Code & Spec Snippet Window -->
       <div class="space-y-2">
-        <div class="flex items-center justify-between text-[11px] text-muted">
+        <div class="flex items-center justify-between text-[11px] text-zinc-400">
           <span class="flex items-center gap-2">
-            <FileCode size={13} class="text-primary" />
+            <FileCode size={13} class="text-teal-400" />
             <span>Production Specification Blueprint</span>
           </span>
           <span class="text-[10px] text-emerald-400 font-mono">IDEMPOTENCY: GUARANTEED</span>
         </div>
-        <div class="relative bg-[#030509] border border-surface-border rounded-xl p-4 overflow-x-auto max-h-[260px] scrollbar-thin">
+        <div class="relative bg-[#030509] border border-zinc-800 rounded-xl p-4 overflow-x-auto max-h-[260px] scrollbar-thin">
           <pre id="rfc-code-block" class="text-cyan-300 font-mono text-xs leading-relaxed"><code>{rfcBlueprints[0].codeSnippet}</code></pre>
         </div>
       </div>
@@ -227,9 +227,9 @@ CREATE POLICY tenant_isolation_policy ON customer_records
       <!-- Trade-Off Arbitrage Grid -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2" id="rfc-tradeoffs-container">
         {rfcBlueprints[0].tradeoffs.map((item) => (
-          <div class="bg-surface/30 border border-surface-border/60 rounded-xl p-4 space-y-1">
-            <div class="text-[10px] text-muted uppercase tracking-wider">{item.label}</div>
-            <div class="text-xs font-bold text-foreground font-montserrat leading-snug">{item.val}</div>
+          <div class="bg-zinc-900/40 border border-zinc-800/60 rounded-xl p-4 space-y-1">
+            <div class="text-[10px] text-zinc-500 uppercase tracking-wider">{item.label}</div>
+            <div class="text-xs font-bold text-zinc-200 font-montserrat leading-snug">{item.val}</div>
           </div>
         ))}
       </div>
@@ -308,11 +308,11 @@ CREATE POLICY tenant_isolation_policy ON customer_records
 
         // Button active styling
         tabs.forEach((t) => {
-          t.classList.remove("bg-primary/15", "text-primary", "border-primary/30", "font-bold");
-          t.classList.add("text-muted", "border-transparent");
+          t.classList.remove("bg-teal-500/10", "text-teal-400", "border-teal-500/20", "font-bold");
+          t.classList.add("text-zinc-400", "border-transparent");
         });
-        tab.classList.remove("text-muted", "border-transparent");
-        tab.classList.add("bg-primary/15", "text-primary", "border-primary/30", "font-bold");
+        tab.classList.remove("text-zinc-400", "border-transparent");
+        tab.classList.add("bg-teal-500/10", "text-teal-400", "border-teal-500/20", "font-bold");
 
         // Update header & code
         if (rfcNumberEl) rfcNumberEl.textContent = selected.rfcNumber;
@@ -326,13 +326,13 @@ CREATE POLICY tenant_isolation_policy ON customer_records
           flowContainerEl.innerHTML = selected.flowSteps
             .map(
               (step) => `
-            <div class="bg-[#05080e] border border-surface-border/80 rounded-xl p-3.5 space-y-1.5">
+            <div class="bg-[#05080e] border border-zinc-800/80 rounded-xl p-3.5 space-y-1.5">
               <div class="flex items-center justify-between text-[10px]">
-                <span class="text-primary font-bold">${step.step}</span>
-                <span class="text-muted-dark font-mono">NODE</span>
+                <span class="text-teal-400 font-bold">${step.step}</span>
+                <span class="text-zinc-500 font-mono">NODE</span>
               </div>
-              <div class="text-xs font-bold text-foreground font-montserrat">${step.name}</div>
-              <div class="text-[10px] text-muted leading-tight font-montserrat">${step.desc}</div>
+              <div class="text-xs font-bold text-zinc-200 font-montserrat">${step.name}</div>
+              <div class="text-[10px] text-zinc-400 leading-tight font-montserrat">${step.desc}</div>
             </div>
           `
             )
@@ -344,9 +344,9 @@ CREATE POLICY tenant_isolation_policy ON customer_records
           tradeoffsContainerEl.innerHTML = selected.tradeoffs
             .map(
               (item) => `
-            <div class="bg-surface/30 border border-surface-border/60 rounded-xl p-4 space-y-1">
-              <div class="text-[10px] text-muted uppercase tracking-wider">${item.label}</div>
-              <div class="text-xs font-bold text-foreground font-montserrat leading-snug">${item.val}</div>
+            <div class="bg-zinc-900/40 border border-zinc-800/60 rounded-xl p-4 space-y-1">
+              <div class="text-[10px] text-zinc-500 uppercase tracking-wider">${item.label}</div>
+              <div class="text-xs font-bold text-zinc-200 font-montserrat leading-snug">${item.val}</div>
             </div>
           `
             )
