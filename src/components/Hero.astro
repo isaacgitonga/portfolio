@@ -6,8 +6,8 @@ import {
   Server,
   Cpu,
   ArrowUpRight,
-  ShieldCheck,
-  Clock
+  Clock,
+  Boxes
 } from "@lucide/astro";
 
 const authorityPillars = [
@@ -16,24 +16,30 @@ const authorityPillars = [
     category: "Financial Engineering",
     description: "Transactional outbox patterns, async checkout engines, and zero double-charging guarantees.",
     icon: CreditCard,
+    specSlug: "asynchronous-payment-checkout",
   },
   {
     title: "Multi-Tenant Context Isolation",
     category: "Security & Access",
     description: "Postgres Row-Level Security (RLS), RBAC token claim enforcement, and tenant boundary isolation.",
     icon: ShieldAlert,
+    specSlug: "database-level-row-level-security",
   },
   {
     title: "Concurrency-Safe Backends",
     category: "Data Integrity",
     description: "Pessimistic database locking, atomic mutations, and zero over-allocation under peak traffic.",
     icon: Server,
+    specSlug: "concurrency-safe-inventory-ledger",
   },
   {
     title: "Deterministic RAG Systems",
     category: "AI Engineering",
     description: "Sandboxed prompt boundaries, strict schema enforcement, and audit-ready agent workflows.",
     icon: Cpu,
+    // No published architecture spec yet — must not link out or carry the
+    // most visual weight of the four. See AGENTS.md §6.4.
+    specSlug: null,
   },
 ];
 ---
@@ -56,7 +62,7 @@ const authorityPillars = [
 
       <!-- Main Headline -->
       <h1 class="hero-headline text-4xl sm:text-5xl lg:text-6xl font-montserrat font-bold text-foreground leading-[1.15] tracking-tight">
-        Engineering the software components your business <br class="hidden sm:inline" />
+        Engineering the software your business <br class="hidden sm:inline" />
         <span class="bg-linear-to-r from-primary via-cyan-400 to-secondary bg-clip-text text-transparent font-iceberg font-normal">
           cannot afford to get wrong.
         </span>
@@ -76,12 +82,6 @@ const authorityPillars = [
           >
             <span>Submit System Inquiry</span>
             <ArrowUpRight size={18} />
-          </a>
-          <a
-            href="/services"
-            class="inline-flex items-center gap-2 px-6 py-3.5 bg-surface/60 hover:bg-surface/90 border border-surface-border hover:border-primary/30 text-foreground font-iceberg font-bold text-base rounded-xl transition-all duration-200 backdrop-blur-xs cursor-pointer"
-          >
-            <span>Explore Services</span>
           </a>
         </div>
 
@@ -112,8 +112,12 @@ const authorityPillars = [
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {authorityPillars.map((pillar) => {
         const IconComponent = pillar.icon;
+        const Tag = pillar.specSlug ? "a" : "div";
         return (
-          <div class="hero-pillar group relative bg-surface/40 hover:bg-surface/75 border border-surface-border hover:border-primary/30 rounded-2xl p-5 transition-all duration-300 backdrop-blur-xs flex flex-col justify-between space-y-4">
+          <Tag
+            href={pillar.specSlug ? `/architecture/${pillar.specSlug}` : undefined}
+            class="hero-pillar group relative bg-surface/40 hover:bg-surface/75 border border-surface-border hover:border-primary/30 rounded-2xl p-5 transition-all duration-300 backdrop-blur-xs flex flex-col justify-between space-y-4"
+          >
             <div class="space-y-3">
               <div class="flex items-center justify-between">
                 <div class="p-2.5 bg-background border border-surface-border rounded-xl text-primary group-hover:bg-primary group-hover:text-background transition-all duration-300 shrink-0">
@@ -130,41 +134,74 @@ const authorityPillars = [
                 {pillar.description}
               </p>
             </div>
-          </div>
+            {pillar.specSlug && (
+              <div class="flex items-center gap-1.5 text-[11px] font-mono font-semibold text-primary/80 group-hover:text-primary transition-colors duration-200">
+                <span>View Spec</span>
+                <ArrowUpRight size={12} />
+              </div>
+            )}
+          </Tag>
         );
       })}
+    </div>
+
+    <!-- Component-Buyer Doorway (transition line intentionally sits AFTER the pillars — see AGENTS.md §6.2) -->
+    <div class="relative max-w-6xl mx-auto mt-20 bg-linear-to-r from-surface/80 via-surface/40 to-surface/80 border border-primary/20 rounded-2xl p-6 sm:p-8 backdrop-blur-md overflow-hidden">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_80%_50%,rgba(56,189,248,0.06),transparent)] pointer-events-none"></div>
+      <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div class="space-y-2 max-w-3xl">
+          <div class="flex items-center gap-2">
+            <Boxes size={16} class="text-primary shrink-0" />
+            <span class="text-xs font-mono uppercase tracking-wider text-primary font-semibold">
+              Standalone Engagements
+            </span>
+          </div>
+          <p class="text-base sm:text-lg font-montserrat font-semibold text-foreground leading-relaxed">
+            Only need one of these — not a full build?
+          </p>
+        </div>
+        <div class="shrink-0">
+          <a
+            href="/services"
+            class="inline-flex items-center gap-2 px-6 py-3.5 bg-surface/60 hover:bg-surface/90 border border-surface-border hover:border-primary/30 text-foreground font-iceberg font-bold text-base rounded-xl transition-all duration-200 backdrop-blur-xs cursor-pointer hover:shadow-lg hover:shadow-primary/10"
+          >
+            <span>Explore Services</span>
+            <ArrowUpRight size={18} />
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- Core Thesis / Bottleneck Banner -->
-  <div class="hero-banner relative bg-linear-to-r from-surface/80 via-surface/40 to-surface/80 border border-primary/20 rounded-2xl p-6 sm:p-8 backdrop-blur-md overflow-hidden">
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(56,189,248,0.06),transparent)] pointer-events-none"></div>
-    <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-      <div class="space-y-2 max-w-3xl">
-        <div class="flex items-center gap-2">
-          <ShieldCheck size={16} class="text-primary shrink-0" />
-          <span class="text-xs font-mono uppercase tracking-wider text-primary font-semibold">
-            Architectural Philosophy & Risk Arbitrage
-          </span>
-        </div>
-        <blockquote class="text-base sm:text-lg font-montserrat font-semibold text-foreground italic leading-relaxed">
-          “I don’t over-engineer your application. I isolate fragile bottlenecks so your core platform can scale without unexpected 2 AM outages.”
-        </blockquote>
-      </div>
-      <div class="shrink-0">
-        <a
-          href="/about"
-          class="inline-flex items-center gap-1.5 px-4 py-2 bg-primary/10 border border-primary/20 hover:bg-primary hover:text-background text-xs font-iceberg font-bold text-primary rounded-lg transition-all duration-200"
-        >
-          <span>Read Ethos</span>
-          <ArrowUpRight size={14} />
-        </a>
-      </div>
-    </div>
-  </div>
+  <!--<div class="hero-banner relative bg-linear-to-r from-surface/80 via-surface/40 to-surface/80 border border-primary/20 rounded-2xl p-6 sm:p-8 backdrop-blur-md overflow-hidden">-->
+  <!--  <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(56,189,248,0.06),transparent)] pointer-events-none"></div>-->
+  <!--  <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">-->
+  <!--    <div class="space-y-2 max-w-3xl">-->
+  <!--      <div class="flex items-center gap-2">-->
+  <!--        <ShieldCheck size={16} class="text-primary shrink-0" />-->
+  <!--        <span class="text-xs font-mono uppercase tracking-wider text-primary font-semibold">-->
+  <!--          Architectural Philosophy & Risk Arbitrage-->
+  <!--        </span>-->
+  <!--      </div>-->
+  <!--      <blockquote class="text-base sm:text-lg font-montserrat font-semibold text-foreground italic leading-relaxed">-->
+  <!--        “I don’t over-engineer your application. I isolate fragile bottlenecks so your core platform can scale without unexpected 2 AM outages.”-->
+  <!--      </blockquote>-->
+  <!--    </div>-->
+  <!--    <div class="shrink-0">-->
+  <!--      <a-->
+  <!--        href="/about"-->
+  <!--        class="inline-flex items-center gap-1.5 px-4 py-2 bg-primary/10 border border-primary/20 hover:bg-primary hover:text-background text-xs font-iceberg font-bold text-primary rounded-lg transition-all duration-200"-->
+  <!--      >-->
+  <!--        <span>Read Ethos</span>-->
+  <!--        <ArrowUpRight size={14} />-->
+  <!--      </a>-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <!--</div>-->
 </section>
 
 <script>
-  import { animateHero } from "../animations/hero.ts";
+  import { animateHero } from "@/animations";
   animateHero();
 </script>

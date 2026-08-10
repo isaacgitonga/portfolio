@@ -32,11 +32,18 @@ graph TD
 
 ### Page 1: Homepage (`/`) — High-Authority Portal
 *   **Hero Section**:
-    *   *Left Column (Copy & CTA)*: Headline (*"Engineering the software components your business cannot afford to get wrong."*), Subheadline (*"Helping startups and growing platforms build software designed to survive scale."*), Primary CTA (`[ Submit System Inquiry ]` -> `/inquire`), and 12-Hour SLA response badge.
+    *   *Left Column (Copy & CTA)*: Headline (*"Engineering the software your business cannot afford to get wrong."*), Subheadline (*"Helping startups and growing platforms build software designed to survive scale. Fixed-scope architectural outcomes that protect data correctness and eliminate 2 AM outages."*), **single** Primary CTA (`[ Submit System Inquiry ]` -> `/inquire`), and 12-Hour SLA response badge.
+        *   **`[ Explore Services ]` removed from the hero (2026-08-07).** Two competing CTAs split intent and let a visitor browse instead of enquiring. Browsing is now a qualified fallback in the Pillars section below.
     *   *Right Column (Visual Hero Element)*: **Interactive Telemetry & Command Console** — Glassmorphic dark terminal with live status indicator (`SYSTEM_STATUS: NOMINAL`), interactive command tabs (`$ inspect --layer=payments`, `--layer=concurrency`, `--layer=security`), live code/telemetry viewer, and contextual CTA bridge to `/inquire`.
-*   **Authority Pillars**: Idempotent Payment Ledgers, Multi-Tenant Context Isolation, Concurrency-Safe Backends, Deterministic RAG Systems.
+*   **Core Engineering Pillars** *(section heading: `CORE ENGINEERING PILLARS`)* — in this order:
+    1.  Four cards: **Idempotent Payment Ledgers · Multi-Tenant Context Isolation · Concurrency-Safe Backends · Deterministic RAG Systems**
+    2.  Transition line **below the cards**: *"Only need one of these — not a full build?"*
+    3.  Secondary CTA: `[ Explore Services ]` -> `/services`
+    *   **Order is deliberate.** The transition line must come *after* the cards. Leading with it tells the majority — who do want a build — that the section is not for them, and they skip the strongest credibility block on the page. Pillars read as proof first; the doorway sits directly beneath, where a component-buyer will already be looking.
+    *   **Link each card to its architecture spec** (`/architecture/[slug]`): payments → `asynchronous-payment-checkout`, concurrency → `concurrency-safe-inventory-ledger`, isolation → `database-level-row-level-security`. This turns the pillars from claims into one-click evidence.
+    *   ⚠ **Deterministic RAG has no backing spec yet.** It should not carry the most visual weight of the four until one exists.
 *   **Core Thesis & Bottleneck Banner**: *"I don’t over-engineer your application. I isolate fragile bottlenecks so your core platform can scale without unexpected 2 AM outages."*
-*   **Featured 6 Offers Grid**: Links to `/services`.
+*   **Featured Offers Grid**: Links to `/services`. *(Catalogue is nine offers in four categories — lead with the categories, not nine flat cards. See `atlas/services/README.md`.)*
 *   **Featured Architecture Spec Blueprint**: Embeds live code/spec viewer.
 
 ### Page 2: Services Showcase (`/services`)
