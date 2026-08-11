@@ -1,0 +1,185 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { Terminal, Shield, CircleCheckBig, Cpu, TriangleAlert } from "@lucide/astro";
+---
+
+<Layout
+  title="AI & Agent Automation | Isaac Gitonga"
+  description="How custom agentic pipelines and developer workflow automation eliminate boilerplate, forcing structural systems correctness before coding."
+>
+  <div class="relative min-h-screen px-6 overflow-hidden">
+    <div class="relative z-10 max-w-6xl w-full mx-auto py-24 md:py-32 space-y-16">
+      
+      <!-- Page Header -->
+      <div class="space-y-4 max-w-3xl pb-10 border-b border-surface-border/40">
+        <span class="text-xs uppercase font-mono tracking-widest text-primary font-semibold">Workflow Leverage</span>
+        <h1 class="text-4xl md:text-5xl font-montserrat font-bold text-foreground leading-tight">
+          Deterministic AI & <br/><span class="text-primary font-iceberg font-normal">Agent Automation</span>
+        </h1>
+        <p class="text-muted font-montserrat font-medium text-lg leading-relaxed mt-4">
+          I leverage custom local AI agents and structured code-generation pipelines to eliminate repetitive boilerplate. This shifts my development focus from writing syntax to verifying architectural correctness, enabling me to deliver production-grade work 2x–3x faster.
+        </p>
+      </div>
+
+      <!-- Main Showcase Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        
+        <!-- Left: Strategy & Value Prop (7 cols) -->
+        <div class="lg:col-span-7 space-y-8">
+          <div class="space-y-4">
+            <h2 class="text-2xl font-iceberg font-bold text-foreground">
+              Maximizing Systems Correctness, Minimizing Boilerplate
+            </h2>
+            <p class="text-muted font-montserrat text-sm leading-relaxed">
+              Standard software development spends 70% of engineering hours on mechanical tasks—writing boilerplate schema setup, setting up basic API endpoints, configuring build tools, and implementing repetitive UI forms.
+            </p>
+            <p class="text-muted font-montserrat text-sm leading-relaxed">
+              By encapsulating design rules and programming constraints into specialized local AI agent tools, I maintain a <strong>50% leverage ratio</strong>. I focus 80% of client hours on high-level system boundaries, index optimization, concurrency safety, and transaction boundaries.
+            </p>
+          </div>
+
+          <!-- The Moat list -->
+          <div class="space-y-4 pt-4">
+            <div class="flex gap-4">
+              <div class="p-2 bg-primary/10 border border-primary/20 text-primary rounded-xl shrink-0 h-fit">
+                <CircleCheckBig size={18} />
+              </div>
+              <div class="space-y-1">
+                <h4 class="font-iceberg font-bold text-foreground">Decoupled Domain Architecture</h4>
+                <p class="text-xs text-muted font-montserrat leading-relaxed">
+                  Agents write isolated domain models using strictly typed structures, ensuring framework updates or database swaps don't break business logic.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="p-2 bg-primary/10 border border-primary/20 text-primary rounded-xl shrink-0 h-fit">
+                <Shield size={18} />
+              </div>
+              <div class="space-y-1">
+                <h4 class="font-iceberg font-bold text-foreground">Automated Security Bounds</h4>
+                <p class="text-xs text-muted font-montserrat leading-relaxed">
+                  Every API or data access layer built is audited by test sweeps validating tenant context isolation, preventing unauthorized object-level access.
+                </p>
+              </div>
+            </div>
+            
+            <div class="flex gap-4">
+              <div class="p-2 bg-primary/10 border border-primary/20 text-primary rounded-xl shrink-0 h-fit">
+                <Cpu size={18} />
+              </div>
+              <div class="space-y-1">
+                <h4 class="font-iceberg font-bold text-foreground">Continuous Spec-Driven Engineering</h4>
+                <p class="text-xs text-muted font-montserrat leading-relaxed">
+                  Code changes correspond directly to markdown specifications. Functional implementations are verified programmatically against the design criteria before staging.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Terminal Emulator Showcase (5 cols) -->
+        <div class="lg:col-span-5 bg-[#0b0d16] border border-surface-border rounded-xl overflow-hidden shadow-2xl">
+          <div class="bg-surface/50 border-b border-surface-border px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <div class="w-3 h-3 rounded-full bg-rose-500/80"></div>
+              <div class="w-3 h-3 rounded-full bg-amber-500/80"></div>
+              <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
+            </div>
+            <span class="text-[10px] font-mono text-muted-dark uppercase tracking-widest font-semibold flex items-center gap-1.5">
+              <Terminal size={12} class="text-primary" />
+              arch-audit-agent.sh
+            </span>
+          </div>
+
+          <div class="p-6 font-mono text-xs text-muted-dark space-y-4 h-[380px] overflow-y-auto">
+            <div class="flex items-center gap-2 text-primary">
+              <span>$</span>
+              <span>bin/agent --action=audit-spec --file=docs/specs/ledger.md</span>
+            </div>
+            
+            <div class="text-foreground/90 space-y-1">
+              <p class="text-blue-400 font-bold">[1/3] Parsing Schema Blueprint...</p>
+              <p>Found Entity: `inventory_items` (Columns: sku, stock, reserved_stock)</p>
+              <p>Found Transaction Block: lines 45-62 in sql/schema.sql</p>
+            </div>
+
+            <div class="space-y-1">
+              <p class="text-emerald-400 font-bold">[2/3] Auditing Concurrency Safeguards...</p>
+              <p class="text-emerald-500 flex items-center gap-1">
+                <span>✓</span>
+                <span>Explicit row-level locks found: `FOR UPDATE` detected.</span>
+              </p>
+              <p class="text-amber-500 flex items-center gap-1">
+                <TriangleAlert size={12} class="shrink-0" />
+                <span>Warning: statement_timeout is not configured at transaction boundary.</span>
+              </p>
+            </div>
+
+            <div class="space-y-1">
+              <p class="text-blue-400 font-bold">[3/3] Evaluating Security Boundaries...</p>
+              <p class="text-emerald-500 flex items-center gap-1">
+                <span>✓</span>
+                <span>RLS tenant column mapped to JWT claims context.</span>
+              </p>
+              <p class="text-emerald-500 flex items-center gap-1">
+                <span>✓</span>
+                <span>BypassRLS analytical role isolation verified.</span>
+              </p>
+            </div>
+
+            <div class="pt-2 border-t border-surface-border/50 text-foreground">
+              <p class="font-bold text-emerald-400">SPEC AUDIT COMPLETED SUCCESSFULLY</p>
+              <p class="text-muted text-[10px]">Errors: 0 | Warnings: 1 | Code Coverage Target: 95%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature Detail Card: Architectural Comparison Engine -->
+      <div class="bg-surface/30 border border-surface-border rounded-2xl p-8 md:p-12 space-y-6 relative overflow-hidden">
+        <div class="absolute right-0 top-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="space-y-4 max-w-4xl z-10 relative">
+          <span class="px-2.5 py-1 bg-secondary/10 border border-secondary/20 text-secondary text-xs rounded font-mono font-medium">
+            Active Tool Blueprint
+          </span>
+          <h3 class="text-2xl md:text-3xl font-iceberg font-bold text-foreground">
+            The Showcase: Automated Architectural Comparison Engine
+          </h3>
+          <p class="text-muted font-montserrat text-sm leading-relaxed">
+            When designing complex transactions or API routing, I write a custom architectural spec before coding. I then pipe the model and SQL schema files into my <strong>Self-Auditing Protocol</strong>. The engine automatically:
+          </p>
+          
+          <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-montserrat text-muted pt-2 list-none">
+            <li class="flex items-start gap-2">
+              <span class="text-primary font-bold">01.</span>
+              <span>Compares design components against standard distributed system patterns.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-primary font-bold">02.</span>
+              <span>Identifies Single Points of Failure (SPOFs) and locks duration limits.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-primary font-bold">03.</span>
+              <span>Performs automatic threat modeling across boundaries (RBAC/RLS).</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-primary font-bold">04.</span>
+              <span>Outlines detailed trade-off calculations for execution speed vs consistency.</span>
+            </li>
+          </ul>
+
+          <div class="pt-6">
+            <a
+              href="/architecture"
+              class="inline-flex items-center gap-1 text-xs font-iceberg font-bold text-primary hover:text-primary-hover hover:underline"
+            >
+              <span>See the audited architecture patterns in action →</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</Layout>

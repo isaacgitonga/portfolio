@@ -1,13 +1,10 @@
 ---
-import PulseBackground from "@/components/PulseBackground.astro";
 import BinaryBackground from "@/components/BinaryBackground.astro";
 ---
 
 <section id="hero" class="relative z-0 max-w-6xl mx-auto flex flex-col justify-center">
   <div class="relative min-h-screen p-6 pb-(--nav-height) flex flex-col md:flex-row-reverse items-end justify-end md:justify-between gap-2 md:gap-4 py-4">
-    <BinaryBackground className="pb-100" />
-    <BinaryBackground className="pb-50" />
-    <PulseBackground className="pb-20" />
+    <BinaryBackground className="pb-90" />
 
     <ul class="stats space-y-5 ml-auto md:ml-0 self-center">
       <li>
@@ -34,14 +31,26 @@ import BinaryBackground from "@/components/BinaryBackground.astro";
 
     <div
       id="hero-intro"
-      class="w-full h-[95%] mb-5 pb-5 flex flex-col justify-end"
+      class="w-full grow flex flex-col justify-between min-h-[60vh] md:min-h-[75vh] mb-5"
     >
-      <div class="space-y-3">
-        <h1 class="hero-title text-3xl md:text-5xl font-bold font-iceberg text-primary flex gap-6 py-2">
-          G.
+      <div class="grow flex flex-col justify-center py-12">
+        <div class="hero-ctas flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-4 py-2 pb-4 max-w-lg">
+          <p class="text-sm font-montserrat text-muted font-semibold">
+            Facing architectural bottlenecks or scaling challenges? 
+            <a href="/inquiry" class="inline-flex items-center gap-1 font-iceberg font-bold text-primary hover:underline ml-1">
+              Submit a Scoping Inquiry →
+            </a>
+          </p>
+        </div>
+      </div>
+
+      <div class="space-y-3 mt-auto">
+        <h1 class="hero-title text-4xl font-bold font-iceberg text-primary flex gap-6 py-2">
+          Isaac.
         </h1>
+
         <p
-          class="hero-text max-w-lg text-muted font-montserrat font-semibold overflow-hidden leading-relaxed"
+          class="hero-text max-w-lg text-sm text-muted font-montserrat font-semibold overflow-hidden leading-relaxed"
         >
           <span class="block">
             Understand the machine before abstracting over it.
@@ -71,7 +80,7 @@ import BinaryBackground from "@/components/BinaryBackground.astro";
 
       <div class="leading-relaxed space-y-4 text-muted">
         <p>
-          I’m a software engineer and system architect who builds reliable
+          My name is <span class="font-iceberg text-primary">Isaac</span>. I’m a software engineer and system architect who builds reliable
           infrastructure for organizations where correctness, security, and
           long-term maintainability are non-negotiable.
         </p>
@@ -102,7 +111,7 @@ import BinaryBackground from "@/components/BinaryBackground.astro";
       <div class="max-w-xl leading-relaxed space-y-6">
         <p class="text-muted">
           I architect, build, and modernize software systems with a relentless
-          focus on backend stability and data integrity.
+          focus on backend stability and data integrity, working exclusively with TypeScript/JavaScript and Python.
         </p>
 
         <div class="space-y-2">

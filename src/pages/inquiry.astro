@@ -1,0 +1,69 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import InquiryForm from "@/components/react/InquiryForm.tsx";
+import PriceTiers from "@/components/PriceTiers.astro";
+import Socials from "@/components/Socials.astro";
+import CopyIcon from "@/components/CopyIcon.astro";
+import config from "@/app.config.ts";
+import AvailabilityCard from "@/components/AvailabilityCard.astro";
+---
+
+<Layout
+  title="Inquiry & Collaboration | Isaac Gitonga"
+  description="Let's build reliable backend systems, fintech products, or consult on system architecture."
+>
+  <div class="relative flex flex-col justify-center px-6 overflow-hidden">
+    <div class="relative z-10 max-w-6xl w-full mx-auto py-24 md:py-32 space-y-12">
+      <!-- Header & Intro -->
+      <div class="space-y-4 max-w-3xl pb-10 border-b border-surface-border/40 mb-12">
+        <span class="text-xs uppercase font-mono tracking-widest text-primary font-semibold">General Channels</span>
+        <h1 class="text-4xl md:text-5xl font-montserrat font-bold text-foreground leading-tight">
+          Inquire & <br/><span class="text-primary font-iceberg font-normal">Collaboration</span>
+        </h1>
+        <p class="text-muted font-montserrat font-medium text-lg leading-relaxed mt-4">
+          Have an architectural challenge, a payments platform project, or need support on a backend-heavy build? Let's trace out a solution.
+        </p>
+      </div>
+
+      <!-- Pricing Scopes -->
+      <PriceTiers />
+
+      <hr class="border-surface-border/30" />
+
+      <!-- Layout Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start mt-8">
+        <!-- Contact Form Card -->
+        <div class="lg:col-span-2 bg-surface/50 border border-surface-border rounded-2xl p-6 md:p-8 backdrop-blur-xs">
+          <InquiryForm client:load />
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-8">
+          <AvailabilityCard />
+
+          <!-- Direct Connections -->
+          <div class="bg-surface/50 border border-surface-border rounded-xl p-6 space-y-4 backdrop-blur-xs">
+            <h3 class="font-iceberg text-lg font-bold text-foreground">
+              Direct channels
+            </h3>
+            <div class="space-y-4">
+              <div class="flex flex-col gap-1 p-3 bg-background border border-surface-border rounded-lg">
+                <span class="text-xs text-muted-dark font-iceberg uppercase tracking-wider font-semibold">Email</span>
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-sm font-montserrat text-foreground font-medium break-all selection:bg-primary/20">
+                    {config.profile.email}
+                  </span>
+                  <CopyIcon text={config.profile.email} class="shrink-0" />
+                </div>
+              </div>
+              <div class="flex items-center justify-between p-3 bg-background border border-surface-border rounded-lg">
+                <span class="text-xs text-muted-dark font-iceberg uppercase tracking-wider font-semibold">Socials</span>
+                <Socials gap={4} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

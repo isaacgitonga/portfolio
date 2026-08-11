@@ -1,6 +1,8 @@
 ---
-import {getSocials} from "@/utils.ts";
+import config from "@/app.config.ts";
 import Socials from "@/components/Socials.astro";
+import CopyIcon from "@/components/CopyIcon.astro";
+import { Mail } from "@lucide/astro";
 ---
 
 <footer
@@ -16,27 +18,36 @@ import Socials from "@/components/Socials.astro";
       Designed and developed by
       <span class="text-primary font-semibold font-iceberg text-nowrap">
         <a
-          href={getSocials().github}
+          href={config.profile.github}
           target="_blank"
           class="inline text-nowrap hover:underline"
         >
           <span class="px-0.5">Isaac G.</span>
           <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
         </a>
-      </span>. Deployed on
-      <span class="text-foreground font-semibold font-iceberg">Vercel</span>.
+      </span>. Deployed on <span class="text-foreground font-semibold font-iceberg">Vercel</span>.
     </p>
 
-    <div class="flex gap-6 items-center">
-      <a href="/" class="flex items-center gap-3 hover:opacity-85 transition-opacity">
-        <img src="/logos/logo-pulse.svg" alt="Profile Logo" class="h-9 w-auto" />
-      </a>
+    <div class="flex flex-col items-center gap-4">
+      <div class="flex items-center gap-2 bg-foreground/[0.03] border border-foreground/5 rounded-lg py-1 px-2.5 text-muted hover:text-foreground hover:border-foreground/10 transition-all duration-200">
+        <Mail class="h-3.5 w-3.5 text-muted" />
+        <span class="text-xs font-montserrat font-medium selection:bg-primary/20">
+          {config.profile.email}
+        </span>
+        <CopyIcon text={config.profile.email} class="p-1" />
+      </div>
 
-      <Socials gap={6} />
+      <div class="flex gap-6 items-center">
+        <a href="/" class="flex items-center gap-3 hover:opacity-85 transition-opacity">
+          <img src="/logos/logo-pulse.svg" alt="Profile Logo" class="h-9 w-auto" />
+        </a>
+
+        <Socials gap={6} />
+      </div>
     </div>
 
     <p class="font-nunito text-sm text-muted-dark mt-4">
-      &copy; <span class="year">{new Date().getFullYear()}</span> Isaac G. All rights reserved.
+      &copy; <span class="year">{new Date().getFullYear()}</span> Isaac. All rights reserved.
     </p>
   </div>
 </footer>

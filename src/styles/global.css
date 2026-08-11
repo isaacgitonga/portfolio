@@ -9,17 +9,43 @@
   --font-lato: "Lato", sans-serif;
   --font-revalia: "Revalia", sans-serif;
 
-  --color-primary: #14b8a6; /* teal-500 */
-  --color-primary-hover: #0d9488; /* teal-600 */
-  --color-secondary: #f97316; /* orange-500 */
-  --color-secondary-hover: #ea580c; /* orange-600 */
-  --color-muted: #9ca3af; /* neutral-400 */
-  --color-muted-dark: #6b7280; /* neutral-500 */
+  --color-primary: var(--color-primary);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-secondary: var(--color-secondary);
+  --color-secondary-hover: var(--color-secondary-hover);
+  --color-muted: var(--color-muted);
+  --color-muted-dark: var(--color-muted-dark);
+  --color-foreground: var(--color-foreground);
+  --color-background: var(--color-background);
+  --color-surface: var(--color-surface);
+  --color-surface-hover: var(--color-surface-hover);
+  --color-surface-border: var(--color-surface-border);
+}
+
+:root {
+  --color-primary: #14b8a6;
+  --color-primary-hover: #0d9488;
+  --color-secondary: #f97316;
+  --color-secondary-hover: #ea580c;
+  --color-muted: #9ca3af;
+  --color-muted-dark: #6b7280;
   --color-foreground: #f7fafc;
   --color-background: #131420;
-  --color-surface: #181a2b; /* card surface matching #131420 theme tone */
+  --color-surface: #181a2b;
   --color-surface-hover: #22253d;
   --color-surface-border: #282b45;
+}
+
+.light {
+  --color-primary: #0f766e;
+  --color-primary-hover: #115e59;
+  --color-foreground: #0f172a;
+  --color-background: #f8fafc;
+  --color-surface: #ffffff;
+  --color-surface-hover: #e2e8f0;
+  --color-surface-border: #cbd5e1;
+  --color-muted: #475569;
+  --color-muted-dark: #64748b;
 }
 
 @layer base {
@@ -41,6 +67,10 @@
     @apply overflow-hidden;
   }
 
+  .btn {
+    @apply flex items-center justify-center w-fit p-4 bg-primary hover:bg-primary-hover text-background font-iceberg rounded-lg transition-colors cursor-pointer;
+  }
+
   #hero .stats li p {
     @apply font-semibold tracking-wide text-sm font-montserrat text-muted text-nowrap;
   }
@@ -54,15 +84,15 @@
   }
 
   #skills .skill {
-    @apply max-w-6xl mx-auto min-h-screen sm:p-4 flex flex-col gap-8 justify-center items-start overflow-hidden;
+    @apply max-w-6xl mx-auto py-10 md:py-16 sm:p-4 overflow-hidden;
   }
 
   #skills .skill .title {
-    @apply font-iceberg font-bold text-4xl lg:text-6xl text-center text-primary;
+    @apply font-iceberg font-bold text-3xl lg:text-4xl text-primary mb-4;
   }
 
   #skills .skill .desc {
-    @apply py-2 max-w-4xl space-y-4 text-lg text-muted;
+    @apply py-2 max-w-4xl space-y-4 text-base text-muted;
   }
 
   #skills .skill .desc strong {
@@ -75,11 +105,11 @@
 
   #skills .skill .tool,
   #skills .global .tool {
-    @apply bg-neutral-900/50 text-foreground border border-neutral-800 rounded-md h-fit p-2 px-4 flex gap-2 items-center justify-center;
+    @apply bg-surface/50 text-foreground border border-surface-border rounded-md h-fit p-2 px-4 flex gap-2 items-center justify-center;
   }
 
   .tool p {
-    @apply font-semibold font-mono;
+    @apply font-mono text-xs text-muted font-normal;
   }
 
   #projects .project {
@@ -132,11 +162,11 @@
   }
 
   .head h1 {
-    @apply text-6xl md:text-7xl lg:text-[85px] xl:text-[100px] py-2 font-bold font-iceberg text-center text-foreground;
+    @apply text-4xl md:text-5xl lg:text-6xl py-2 font-bold font-iceberg text-center text-foreground;
   }
 
   .head p {
-    @apply py-4 text-center text-xl md:text-2xl lg:text-3xl text-muted font-semibold font-montserrat;
+    @apply py-4 text-center text-lg md:text-xl text-muted font-semibold font-montserrat;
   }
 
   .nav-link {
@@ -148,7 +178,8 @@
     @apply absolute bottom-0 left-0 w-full h-0.5 bg-primary scale-x-0 origin-right transition-transform duration-500;
   }
 
-  .nav-link:hover::after {
+  .nav-link:hover::after,
+  .nav-link.active-link::after {
     @apply scale-x-100 origin-left;
   }
 }

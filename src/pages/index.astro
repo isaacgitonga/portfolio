@@ -4,7 +4,6 @@ import Hero from "../components/Hero.astro";
 import Skills from "../components/Skills.astro";
 import ProjectItem from "../components/ProjectItem.astro";
 import Reviews from "../components/Reviews.astro";
-import Contact from "../components/Contact.astro";
 import { getCollection } from "astro:content";
 
 const rawProjects = await getCollection("projects");
@@ -32,11 +31,10 @@ const projects = rawProjects
       </div>
 
       <ul class="project-list space-y-4 mt-12">
-        {projects.map((project) => <ProjectItem project={project} page="home" />)}
+        {projects.map((project) => <ProjectItem project={project} />)}
       </ul>
     </div>
   </section>
 
   <Reviews />
-  <Contact />
 </Layout>

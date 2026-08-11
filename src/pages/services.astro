@@ -1,0 +1,200 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { Server, ShieldAlert, CreditCard, Layers, SearchCheck, Cpu, ArrowUpRight } from "@lucide/astro";
+
+interface ServiceOffer {
+  id: string;
+  icon: any;
+  title: string;
+  problem: string;
+  approach: string;
+  deliverable: string;
+  pricing: string;
+  specLink?: string;
+  specLabel?: string;
+}
+
+const services: ServiceOffer[] = [
+  {
+    id: "backend-infra",
+    icon: Server,
+    title: "Resilient Backend & API Infrastructure",
+    problem: "Naively coupled API controllers that lock during traffic spikes, bleed database connections, or crash under unexpected request payloads.",
+    approach: "Decoupled Clean Architecture isolating domain models from framework dependencies. Implementing robust CQRS patterns, message queues, and thread-safe boundaries.",
+    deliverable: "Production-grade backend system with documented OpenAPI contracts, comprehensive test suites, and decoupled execution layers.",
+    pricing: "Custom engagement / Architectural implementation package",
+    specLink: "/architecture/asynchronous-payment-checkout",
+    specLabel: "View Backend Spec Proof"
+  },
+  {
+    id: "identity-access",
+    icon: ShieldAlert,
+    title: "Enterprise Identity & Access Control (RBAC/ABAC)",
+    problem: "Broken Object-Level Authorization (BOLA) where multi-tenant data leaks because the app code relies on programmers always remembering 'tenant_id' checks.",
+    approach: "Database-enforced context isolation utilizing PostgreSQL Row-Level Security (RLS) and claims-based validation at the gateway layer.",
+    deliverable: "Secure, auditable tenant isolation boundary + automated security verification suite testing for privilege escalation.",
+    pricing: "Fixed-scope implementation",
+    specLink: "/architecture/database-level-row-level-security",
+    specLabel: "View RLS Tenant Isolation Spec"
+  },
+  {
+    id: "payment-billing",
+    icon: CreditCard,
+    title: "Idempotent Payment & Billing Architectures",
+    problem: "Orphaned webhook payments, duplicate Stripe charges, state desync on network drops, and billing ledgers that cannot be audited or reconciled.",
+    approach: "Asynchronous Transactional Outbox pattern decoupling client-side checkout intents from payment gateway lifecycles.",
+    deliverable: "A fully reconcilable, double-charge-proof ledger integration (Stripe / M-Pesa / Adyen) with active query reconciliation cron workers.",
+    pricing: "Fixed-rate package integration",
+    specLink: "/architecture/asynchronous-payment-checkout",
+    specLabel: "View Resilient Payments Spec"
+  },
+  {
+    id: "admin-consoles",
+    icon: Layers,
+    title: "Data-Dense Admin Consoles & Real-Time Sync",
+    problem: "Laggy administrative pages that lock rows during massive queries, stale dashboard state, and error-prone UI operations that cause database side-effects.",
+    approach: "Bespoke internal tools optimized for concurrency control. Aggressive cache-invalidation strategies, read-replicas for reporting queries, and jank-free operational UI.",
+    deliverable: "High-performance operational admin suite featuring precise state synchronization, audit logs, and transaction-safety guardrails.",
+    pricing: "Project-based advisory & build",
+    specLink: "/architecture/concurrency-safe-inventory-ledger",
+    specLabel: "View Ledger Concurrency Spec"
+  },
+  {
+    id: "risk-auditing",
+    icon: SearchCheck,
+    title: "Architectural Risk Auditing & Consultation",
+    problem: "System instability, mounting technical debt, slow query execution times, and fear of launching changes to production during peak hours.",
+    approach: "Systematic deep-dive auditing of database schema designs, query execution paths, transaction boundaries, lock durations, and network topologies.",
+    deliverable: "A blunt, highly detailed 20-page Architectural Audit Report highlighting critical failure points, security gaps, and a step-by-step remediation roadmap.",
+    pricing: "Flat-rate advisory engagement",
+    specLink: "/inquiry?service=risk-auditing",
+    specLabel: "Inquire about an Audit"
+  },
+  {
+    id: "deterministic-rag",
+    icon: Cpu,
+    title: "Deterministic RAG & Secure Agent Integration",
+    problem: "Unpredictable AI workflows that hallucinate, bleed proprietary customer data, bypass authorization checks, or run up massive API billings.",
+    approach: "Context-isolated AI orchestration pipelines with strict data retrieval boundaries, semantic cache controls, and auditable runtime trace logs.",
+    deliverable: "Production-ready, deterministic RAG system bounded by structural security rules, with cost-limiting rate guards and verification logs.",
+    pricing: "Automation engineering package",
+    specLink: "/automation",
+    specLabel: "Explore Agent Automation Engine"
+  }
+];
+---
+
+<Layout
+  title="Services & Advisory | Isaac Gitonga"
+  description="Productized systems advisory, payment architecture design, database optimization, and high-integrity consulting services for tech companies."
+>
+  <div class="relative min-h-screen px-6 overflow-hidden">
+    <div class="relative z-10 max-w-6xl w-full mx-auto py-24 md:py-32 space-y-16">
+      
+      <!-- Page Header -->
+      <div class="space-y-4 max-w-3xl pb-10 border-b border-surface-border/40">
+        <span class="text-xs uppercase font-mono tracking-widest text-primary font-semibold">Services & Solutions</span>
+        <h1 class="text-4xl md:text-5xl font-montserrat font-bold text-foreground leading-tight">
+          Productized Advisory & <br/><span class="text-primary font-iceberg font-normal">Systems Engineering</span>
+        </h1>
+        <p class="text-muted font-montserrat font-medium text-lg leading-relaxed mt-4">
+          I provide high-leverage architectural consulting and engineering services designed to guarantee data correctness, system isolation, and resilience under heavy load. I do not sell vague developer hours. I offer fixed-scope outcomes that mitigate technical risk.
+        </p>
+      </div>
+
+      <!-- Services Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+        {services.map((service, index) => {
+          const Icon = service.icon;
+          return (
+            <div 
+              id={`service-card-${index}`}
+              class="group relative flex flex-col justify-between bg-surface/40 hover:bg-surface/75 border border-surface-border hover:border-primary/30 rounded-2xl p-6 md:p-8 transition-all duration-300 backdrop-blur-xs shadow-xs hover:shadow-md hover:shadow-primary/5"
+            >
+              <div class="space-y-6">
+                <!-- Header with Icon -->
+                <div class="flex items-center justify-between">
+                  <div class="p-3 bg-background border border-surface-border rounded-xl text-primary group-hover:text-foreground group-hover:bg-primary transition-all duration-300">
+                    <Icon size={24} />
+                  </div>
+                  <span class="text-[10px] font-mono text-muted-dark uppercase tracking-wider font-semibold">Offer 0{index + 1}</span>
+                </div>
+
+                <!-- Title & Description -->
+                <div class="space-y-3">
+                  <h3 class="text-xl font-iceberg font-bold text-foreground group-hover:text-primary transition-colors duration-200">
+                    {service.title}
+                  </h3>
+                  
+                  <div class="space-y-4 text-sm font-montserrat text-muted">
+                    <div>
+                      <span class="block text-[10px] uppercase font-mono tracking-wider text-rose-400 font-semibold mb-1">The Acute Friction</span>
+                      <p class="leading-relaxed">{service.problem}</p>
+                    </div>
+                    <div>
+                      <span class="block text-[10px] uppercase font-mono tracking-wider text-primary font-semibold mb-1">The Architectural Approach</span>
+                      <p class="leading-relaxed">{service.approach}</p>
+                    </div>
+                    <div>
+                      <span class="block text-[10px] uppercase font-mono tracking-wider text-foreground font-semibold mb-1">The Concrete Deliverable</span>
+                      <p class="leading-relaxed text-foreground/80">{service.deliverable}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Footer (Pricing & Link) -->
+              <div class="mt-8 pt-6 border-t border-surface-border/50 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div class="font-mono text-xs text-muted-dark">
+                  <span class="block text-[9px] uppercase tracking-wider">Pricing Anchor</span>
+                  <span class="text-secondary font-semibold">{service.pricing}</span>
+                </div>
+                <div class="flex items-center gap-4">
+                  {service.specLink && (
+                    <a
+                      href={service.specLink}
+                      class="inline-flex items-center gap-1.5 text-xs font-iceberg font-bold text-muted hover:text-foreground hover:underline"
+                    >
+                      <span>{service.specLabel}</span>
+                      <ArrowUpRight size={14} />
+                    </a>
+                  )}
+                  <a
+                    href={`/inquiry?service=${service.id}`}
+                    class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary/10 border border-primary/20 hover:bg-primary hover:text-background text-xs font-iceberg font-bold text-primary rounded-lg transition-all duration-200"
+                  >
+                    <span>Inquire</span>
+                    <ArrowUpRight size={14} />
+                  </a>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <!-- CTA Banner -->
+      <div class="relative bg-linear-to-r from-surface/80 to-[#14202d]/60 border border-surface-border rounded-2xl p-8 md:p-12 overflow-hidden flex flex-col md:flex-row justify-between items-center gap-8 mt-12">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(20,184,166,0.05),transparent)] pointer-events-none"></div>
+        <div class="space-y-3 z-10 max-w-2xl text-center md:text-left">
+          <h2 class="text-2xl md:text-3xl font-iceberg font-bold text-foreground">
+            Facing a fragile system or preparing for high traffic?
+          </h2>
+          <p class="text-muted text-sm font-montserrat leading-relaxed">
+            Let's evaluate your bottlenecks, secure your database transaction limits, and establish audit-ready isolation boundaries.
+          </p>
+        </div>
+        <div class="z-10 shrink-0">
+          <a
+            href="/inquiry?service=risk-auditing"
+            class="flex items-center justify-center gap-2 px-6 py-4 bg-primary hover:bg-primary-hover text-background font-bold font-iceberg text-base rounded-xl transition-all duration-200 shadow-lg shadow-primary/10 hover:shadow-primary/20 active:scale-98 cursor-pointer"
+          >
+            <span>Inquire about an Audit</span>
+            <ArrowUpRight size={18} />
+          </a>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</Layout>

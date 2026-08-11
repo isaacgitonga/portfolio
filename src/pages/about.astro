@@ -1,0 +1,147 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { Server, Database, LayoutTemplate, ShieldAlert, Cpu, ArrowUpRight } from "@lucide/astro";
+---
+
+<Layout
+  title="About & Ethos | Isaac Gitonga"
+  description="Ethos, technical background, and systems architecture approach of Isaac Gitonga, Principal Architect."
+>
+  <div class="relative min-h-screen px-6 overflow-hidden">
+    <div class="relative z-10 max-w-6xl w-full mx-auto py-24 md:py-32 space-y-16">
+      
+      <!-- Page Header -->
+      <div class="space-y-4 max-w-3xl pb-10 border-b border-surface-border/40">
+        <span class="text-xs uppercase font-mono tracking-widest text-primary font-semibold">Ethos & Background</span>
+        <h1 class="text-4xl md:text-5xl font-montserrat font-bold text-foreground leading-tight">
+          Isaac Gitonga | <span class="text-primary font-iceberg font-normal">Principal Architect</span>
+        </h1>
+        <p class="text-muted font-montserrat font-medium text-lg leading-relaxed mt-4">
+          I build resilient, high-integrity backend systems where security, correctness, and long-term maintainability are non-negotiable.
+        </p>
+      </div>
+
+      <!-- Who I Am & Why I Do It -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        
+        <!-- Left: Narrative (8 cols) -->
+        <div class="lg:col-span-8 space-y-8 font-montserrat text-muted text-base leading-relaxed">
+          
+          <div class="space-y-4">
+            <h2 class="text-2xl font-iceberg font-bold text-foreground">Who I Am</h2>
+            <p>
+              I’m a software engineer and system architect specializing in evolving backend-heavy platforms that handle sensitive data, complex workflows, and real operational constraints. My work spans greenfield builds to legacy modernization, always focusing on software that survives production, not just the demo.
+            </p>
+            <p>
+              I don’t chase hype. I design architectures that are understandable, auditable, and resilient—solutions that teams can maintain and businesses can trust.
+            </p>
+          </div>
+
+          <div class="space-y-4 pt-4">
+            <h2 class="text-2xl font-iceberg font-bold text-foreground">Why I Do It</h2>
+            <p>
+              Most costly software failures don’t stem from bad ideas—they stem from fragile systems, rushed architecture, and unmanaged technical debt.
+            </p>
+            <p>
+              I build software because I value resilience. I design systems that hold up under pressure: when traffic spikes, when money is on the line, and long after the original authors have moved on.
+            </p>
+            <p>
+              I thrive on the hard parts of engineering—state management, concurrency, and data integrity—because getting these right early saves clients years of pain, expensive rewrites, and lost trust.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Right: Core Directives & Status (4 cols) -->
+        <div class="lg:col-span-4 space-y-6">
+          <div class="bg-surface/50 border border-surface-border rounded-2xl p-6 space-y-4 backdrop-blur-xs">
+            <h3 class="font-iceberg text-lg font-bold text-foreground">
+              Core Principles
+            </h3>
+            
+            <ul class="space-y-3 font-montserrat text-xs text-muted list-none pl-0">
+              <li class="flex items-start gap-2.5">
+                <span class="text-primary font-bold">01.</span>
+                <span>Enforce security and integrity at the database layer, not just in application memory.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-primary font-bold">02.</span>
+                <span>Decouple business domain logic strictly from framework dependencies.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-primary font-bold">03.</span>
+                <span>Design with clear transaction boundaries and lock contention awareness.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-primary font-bold">04.</span>
+                <span>Eliminate superficial abstractions; maintain complete visibility over runtime performance.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Core Competencies / Technical Expertise Grid -->
+      <div class="space-y-8 pt-8">
+        <h2 class="text-2xl font-iceberg font-bold text-foreground border-b border-surface-border/40 pb-2">
+          Technical Specializations
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- Backend Engineering -->
+          <div class="bg-surface/30 border border-surface-border rounded-xl p-6 space-y-4">
+            <div class="p-2.5 bg-primary/10 border border-primary/20 text-primary rounded-lg w-fit">
+              <Server size={20} />
+            </div>
+            <h3 class="font-iceberg font-bold text-lg text-foreground">Backend Engineering</h3>
+            <p class="text-xs text-muted font-montserrat leading-relaxed">
+              API design (OpenAPI/GraphQL), context isolation, authentication models (claims-based RBAC), and asynchronous transactional workflows. Decoupling core business boundaries from frameworks using TypeScript/JavaScript and Python.
+            </p>
+          </div>
+
+          <!-- Database Design -->
+          <div class="bg-surface/30 border border-surface-border rounded-xl p-6 space-y-4">
+            <div class="p-2.5 bg-primary/10 border border-primary/20 text-primary rounded-lg w-fit">
+              <Database size={20} />
+            </div>
+            <h3 class="font-iceberg font-bold text-lg text-foreground">Database Design</h3>
+            <p class="text-xs text-muted font-montserrat leading-relaxed">
+              Relational data modeling, explicit concurrency control (row locks), query execution planning, index optimization strategies, and zero-downtime database migrations.
+            </p>
+          </div>
+
+          <!-- Frontend Engineering -->
+          <div class="bg-surface/30 border border-surface-border rounded-xl p-6 space-y-4">
+            <div class="p-2.5 bg-primary/10 border border-primary/20 text-primary rounded-lg w-fit">
+              <LayoutTemplate size={20} />
+            </div>
+            <h3 class="font-iceberg font-bold text-lg text-foreground">Data-Dense Frontend</h3>
+            <p class="text-xs text-muted font-montserrat leading-relaxed">
+              Administrative dashboards, system operators console UI, real-time data sync frameworks, cache synchronization strategies, and responsive layouts built with TypeScript.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="bg-surface/30 border border-surface-border rounded-2xl p-8 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="space-y-1 text-center md:text-left">
+          <h4 class="font-iceberg font-bold text-lg text-foreground">Want to collaborate?</h4>
+          <p class="text-xs text-muted font-montserrat">Let's discuss backend stability, transaction ledgers, or database optimizations.</p>
+        </div>
+        <div class="flex gap-4">
+          <a 
+            href="/apps/portfolio/src/pages/inquiry"
+            class="px-5 py-3 bg-primary hover:bg-primary-hover text-background font-iceberg font-bold text-sm rounded-lg transition-colors cursor-pointer"
+          >
+            Inquire Now
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</Layout>
