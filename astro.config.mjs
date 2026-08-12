@@ -13,12 +13,5 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  redirects: {
-    '/case-studies': '/work',
-    '/book': '/inquiry?service=risk-auditing',
-    '/contact': '/inquiry',
-    '/inquire': '/inquiry',
-  },
-
   adapter: vercel()
 });
