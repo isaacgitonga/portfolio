@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { type AstroComponent, ArrowUpRight, CircleCheck } from "@lucide/astro";
+import { type AstroComponent, ArrowUpRight, CircleCheck, ChevronDown } from "@lucide/astro";
 import { INQUIRY_CATEGORY_MAP } from "@/constants/inquiryCategories";
 
 interface Props {
@@ -103,6 +103,38 @@ const isFeatured = variant === "featured";
         </p>
       </div>
 
+      <!-- Problem & Approach (collapsible) -->
+      <details class="group js-service-accordion border-t border-surface-border/30 pt-4">
+        <summary class="flex items-center justify-between gap-3 cursor-pointer list-none [&::-webkit-details-marker]:hidden text-[10px] uppercase font-mono tracking-wider text-foreground font-semibold">
+          <span>The Problem & My Approach</span>
+          <ChevronDown size={14} class="text-muted-dark transition-transform duration-200 group-open:rotate-180 shrink-0" />
+        </summary>
+        <div class="js-accordion-panel mt-4 space-y-4 text-xs font-montserrat">
+          <div class="space-y-1.5">
+            <span class="block text-foreground font-semibold">{service.problem.headline}</span>
+            <ul class="space-y-1">
+              {service.problem.points.map((point) => (
+                <li class="flex items-start gap-1.5 text-foreground/80">
+                  <span class="text-muted-dark shrink-0">—</span>
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="space-y-1.5">
+            <span class="block text-primary font-semibold">{service.approach.headline}</span>
+            <ul class="space-y-1">
+              {service.approach.points.map((point) => (
+                <li class="flex items-start gap-1.5 text-foreground/80">
+                  <CircleCheck size={12} class="text-emerald-400 shrink-0 mt-0.5" />
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </details>
+
       <!-- Detailed Breakdown -->
       <div class="space-y-4 pt-2 text-sm font-montserrat border-t border-surface-border/30">
         <!-- Concrete Deliverables -->
@@ -141,3 +173,73 @@ const isFeatured = variant === "featured";
     </div>
   </div>
 )}
+
+<script>
+  function setupAccordion(details: HTMLDetailsElement) {
+    const summary = details.querySelector<HTMLElement>(":scope > summary");
+    const panel = details.querySelector<HTMLElement>(":scope > .js-accordion-panel");
+    if (!summary || !panel) return;
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
+    let animation: Animation | null = null;
+    let isClosing = false;
+    let isExpanding = false;
+
+    summary.addEventListener("click", (e) => {
+      e.preventDefault();
+      details.style.overflow = "hidden";
+
+      if (isClosing || !details.open) {
+        expand();
+      } else if (isExpanding || details.open) {
+        collapse();
+      }
+    });
+
+    function expand() {
+      isExpanding = true;
+      details.style.height = `${details.offsetHeight}px`;
+      details.open = true;
+      requestAnimationFrame(() => {
+        const startHeight = `${details.offsetHeight}px`;
+        const endHeight = `${summary!.offsetHeight + panel!.offsetHeight}px`;
+        runAnimation(startHeight, endHeight, true);
+      });
+    }
+
+    function collapse() {
+      isClosing = true;
+      const startHeight = `${details.offsetHeight}px`;
+      const endHeight = `${summary!.offsetHeight}px`;
+      runAnimation(startHeight, endHeight, false);
+    }
+
+    function runAnimation(startHeight: string, endHeight: string, opening: boolean) {
+      if (animation) animation.cancel();
+      animation = details.animate(
+        { height: [startHeight, endHeight] },
+        { duration: 250, easing: "ease-out" }
+      );
+      animation.onfinish = () => onAnimationFinish(opening);
+      animation.oncancel = () => {
+        isClosing = false;
+        isExpanding = false;
+      };
+    }
+
+    function onAnimationFinish(open: boolean) {
+      details.open = open;
+      animation = null;
+      isClosing = false;
+      isExpanding = false;
+      details.style.height = "";
+      details.style.overflow = "";
+    }
+  }
+
+  document
+    .querySelectorAll<HTMLDetailsElement>(".js-service-accordion")
+    .forEach(setupAccordion);
+</script>

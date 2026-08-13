@@ -27,20 +27,6 @@ const footerServices = rawServices
         <Socials gap={5} />
       </div>
 
-      <!-- Navigate -->
-      <div class="space-y-4">
-        <h6 class="text-xs uppercase font-mono tracking-widest text-primary font-semibold">Navigate</h6>
-        <ul class="space-y-3">
-          {NAV_LINKS.map((nav) => (
-            <li>
-              <a href={nav.href} class="text-sm text-muted hover:text-primary font-montserrat transition-colors">
-                {nav.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-
       <!-- Services -->
       <div class="space-y-4">
         <h6 class="text-xs uppercase font-mono tracking-widest text-primary font-semibold">Services</h6>
@@ -61,6 +47,20 @@ const footerServices = rawServices
               <ArrowUpRight size={12} />
             </a>
           </li>
+        </ul>
+      </div>
+
+      <!-- Navigate -->
+      <div class="space-y-4">
+        <h6 class="text-xs uppercase font-mono tracking-widest text-primary font-semibold">Navigate</h6>
+        <ul class="space-y-3">
+          {NAV_LINKS.map((nav) => (
+            <li>
+              <a href={nav.href} class="text-sm text-muted hover:text-primary font-montserrat transition-colors">
+                {nav.name}
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
 
