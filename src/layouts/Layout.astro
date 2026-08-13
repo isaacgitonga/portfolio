@@ -9,8 +9,8 @@ interface Props {
 }
 
 const {
-  title = "Isaac Gitonga | Software Architect",
-  description = "Software engineer and system architect building reliable infrastructure.",
+  title = "Isaac | Principal Architect & Systems Consultant",
+  description = "Engineering the software your business cannot afford to get wrong.",
 } = Astro.props;
 ---
 
@@ -29,6 +29,7 @@ const {
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <title>{title}</title>
+
     <script is:inline>
       const theme = (() => {
         if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
@@ -46,6 +47,7 @@ const {
         document.documentElement.classList.remove('light');
       }
     </script>
+
   </head>
   <body
     class="bg-background text-foreground font-nunito overflow-x-hidden selection:bg-primary/20 selection:text-primary"

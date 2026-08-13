@@ -53,7 +53,6 @@
     @apply block;
   }
 
-  html,
   body {
     @apply bg-background text-foreground font-nunito overflow-x-hidden;
     margin: 0;
@@ -228,4 +227,25 @@
   width: 100%;
   height: 100%;
   fill: currentColor;
+}
+
+/* Theme Toggle Switcher State Styles */
+#theme-indicator {
+  @apply translate-x-8 transition-transform duration-300 ease-out;
+}
+#theme-light-btn {
+  @apply text-foreground/60 transition-colors duration-300;
+}
+#theme-dark-btn {
+  @apply text-background transition-colors duration-300;
+}
+
+.light #theme-indicator {
+  @apply translate-x-0;
+}
+.light #theme-light-btn {
+  @apply text-background;
+}
+.light #theme-dark-btn {
+  @apply text-foreground/60;
 }
