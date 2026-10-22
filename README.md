@@ -1,47 +1,69 @@
-# Astro Starter Kit: Basics
+# isaacgitonga.com
 
-```sh
-pnpm create astro@latest -- --template basics
+Source for [isaacgitonga.com](https://isaacgitonga.com), Isaac Gitonga's portfolio and services site. It covers
+selected work, an architecture catalog, the services offered, and an inquiry form that emails both sides through Resend.
+
+## Stack
+
+- [Astro](https://astro.build) 7, server-rendered on Vercel through `@astrojs/vercel`
+- React islands for interactive parts (the inquiry form uses React Hook Form and Zod)
+- Tailwind CSS 4, GSAP for animation, Mermaid for diagrams, Lucide icons
+- [React Email](https://react.email) templates sent through [Resend](https://resend.com)
+
+## Getting started
+
+Requires Node.js 22.12 or later and pnpm, which is pinned in `package.json`. Run `corepack enable pnpm` once per
+Node version so `pnpm` resolves to the pinned release.
+
+```bash
+git clone https://github.com/isaacgitonga/portfolio.git
+cd portfolio
+pnpm install
+cp .env.example .env   # then fill in RESEND_API_KEY
+pnpm dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Both variables in `.env.example` are required. The app throws a `CONFIG_ERROR` at startup if either is missing.
 
-## 🚀 Project Structure
+## Commands
 
-Inside of your Astro project, you'll see the following folders and files:
+| Command        | Does                                                     |
+| :------------- | :------------------------------------------------------- |
+| `pnpm dev`     | Dev server at `localhost:4321`                           |
+| `pnpm build`   | Production build into `dist/` and `.vercel/output/`      |
+| `pnpm preview` | Serve the production build locally                       |
+| `pnpm email`   | React Email preview of `src/emails/` at `localhost:3003` |
+| `pnpm astro …` | Astro CLI (`astro add`, `astro check`, …)                |
+
+## Project structure
 
 ```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+src/
+├── actions/          Astro Actions; `inquire` validates the form and sends both emails
+├── content/          Content collections (JSON and Markdown)
+│   ├── architecture/ Architecture catalog entries
+│   ├── projects/     Selected work
+│   ├── services/     Service offers
+│   └── raw/          Staging area for imported material, not rendered
+├── content.config.ts Collection definitions
+├── emails/           React Email templates and their Tailwind theme
+├── schema/           Zod schemas for collections and the inquiry form
+├── pages/            Routes: /, /about, /work, /architecture, /services, /automation, /inquiry
+├── components/  layouts/  animations/  styles/  utils/  types/  constants/
+└── app.config.ts     Profile links, availability and service keys
+docs/                 Build specs: wireframes, schemas, canonical copy, decision log
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Content and docs
 
-## 🧞 Commands
+- Pages render from the collections in `src/content/`, validated by the schemas in `src/schema/`.
+- `docs/` holds how the site is built: [`wireframes.md`](docs/wireframes.md) (sitemap and page breakdowns),
+  [`schemas.md`](docs/schemas.md), [`copy.md`](docs/copy.md) (canonical copy), and
+  [`overrides.md`](docs/overrides.md) (the decision log). `blueprint.md` is a superseded draft.
+- Business facts (positioning, service definitions and statuses, case-study context) are owned outside this repo.
+  Copy here follows them. [`AGENTS.md`](AGENTS.md) spells out the boundary and the working rules for coding agents.
 
-All commands are run from the root of the project, from a terminal:
+## History
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-| `pnpm email`           | Preview email templates at `localhost:3003`      |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Version 1 was a Vite + React site; its last commit is `37f8b6c`. Version 2 is the Astro rewrite that follows it. It
+was built in a monorepo from June to October 2026 and moved back here with its full commit history.
