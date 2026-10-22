@@ -1,5 +1,5 @@
 {
-  "name": "@apps/portfolio",
+  "name": "portfolio",
   "type": "module",
   "version": "2.0.0",
   "engines": {
@@ -9,12 +9,12 @@
     "dev": "astro dev --port 4321",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "email": "email dev --dir src/emails -p 3003"
   },
   "dependencies": {
     "@astrojs/react": "^6.0.1",
     "@astrojs/vercel": "^11.0.4",
-    "@core/transactional": "workspace:*",
     "@hookform/resolvers": "^5.4.0",
     "@lucide/astro": "^1.25.0",
     "@types/react": "^19.2.17",
@@ -24,14 +24,16 @@
     "mermaid": "^11.17.2",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "react-email": "6.9.1",
     "react-hook-form": "^7.77.0",
     "resend": "^6.12.4",
-    "zod": "catalog:"
+    "zod": "^4.6.5"
   },
   "devDependencies": {
-    "@core/tsconfig": "workspace:*",
+    "@react-email/ui": "6.9.1",
     "@tailwindcss/vite": "^4.3.3",
     "sharp": "^0.35.4",
     "tailwindcss": "^4.3.3"
-  }
+  },
+  "packageManager": "pnpm@12.6.0+sha512.3ef68f951cb111ac204b4a5a16f0b2ddf0da56a96e0413e81d855d9f0b55ef926714709028e1cd00c405c2c5fb7b9e8ec4dc46777c805d0373c2f2ff00fd20ec"
 }

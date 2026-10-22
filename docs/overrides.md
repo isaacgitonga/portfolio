@@ -1,6 +1,6 @@
-# Portfolio Decisions & Overrides (`apps/portfolio/docs/overrides.md`)
+# Portfolio Decisions & Overrides (`docs/overrides.md`)
 
-> **Purpose**: The single log of *why things are the way they are* in `apps/portfolio`. Covers both:
+> **Purpose**: The single log of *why things are the way they are* in this repo. Covers both:
 > * **Overrides** — deliberate departures from the specifications in `docs/`
 > * **Decisions** — choices made *within* spec where the spec was silent (why SSE over polling, why this nav structure, why this section order)
 >

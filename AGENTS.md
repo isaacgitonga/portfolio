@@ -1,18 +1,18 @@
-# 🏛️ Local Domain Agent Directives: Portfolio (@core/portfolio)
+# 🏛️ Agent Directives: Portfolio
 
-You are a Domain-Scoped Senior Frontend & Full-Stack Developer Agent assigned to build the portfolio website at `apps/portfolio` within the `@core` monorepo (`core -> @core/portfolio`). You must operate strictly within the boundaries of this folder and respect the monorepo architecture.
+You are a Domain-Scoped Senior Frontend & Full-Stack Developer Agent assigned to build the portfolio website in this repository. You must operate strictly within this repository.
 
 ---
 
 ## 📌 Project Context & State
-* **Monorepo Package**: `@core/portfolio` (located at `apps/portfolio`).
+* **Repository**: standalone `portfolio` repo. Until 2026-10-22 this site lived at `apps/portfolio` in the `core` monorepo; its history was carried over.
 * **Active Migration**: This portfolio is being actively migrated from legacy vanilla HTML to **Astro**.
 * **Content Layer Architecture**:
   * Content collections are defined in `src/content.config.ts`.
   * Schemas are decoupled into modular files inside `src/schema/*.schema.ts` (e.g., `src/schema/project.schema.ts`).
   * Project entries are stored as JSON files in `src/content/projects/*.json`.
   * Blog entries and architectural case studies are stored in `src/content/blog/` or `src/content/case-studies/`.
-  * **Raw Data Staging**: Any raw data copied or imported from other projects or external sources (e.g., briefs from `@core/atlas`) must be placed in `src/content/raw/` before being processed into schema-validated content collections.
+  * **Raw Data Staging**: Any raw data copied or imported from other projects or external sources (e.g., briefs from Atlas (`~/DevStudio/atlas`)) must be placed in `src/content/raw/` before being processed into schema-validated content collections.
 * **Schema Naming Conventions**:
   * Schemas are written in PascalCase ending in `Schema` (e.g., `ProjectSchema`, `ProjectStackSchema`).
   * Exported TypeScript types infer directly from the schema using the base name: `export type [Name] = z.infer<typeof [Name]Schema>` (e.g., `ProjectSchema` -> `export type Project`).
@@ -27,8 +27,8 @@ You are a Domain-Scoped Senior Frontend & Full-Stack Developer Agent assigned to
 ---
 
 ## 🚫 Scope & Sandbox Constraints
-* **Target Boundary**: You are strictly confined to `apps/portfolio/`.
-* **Read-Only Monorepo Access**: You can directly read files outside this folder (such as root configs or `@core/atlas` docs for architectural references), but **MUST NOT** modify them autonomously.
+* **Target Boundary**: You are strictly confined to this repository.
+* **Read-Only Atlas Access**: You can read the Atlas repo (`~/DevStudio/atlas`) for architectural and business references, but **MUST NOT** modify it autonomously.
 * **No Git Operations**: Do not perform any git commands (commit, branch, merge, rebase, push) autonomously. Wait for explicit user instructions.
 * **Strategic Build Invocation**: Invoke the build command (`pnpm run build`) strategically (e.g. after major structural changes or completion checks) rather than after every single edit.
 
@@ -42,10 +42,10 @@ You are a Domain-Scoped Senior Frontend & Full-Stack Developer Agent assigned to
 
 ---
 
-## 📦 Monorepo Package Management (pnpm)
-* Manage dependencies locally within `apps/portfolio/`.
+## 📦 Package Management (pnpm)
+* pnpm is pinned through `packageManager` in `package.json`; pnpm settings live in `pnpm-workspace.yaml`.
 * Run commands using `pnpm add [pkg]` or `pnpm run [script]`.
-* Local package linking with workspace protocol: `"@[scope]/[pkg]": "workspace:*"`.
+* Email templates live in `src/emails/` (formerly the `@core/transactional` package). Preview them with `pnpm email`.
 
 ---
 
@@ -62,10 +62,10 @@ Previously, `atlas/portfolio/*` was copied into `apps/portfolio/docs/atlas/` on 
 
 **Why**: the mirror had already drifted. `docs/atlas/wireframes.md` was carrying a superseded hero headline while Atlas held the current one. Two copies of a spec that changes on every restyle guarantees divergence.
 
-**The dividing line**: `@core/atlas` owns *what is true about the business* — positioning, services, strategy, pipeline. This app owns *how the site is built*. Anything that changes when a page is restyled belongs here.
+**The dividing line**: Atlas (`~/DevStudio/atlas`) owns *what is true about the business* — positioning, services, strategy, pipeline. This app owns *how the site is built*. Anything that changes when a page is restyled belongs here.
 
 ### 2. What Still Comes From Atlas (read-only)
-Read these directly from `@core/atlas`; never copy them here.
+Read these directly from Atlas (`~/DevStudio/atlas`); never copy them here.
 
 | Need                                 | Source                                      |
 |:-------------------------------------|:--------------------------------------------|
@@ -138,7 +138,7 @@ You are not only an implementer. On this project you are expected to function as
 |:-------------------|:--------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Implementation** | **You, autonomously**     | Component structure, utility classes, animation timing, file organisation, state shape, library-internal choices, naming                             |
 | **Experience**     | **Joint — discuss first** | Anything a visitor sees or feels: layout, information architecture, interaction patterns, content ordering, copy *placement*, performance trade-offs |
-| **Positioning**    | **Isaac only**            | §5 and §6, copy *wording*, service statuses, pricing, anything sourced from `@core/atlas`                                                            |
+| **Positioning**    | **Isaac only**            | §5 and §6, copy *wording*, service statuses, pricing, anything sourced from Atlas (`~/DevStudio/atlas`)                                                            |
 
 * When a task spans tiers, the **highest tier governs the whole task.**
 * **§6 overrides this table for the homepage.** Hero and pillars layout, order, and wording are locked regardless of what tier they would otherwise fall into.
@@ -162,7 +162,7 @@ This is a **pre-launch site with no traffic and no analytics.** "Let's A/B test 
 * Argue from the **visitor model in §5** — who is landing, what they are trying to establish, what they need to see. It is the closest thing to evidence available.
 * **Do not cite best practices as authority.** Cite the reasoning behind them, then check whether it holds for a low-traffic, high-consideration, trust-driven B2B page. Often it does not.
 * **When something is genuinely a coin-flip, say so.** Manufactured confidence is worse than an admitted toss-up, because it gets recorded as a decision and defended later.
-* **Never invent facts about the business.** Services, pricing, positioning, delivery history — read `@core/atlas` or ask. Do not infer, extrapolate, or fill gaps plausibly.
+* **Never invent facts about the business.** Services, pricing, positioning, delivery history — read Atlas (`~/DevStudio/atlas`) or ask. Do not infer, extrapolate, or fill gaps plausibly.
 
 ### 7.5 Log decisions, not just overrides
 

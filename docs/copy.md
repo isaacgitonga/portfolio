@@ -1,4 +1,4 @@
-# Portfolio Canonical Copy (`apps/portfolio/docs/copy.md`)
+# Portfolio Canonical Copy (`docs/copy.md`)
 
 > **Directory Purpose**: Master single-source-of-truth copy for the About, Services Showcase, and Architecture Catalog sections of `isaacgitonga.com`.
 
@@ -33,7 +33,7 @@ I thrive on the hard parts of engineering — state management, concurrency, and
 
 ## 🛠️ 2. Productized Services Showcase (9 Offers Matrix)
 
-Full 6-part specification files for each offer are maintained in **[`atlas/services/`](file:///home/isaac/DevStudio/core/atlas/services/README.md)**:
+Full 6-part specification files for each offer are maintained in **[`atlas/services/`](file:///home/isaac/DevStudio/atlas/services/README.md)**:
 
 1. **Resilient Backend & Developer API Infrastructure** (`01-resilient-backend-apis.md`)
 2. **Enterprise Identity & Access Control (RBAC/ABAC)** (`02-enterprise-identity-rbac.md`)

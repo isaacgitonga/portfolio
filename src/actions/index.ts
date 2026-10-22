@@ -3,7 +3,7 @@ import config from "@/app.config.ts";
 import {ActionError, defineAction} from "astro:actions";
 import {Resend} from "resend";
 import {InquirySchema} from "@/schema";
-import {InquiryConfirmationEmail, InquiryEmail} from "@core/transactional";
+import {InquiryConfirmationEmail, InquiryEmail} from "@/emails";
 
 const resend = new Resend(config.resend.apiKey);
 

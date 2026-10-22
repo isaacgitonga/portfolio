@@ -1,0 +1,12 @@
+allowBuilds:
+  esbuild: true
+  sharp: false
+
+packageExtensions:
+  # @hookform/resolvers ships a zod resolver whose types import `zod/v4/core`, but declares zod neither as a
+  # dependency nor as a peer. Without it, TypeScript can bind to whichever zod is hoisted rather than ours, and
+  # zod 4 brands its types with a version literal, so `zodResolver(schema)` fails to typecheck. Declaring the
+  # missing peer makes pnpm link our own zod into the resolver.
+  '@hookform/resolvers':
+    peerDependencies:
+      zod: '*'

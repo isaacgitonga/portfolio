@@ -1,4 +1,4 @@
-# Portfolio Astro Schemas & Data Models (`apps/portfolio/docs/schemas.md`)
+# Portfolio Astro Schemas & Data Models (`docs/schemas.md`)
 
 > **Directory Purpose**: Canonical TypeScript interfaces, Astro Zod Content Collection schemas, slug dictionaries, and cross-referencing graph utilities for `isaacgitonga.com`.
 
