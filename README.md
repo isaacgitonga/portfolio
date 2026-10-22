@@ -65,5 +65,5 @@ docs/                 Build specs: wireframes, schemas, canonical copy, decision
 
 ## History
 
-Version 1 was a Vite + React site; its last commit is `37f8b6c`. Version 2 is the Astro rewrite that follows it. It
+Version 1 was a Vite site in vanilla HTML and TypeScript; its last commit is `37f8b6c`. Version 2 is the Astro rewrite that follows it. It
 was built in a monorepo from June to October 2026 and moved back here with its full commit history.

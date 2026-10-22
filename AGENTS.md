@@ -2,16 +2,17 @@
 
 You are a Domain-Scoped Senior Frontend & Full-Stack Developer Agent assigned to build the portfolio website in this repository. You must operate strictly within this repository.
 
+> `CLAUDE.md` is a **symlink to this file**. Claude Code v2.1.277+ reads `AGENTS.md` on its own, but not in every session (older versions, or the first session after an upgrade); the symlink makes it load in all of them, exactly once. Edit `AGENTS.md`; never create a separate `CLAUDE.md`.
+
 ---
 
 ## 📌 Project Context & State
 * **Repository**: standalone `portfolio` repo. Until 2026-10-22 this site lived at `apps/portfolio` in the `core` monorepo; its history was carried over.
-* **Active Migration**: This portfolio is being actively migrated from legacy vanilla HTML to **Astro**.
+* **Active Migration**: This portfolio is being actively migrated from the legacy site (v1: Vite with vanilla HTML and TypeScript, last commit `37f8b6c`) to **Astro** (v2).
 * **Content Layer Architecture**:
-  * Content collections are defined in `src/content.config.ts`.
-  * Schemas are decoupled into modular files inside `src/schema/*.schema.ts` (e.g., `src/schema/project.schema.ts`).
-  * Project entries are stored as JSON files in `src/content/projects/*.json`.
-  * Blog entries and architectural case studies are stored in `src/content/blog/` or `src/content/case-studies/`.
+  * Content collections are defined in `src/content.config.ts`: `projects`, `architecture` and `services`.
+  * Schemas are decoupled into modular files inside `src/schema/*.schema.ts` (e.g., `src/schema/project.schema.ts`); the inquiry form's schema is `src/schema/inquiry.schema.ts`.
+  * Project entries are JSON files in `src/content/projects/`, service offers are JSON files in `src/content/services/`, and architecture catalog entries are Markdown/MDX files in `src/content/architecture/` (files starting with `_` are skipped).
   * **Raw Data Staging**: Any raw data copied or imported from other projects or external sources (e.g., briefs from Atlas (`~/DevStudio/atlas`)) must be placed in `src/content/raw/` before being processed into schema-validated content collections.
 * **Schema Naming Conventions**:
   * Schemas are written in PascalCase ending in `Schema` (e.g., `ProjectSchema`, `ProjectStackSchema`).
@@ -44,8 +45,10 @@ You are a Domain-Scoped Senior Frontend & Full-Stack Developer Agent assigned to
 
 ## 📦 Package Management (pnpm)
 * pnpm is pinned through `packageManager` in `package.json`; pnpm settings live in `pnpm-workspace.yaml`.
-* Run commands using `pnpm add [pkg]` or `pnpm run [script]`.
+* Run commands using `pnpm add [pkg]` or `pnpm run [script]`. If `pnpm` is missing, run `corepack enable pnpm`.
+* Environment variables are listed in `.env.example`; both are required and the app throws a `CONFIG_ERROR` without them.
 * Email templates live in `src/emails/` (formerly the `@core/transactional` package). Preview them with `pnpm email`.
+* There is no type-check script and no `@astrojs/check`; `pnpm run build` is the verification step.
 
 ---
 
@@ -54,7 +57,7 @@ You are a Domain-Scoped Senior Frontend & Full-Stack Developer Agent assigned to
 ### 1. Build Specs Live Here (`docs/`) — the Atlas mirror is retired
 *As of 2026-08-07 the `docs/atlas/` mirror no longer exists.*
 
-Previously, `atlas/portfolio/*` was copied into `apps/portfolio/docs/atlas/` on every change (the "Upstream Portfolio Sync Mandate"). That mandate has been removed from `@core/atlas/AGENTS.md`, and the specs now live **only** here:
+Previously, `atlas/portfolio/*` was copied into this site's `docs/atlas/` on every change (the "Upstream Portfolio Sync Mandate"). That mandate has been removed from Atlas's `AGENTS.md`, and the specs now live **only** here:
 
 * [`docs/wireframes.md`](docs/wireframes.md) — sitemap, visual theme, page breakdowns, `/inquire` SLA flow
 * [`docs/schemas.md`](docs/schemas.md) — Astro content collection schemas, `ServiceCard` interface, category maps
