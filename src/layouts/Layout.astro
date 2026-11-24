@@ -19,7 +19,7 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/logos/logo-pulse.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -32,26 +32,26 @@ const {
 
     <script is:inline>
       const theme = (() => {
-        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-          return localStorage.getItem('theme');
+        if (
+          typeof localStorage !== "undefined" &&
+          localStorage.getItem("theme")
+        ) {
+          return localStorage.getItem("theme");
         }
-        if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-          return 'light';
+        if (window.matchMedia("(prefers-color-scheme: light)").matches) {
+          return "light";
         }
-        return 'dark';
+        return "dark";
       })();
 
-      if (theme === 'light') {
-        document.documentElement.classList.add('light');
+      if (theme === "light") {
+        document.documentElement.classList.add("light");
       } else {
-        document.documentElement.classList.remove('light');
+        document.documentElement.classList.remove("light");
       }
     </script>
-
   </head>
-  <body
-    class="bg-background text-foreground font-nunito overflow-x-hidden selection:bg-primary/20 selection:text-primary"
-  >
+  <body class="bg-background text-foreground font-nunito overflow-x-hidden selection:bg-primary/20 selection:text-primary">
     <Navbar />
     <slot />
     <Footer />

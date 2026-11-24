@@ -1,33 +1,42 @@
 ---
-import {Menu, Moon, Sun, X} from "@lucide/astro";
+import { Menu, Moon, Sun, X } from "@lucide/astro";
 import Socials from "@/components/Socials.astro";
 import { NAV_LINKS as navs } from "@/constants/navigation";
-
 
 const pathname = Astro.url.pathname;
 const isActive = (href: string) => {
   if (href === "/") {
     return pathname === "/" || pathname === "";
   }
-  
+
   return pathname.startsWith(href);
 };
 ---
 
 <!-- Desktop Navigation Header -->
-<header id="site-header" class="sticky top-0 w-full z-40 bg-background/80 backdrop-blur-md border-b border-transparent transition-colors duration-300">
+<header
+  id="site-header"
+  class="sticky top-0 w-full z-40 bg-background/80 backdrop-blur-md border-b border-transparent transition-colors duration-300"
+>
   <div class="max-w-7xl mx-auto h-(--nav-height) flex justify-between items-center gap-6 py-2 px-6">
     <div class="flex items-center gap-8">
-      <a href="/" class="flex items-center gap-3 hover:opacity-85 transition-opacity">
-        <img src="/logos/logo-pulse.svg" alt="Profile Logo" class="h-9 w-auto" />
+      <a
+        href="/"
+        class="flex items-center gap-3 hover:opacity-85 transition-opacity"
+      >
+        <img
+          src="/logos/logo-no-bg-white.svg"
+          alt="Profile Logo"
+          class="h-9 w-auto"
+        />
       </a>
 
       <nav class="hidden md:block">
         <ul class="flex items-center gap-8 font-iceberg text-sm">
-          {navs.map(nav => (
+          {navs.map((nav) => (
             <li>
-              <a 
-                href={nav.href} 
+              <a
+                href={nav.href}
                 class={`nav-link transition-colors ${isActive(nav.href) ? "text-primary active-link" : "text-muted hover:text-primary"}`}
               >
                 {nav.name}
@@ -45,10 +54,25 @@ const isActive = (href: string) => {
 
       <div class="relative rounded-full p-1 flex items-center justify-center gap-1 border border-primary/15 bg-surface/50 h-9 overflow-hidden">
         <!-- Sliding Indicator -->
-        <div id="theme-indicator" class="absolute left-1 w-7 h-7 bg-primary rounded-full z-0"></div>
+        <div
+          id="theme-indicator"
+          class="absolute left-1 w-7 h-7 bg-primary rounded-full z-0"
+        ></div>
 
-        <button id="theme-light-btn" class="relative w-7 h-7 flex items-center justify-center rounded-full cursor-pointer transition-colors duration-300 z-10" aria-label="Light Mode"><Sun size={15} /></button>
-        <button id="theme-dark-btn" class="relative w-7 h-7 flex items-center justify-center rounded-full cursor-pointer transition-colors duration-300 z-10" aria-label="Dark Mode"><Moon size={15} /></button>
+        <button
+          id="theme-light-btn"
+          class="relative w-7 h-7 flex items-center justify-center rounded-full cursor-pointer transition-colors duration-300 z-10"
+          aria-label="Light Mode"
+        >
+          <Sun size={15} />
+        </button>
+        <button
+          id="theme-dark-btn"
+          class="relative w-7 h-7 flex items-center justify-center rounded-full cursor-pointer transition-colors duration-300 z-10"
+          aria-label="Dark Mode"
+        >
+          <Moon size={15} />
+        </button>
       </div>
 
       <!-- Desktop Inquire Button -->
@@ -69,7 +93,10 @@ const isActive = (href: string) => {
 
 <!-- Mobile Navigation Drawer -->
 <nav id="side-nav" class="fixed hidden inset-0 z-50 h-screen w-screen">
-  <div id="nav-backdrop" class="fixed inset-0 bg-background/60 backdrop-blur-xs"></div>
+  <div
+    id="nav-backdrop"
+    class="fixed inset-0 bg-background/60 backdrop-blur-xs"
+  ></div>
 
   <div
     id="nav-content"
@@ -79,21 +106,25 @@ const isActive = (href: string) => {
       <div class="flex items-center justify-between">
         <Socials />
 
-        <button id="menu-close" class="p-3 text-muted hover:text-foreground transition-colors cursor-pointer" aria-label="Close Menu">
+        <button
+          id="menu-close"
+          class="p-3 text-muted hover:text-foreground transition-colors cursor-pointer"
+          aria-label="Close Menu"
+        >
           <X size={22} />
         </button>
       </div>
 
-      <ul
-        class="mt-8 space-y-6 text-3xl font-iceberg overflow-y-auto overflow-x-hidden"
-      >
+      <ul class="mt-8 space-y-6 text-3xl font-iceberg overflow-y-auto overflow-x-hidden">
         {navs.map((nav, index: number) => (
           <li>
-            <a 
-              href={nav.href} 
+            <a
+              href={nav.href}
               class={`mobile-nav-link group flex items-center gap-4 transition-colors ${isActive(nav.href) ? "text-primary active-link" : "text-muted hover:text-primary"}`}
             >
-              <span class="text-sm text-muted-dark group-hover:text-primary transition-colors">0{index + 1}</span>
+              <span class="text-sm text-muted-dark group-hover:text-primary transition-colors">
+                0{index + 1}
+              </span>
               {nav.name}
             </a>
           </li>
@@ -118,17 +149,17 @@ const isActive = (href: string) => {
 <script src="../animations/navbar.ts"></script>
 
 <script>
-  const lightBtn = document.getElementById('theme-light-btn');
-  const darkBtn = document.getElementById('theme-dark-btn');
+  const lightBtn = document.getElementById("theme-light-btn");
+  const darkBtn = document.getElementById("theme-dark-btn");
 
   // Click listeners
-  lightBtn?.addEventListener('click', () => {
-    document.documentElement.classList.add('light');
-    localStorage.setItem('theme', 'light');
+  lightBtn?.addEventListener("click", () => {
+    document.documentElement.classList.add("light");
+    localStorage.setItem("theme", "light");
   });
 
-  darkBtn?.addEventListener('click', () => {
-    document.documentElement.classList.remove('light');
-    localStorage.setItem('theme', 'dark');
+  darkBtn?.addEventListener("click", () => {
+    document.documentElement.classList.remove("light");
+    localStorage.setItem("theme", "dark");
   });
 </script>
