@@ -20,13 +20,10 @@ const isActive = (href: string) => {
 >
   <div class="max-w-7xl mx-auto h-(--nav-height) flex justify-between items-center gap-6 py-2 px-6">
     <div class="flex items-center gap-8">
-      <a
-        href="/"
-        class="flex items-center gap-3 hover:opacity-85 transition-opacity"
-      >
+      <a href="/" class="hover:opacity-85 transition-opacity">
         <img
-          src="/logos/logo-no-bg-white-thick.svg"
-          alt="Profile Logo"
+          src="/logos/site/logo-no-bg-white-thick.svg"
+          alt="Logo"
           class="h-9 w-auto"
         />
       </a>
@@ -85,7 +82,7 @@ const isActive = (href: string) => {
 
       <!-- Mobile Toggle Button -->
       <button id="menu-toggle" class="md:hidden" aria-label="Toggle Menu">
-        <Menu size={22} />
+        <Menu size={26} />
       </button>
     </div>
   </div>
@@ -104,7 +101,14 @@ const isActive = (href: string) => {
   >
     <div class="flex flex-col space-y-6">
       <div class="flex items-center justify-between">
-        <Socials />
+        <div class="flex gap-6 items-center">
+          <img
+            src="/logos/site/logo-no-bg-white-thick.svg"
+            alt="Logo"
+            class="h-7 w-auto"
+          />
+          <Socials />
+        </div>
 
         <button
           id="menu-close"
@@ -138,10 +142,6 @@ const isActive = (href: string) => {
       >
         Inquire
       </a>
-    </div>
-
-    <div class="flex gap-6 items-center">
-      <img src="/logos/logo-pulse.svg" alt="Profile Logo" class="h-7 w-auto" />
     </div>
   </div>
 </nav>

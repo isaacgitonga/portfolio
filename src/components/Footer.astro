@@ -18,18 +18,36 @@ const footerServices = rawServices
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 pb-12 border-b border-surface-border/40">
       <!-- Brand -->
       <div class="col-span-2 lg:col-span-1 space-y-5">
-        <a href="/" class="flex items-center gap-3 hover:opacity-85 transition-opacity w-fit">
-          <img src="/logos/logo-pulse.svg" alt="Profile Logo" class="h-9 w-auto" />
-        </a>
+        <div class="flex gap-5">
+          <a href="/" class="hover:opacity-85 transition-opacity">
+            <img
+              src="/logos/site/logo-no-bg-white-thick.svg"
+              alt="Logo"
+              class="h-9 w-auto"
+            />
+          </a>
+          <Socials gap={5} />
+        </div>
         <p class="text-muted font-montserrat text-sm leading-relaxed max-w-xs">
-          Built with <span class="text-foreground font-semibold font-iceberg">Astro, TypeScript,</span> and <span class="text-foreground font-semibold font-iceberg">Tailwind.</span> Deployed on <span class="text-foreground font-semibold font-iceberg">Vercel</span>.
+          Built with{" "}
+          <span class="text-foreground font-semibold font-iceberg">
+            Astro, TypeScript,
+          </span>{" "}
+          and{" "}
+          <span class="text-foreground font-semibold font-iceberg">
+            Tailwind.
+          </span>{" "}
+          Deployed on{" "}
+          <span class="text-foreground font-semibold font-iceberg">Vercel</span>
+          .
         </p>
-        <Socials gap={5} />
       </div>
 
       <!-- Services -->
       <div class="space-y-4">
-        <h6 class="text-xs uppercase font-mono tracking-widest text-primary font-semibold">Services</h6>
+        <h6 class="text-xs uppercase font-mono tracking-widest text-primary font-semibold">
+          Services
+        </h6>
         <ul class="space-y-3">
           {footerServices.map((entry) => (
             <li>
@@ -42,7 +60,10 @@ const footerServices = rawServices
             </li>
           ))}
           <li>
-            <a href="/services" class="inline-flex items-center gap-1 text-sm text-primary hover:text-primary-hover font-montserrat font-semibold transition-colors">
+            <a
+              href="/services"
+              class="inline-flex items-center gap-1 text-sm text-primary hover:text-primary-hover font-montserrat font-semibold transition-colors"
+            >
               <span>View All Services</span>
               <ArrowUpRight size={12} />
             </a>
@@ -52,11 +73,16 @@ const footerServices = rawServices
 
       <!-- Navigate -->
       <div class="space-y-4">
-        <h6 class="text-xs uppercase font-mono tracking-widest text-primary font-semibold">Navigate</h6>
+        <h6 class="text-xs uppercase font-mono tracking-widest text-primary font-semibold">
+          Navigate
+        </h6>
         <ul class="space-y-3">
           {NAV_LINKS.map((nav) => (
             <li>
-              <a href={nav.href} class="text-sm text-muted hover:text-primary font-montserrat transition-colors">
+              <a
+                href={nav.href}
+                class="text-sm text-muted hover:text-primary font-montserrat transition-colors"
+              >
                 {nav.name}
               </a>
             </li>
@@ -66,8 +92,10 @@ const footerServices = rawServices
 
       <!-- Contact -->
       <div class="space-y-4">
-        <h6 class="text-xs uppercase font-mono tracking-widest text-primary font-semibold">Contact</h6>
-        <div class="flex items-center gap-2 bg-foreground/[0.03] border border-foreground/5 rounded-lg py-1 px-2.5 text-muted hover:text-foreground hover:border-foreground/10 transition-all duration-200 w-fit">
+        <h6 class="text-xs uppercase font-mono tracking-widest text-primary font-semibold">
+          Contact
+        </h6>
+        <div class="flex items-center gap-2 bg-foreground/3 border border-foreground/5 rounded-lg py-1 px-2.5 text-muted hover:text-foreground hover:border-foreground/10 transition-all duration-200 w-fit">
           <Mail class="h-3.5 w-3.5 text-muted shrink-0" />
           <span class="text-xs font-montserrat font-medium selection:bg-primary/20">
             {config.profile.email}
@@ -86,14 +114,18 @@ const footerServices = rawServices
 
     <div class="flex flex-col-reverse sm:flex-row items-center justify-between gap-4 pt-8">
       <p class="font-nunito text-sm text-muted-dark">
-        &copy; <span class="year">{new Date().getFullYear()}</span> Isaac. All rights reserved.
+        &copy; <span class="year">{new Date().getFullYear()}</span> Isaac. All
+        rights reserved.
       </p>
       <p class="font-nunito text-sm text-muted-dark">
-        Designed and developed by <a
+        Designed and developed by{" "}
+        <a
           href={config.profile.github}
           target="_blank"
           class="inline text-primary font-semibold font-iceberg hover:underline"
-        >Isaac G.</a>
+        >
+          Isaac G.
+        </a>
       </p>
     </div>
   </div>
