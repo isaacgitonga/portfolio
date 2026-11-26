@@ -1,6 +1,7 @@
 ---
 import config from "@/app.config.ts";
 import Socials from "@/components/Socials.astro";
+import Logo from "@/components/Logo.astro";
 import CopyIcon from "@/components/CopyIcon.astro";
 import { NAV_LINKS } from "@/constants/navigation";
 import { getCollection } from "astro:content";
@@ -20,11 +21,7 @@ const footerServices = rawServices
       <div class="col-span-2 lg:col-span-1 space-y-5">
         <div class="flex gap-5">
           <a href="/" class="hover:opacity-85 transition-opacity">
-            <img
-              src="/logos/site/logo-no-bg-white-thick.svg"
-              alt="Logo"
-              class="h-9 w-auto"
-            />
+            <Logo class="h-9 w-auto" />
           </a>
           <Socials gap={5} />
         </div>

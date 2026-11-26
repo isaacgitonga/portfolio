@@ -1,0 +1,20 @@
+---
+// Site logo. Theme is a `.light` class on <html> (set in Layout.astro):
+// dark theme shows the light logo, light theme shows the dark logo.
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+---
+
+<img
+  src="/logos/site/logo-light.svg"
+  alt="Logo"
+  class:list={["in-[.light]:hidden", className]}
+/>
+<img
+  src="/logos/site/logo-dark.svg"
+  alt="Logo"
+  class:list={["hidden in-[.light]:block", className]}
+/>

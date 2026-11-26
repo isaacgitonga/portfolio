@@ -1,6 +1,7 @@
 ---
 import { Menu, Moon, Sun, X } from "@lucide/astro";
 import Socials from "@/components/Socials.astro";
+import Logo from "@/components/Logo.astro";
 import { NAV_LINKS as navs } from "@/constants/navigation";
 
 const pathname = Astro.url.pathname;
@@ -21,11 +22,7 @@ const isActive = (href: string) => {
   <div class="max-w-7xl mx-auto h-(--nav-height) flex justify-between items-center gap-6 py-2 px-6">
     <div class="flex items-center gap-8">
       <a href="/" class="hover:opacity-85 transition-opacity">
-        <img
-          src="/logos/site/logo-no-bg-white-thick.svg"
-          alt="Logo"
-          class="h-9 w-auto"
-        />
+        <Logo class="h-9 w-auto" />
       </a>
 
       <nav class="hidden md:block">
@@ -102,11 +99,7 @@ const isActive = (href: string) => {
     <div class="flex flex-col space-y-6">
       <div class="flex items-center justify-between">
         <div class="flex gap-6 items-center">
-          <img
-            src="/logos/site/logo-no-bg-white-thick.svg"
-            alt="Logo"
-            class="h-7 w-auto"
-          />
+          <Logo class="h-7 w-auto" />
           <Socials />
         </div>
 
